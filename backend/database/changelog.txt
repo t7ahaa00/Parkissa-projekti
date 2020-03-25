@@ -1,0 +1,49 @@
+Ver. 0.1
+
+-Luotiin pohja tietokannalle
+
+-Lisätyt taulut
+
+    · käyttäjä, applikaation käyttäjäkohtainen data
+
+    · auto, applikaation käyttäjien autot
+
+    · parkkialue, parkkialueiden tiedot
+
+    · kamera, parkkialuetta valvovien kameroiden tiedot
+
+    · parkkiruutu, parkkialueen ruudut ja niiden tilanne
+
+Ver. 0.2
+
+-Liitettiin käyttäjät parkkipaikkoihin, tehtiin proseduureja logien tekemiseen ja parkkipaikkojen ruutujen tekemiseen
+
+-Käännettiin taulujen nimet englanniksi
+
+-muutettiin taulujen kaikki kentät lower caseksi
+
+-Lisätyt taulut
+
+    · log, parkkipaikan käyttöasteen logittaminen createLog(parkkipaikanNimi) proseduurin avulla
+
+    · parkinglot_has_user, taulu joka linkittää käyttäjät parkkialueisiin
+
+    · visitor, vierailija
+
+    · admin, ohjelman ylläpidosta vastaavat käyttäjät
+
+    · staff, yksittäisten parkkipaikkojen hallinnoinnista vastaavat käyttäjät
+
+-Lisätyt proseduurit
+
+    · createLog(parkkipaikanNimi)
+
+        o Generoi logi tauluun tiedot parkkipaikan senhetkisestä tilanteesta
+
+    · CreateParkingGrid(parkkipaikanNimi, rivien lukumäärä, paikkojen lukumäärä rivissä)
+
+        o Generoi parkkipaikoille nimet muodossa (KIRJAIN RIVI)(NUMERO PAIKKA) eli A1, A2.... Z8 muodossa jos rivejä on vähemmän kuin 26 (A-Z)
+
+        o Generoi parkkipaikoille nimet muodossa (KIRJAIN RIVI)(KIRJAIN 2 RIVI)(NUMERO PAIKKA) eli AA1, AA2... AB1, AB2 ... ZZ8,ZZ9 muodossa jos rivejä on enemmän kuin 26 (AA-ZZ)
+
+        o Päivittää parkkialueen parkkipaikkojen lukumäärän vastaamaan annettua määrää.
