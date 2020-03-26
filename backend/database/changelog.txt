@@ -14,7 +14,7 @@ Ver. 0.1
 
     · parkkiruutu, parkkialueen ruudut ja niiden tilanne
 
-Ver. 0.2
+Ver. 0.2.1
 
 -Liitettiin käyttäjät parkkipaikkoihin, tehtiin proseduureja logien tekemiseen ja parkkipaikkojen ruutujen tekemiseen
 
@@ -47,3 +47,13 @@ Ver. 0.2
         o Generoi parkkipaikoille nimet muodossa (KIRJAIN RIVI)(KIRJAIN 2 RIVI)(NUMERO PAIKKA) eli AA1, AA2... AB1, AB2 ... ZZ8,ZZ9 muodossa jos rivejä on enemmän kuin 26 (AA-ZZ)
 
         o Päivittää parkkialueen parkkipaikkojen lukumäärän vastaamaan annettua määrää.
+
+Ver. 0.2.2
+
+-Muutettiin parkkipaikan nimi kenttä uniikiksi
+
+-Lisätyt prodesuurit
+
+    · toggleState(parkkipaikanNimi, parkkiruudunNimi)
+
+        o Vaihtaa parkkiruudun tilan vastakkaiseksi, parkkipaikkojen nimet voidaan vaihtaa parkkipaikkojen ID:iksi kun päätetään miten parkkiruudut merkataan applikaatiossa.

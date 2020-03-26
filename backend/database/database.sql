@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`admin` (
   `idadmin` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(300) NOT NULL,
   `password` VARCHAR(300) NOT NULL,
-  INDEX `fk_admin_user1_idx` (`iduser` ASC),
   PRIMARY KEY (`idadmin`),
+  INDEX `fk_admin_user1_idx` (`iduser` ASC),
   CONSTRAINT `fk_admin_user1`
     FOREIGN KEY (`iduser`)
     REFERENCES `parkissa`.`user` (`iduser`)
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   `lat` FLOAT NOT NULL,
   `name` VARCHAR(60) NOT NULL,
   `avaiblespace` INT(11) NOT NULL,
-  PRIMARY KEY (`idparkinglot`))
+  PRIMARY KEY (`idparkinglot`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
@@ -157,13 +158,14 @@ DROP TABLE IF EXISTS `parkissa`.`log` ;
 
 CREATE TABLE IF NOT EXISTS `parkissa`.`log` (
   `idparkinglot` INT(11) NOT NULL,
+  `parkinglotname` VARCHAR(300) NOT NULL,
   `idlog` INT(11) NOT NULL AUTO_INCREMENT,
   `time` DATETIME NOT NULL,
   `occupied` INT(11) NOT NULL,
   `free` INT(11) NOT NULL,
   `total` INT(11) NOT NULL,
-  INDEX `fk_log_parkinglot1_idx` (`idparkinglot` ASC),
   PRIMARY KEY (`idlog`),
+  INDEX `fk_log_parkinglot1_idx` (`idparkinglot` ASC),
   CONSTRAINT `fk_log_parkinglot1`
     FOREIGN KEY (`idparkinglot`)
     REFERENCES `parkissa`.`parkinglot` (`idparkinglot`)
@@ -219,6 +221,37 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 USE `parkissa` ;
+
+-- -----------------------------------------------------
+-- procedure createLog
+-- -----------------------------------------------------
+
+USE `parkissa`;
+DROP procedure IF EXISTS `parkissa`.`createLog`;
+
+DELIMITER $$
+USE `parkissa`$$
+CREATE PROCEDURE createLog(
+IN 	parkinglotName VARCHAR(255))
+BEGIN
+
+	SET @idParkingLot := (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName);
+	
+    INSERT INTO log VALUES(
+	(@idParkingLot),
+    parkinglotName,
+	null,
+	NOW(),
+    (SELECT COUNT(*) FROM grid 
+		WHERE idparkinglot = (@idParkingLot) 
+		AND occupied = true),
+    (SELECT COUNT(*) FROM grid 
+		WHERE idparkinglot = (@idParkingLot) 
+		AND occupied = false),
+    (SELECT avaiblespace FROM parkinglot WHERE idparkinglot = @idParkingLot));
+END$$
+
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- procedure createParkingGrid
@@ -299,35 +332,64 @@ BEGIN
     END IF;
 
     UPDATE parkinglot SET avaiblespace = rowCount*placesInRow WHERE name = parkinglotName;    
-END;$$
+END$$
 
 DELIMITER ;
 
 -- -----------------------------------------------------
--- procedure createLog
+-- procedure toggleState
 -- -----------------------------------------------------
 
 USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`createLog`;
+DROP procedure IF EXISTS `parkissa`.`toggleState`;
 
 DELIMITER $$
 USE `parkissa`$$
-CREATE PROCEDURE createLog (
-IN 	parkinglotName VARCHAR(255))
+CREATE PROCEDURE toggleState (
+	IN 	parkinglotName VARCHAR(255), 
+		slotNameIn VARCHAR(5)
+)
 BEGIN
+	UPDATE grid SET grid.occupied = NOT grid.occupied 
+	WHERE idparkinglot in (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName)
+	AND slotName=slotNameIn;
+END$$
 
-	SET @idParkingLot := (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName);
-	INSERT INTO log VALUES(
-	(@idParkingLot),
-	null,
-	NOW(),
-    (SELECT COUNT(*) FROM grid 
-	WHERE idparkinglot = (@idParkingLot) 
-    AND occupied = true),
-    (SELECT COUNT(*) FROM grid 
-	WHERE idparkinglot = (@idParkingLot) 
-    AND occupied = false),
-    (SELECT avaiblespace FROM parkinglot WHERE idparkinglot = @idParkingLot));
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getFreeSlots
+-- -----------------------------------------------------
+
+USE `parkissa`;
+DROP procedure IF EXISTS `parkissa`.`getFreeSlots`;
+
+DELIMITER $$
+USE `parkissa`$$
+CREATE PROCEDURE getFreeSlots (
+	IN 	parkinglotID int(11)
+)
+BEGIN
+	DECLARE parkinglotName varchar(300) DEFAULT "Parkinglot with id doesn't exist";
+    DECLARE freeSlots int(11) DEFAULT 0;
+	
+    SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotID);
+	
+    IF(parkinglotName IS NOT NULL) THEN
+		SELECT 
+			parkinglotID AS idparkinglot, 
+			parkinglotName AS name,
+			(SELECT COUNT(*) FROM grid
+				WHERE idparkinglot = idparkinglot 
+				AND occupied = false) AS freeSlots;
+	END IF;
+    
+	IF(parkinglotName IS NULL) THEN
+		SELECT 
+			'error' AS error,
+            'could not find parkinglot with that id' AS message;
+	END IF;
+
 END$$
 
 DELIMITER ;

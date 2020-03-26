@@ -14,9 +14,8 @@ INSERT INTO parkinglot VALUES(null,65.060778,25.461132,'OAMK parkkipaikka',40);
 CALL createParkingGrid('OAMK parkkipaikka',9,10);
 
 #-----------------------PARKKIPAIKAN LOGIN PÄIVITTÄMINEN------------------
- 
-#CALL createLog(Parkkipaikan nimi);
 
+#CALL createLog(Parkkipaikan nimi);
 CALL createLog('OAMK parkkipaikka');
 
 #-----------------------VAPAIDEN PARKKIPAIKKOJEN LASKEMINEN--------------
@@ -24,12 +23,10 @@ CALL createLog('OAMK parkkipaikka');
 SELECT COUNT(*) FROM grid 
 	WHERE idparkinglot = (SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka') 
     AND occupied = false;
-
+ 
 #-----------------------PARKKIPAIKAN TILAN MUUTTAMINEN-------------------
 
-UPDATE grid SET grid.occupied = NOT grid.occupied 
-	WHERE idparkinglot in (SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka')
-	AND slotName='A4';
+CALL toggleState(parkinglotName,slotName);
 
 #***********************KÄYTTÄJÄHALLINTA*********************************
 
@@ -39,8 +36,8 @@ INSERT INTO admin VALUES (LAST_INSERT_ID(), null, 'admin', 'salainenSalasana');
 
 #-----------------------ADMIN LISÄÄMINEN PARKKIPAIKALLE------------------
 INSERT INTO parkinglot_has_user VALUES(
-(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-(SELECT iduser FROM user WHERE email = 'admin.admin@parkissa.fi'));
+	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
+	(SELECT iduser FROM user WHERE email = 'admin.admin@parkissa.fi'));
 
 #-----------------------HALTIJAN LISÄÄMINEN------------------------------
 INSERT INTO user VALUES(null,'ylläpitäjä.ylläpitäjä@firma.net');
@@ -48,8 +45,8 @@ INSERT INTO staff VALUES (LAST_INSERT_ID(), null, 'ylläpitäjä', 'password');
 
 #-----------------------HALTIJAN LISÄÄMINEN PARKKIPAIKALLE---------------
 INSERT INTO parkinglot_has_user VALUES(
-(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-(SELECT iduser FROM user WHERE email = 'ylläpitäjä.ylläpitäjä@firma.net'));
+	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
+	(SELECT iduser FROM user WHERE email = 'ylläpitäjä.ylläpitäjä@firma.net'));
 
 #-----------------------KÄYTTÄJÄN LISÄÄMINEN-----------------------------
 INSERT INTO user VALUES(null,'matti.meikäläinen@gmail.com');
@@ -57,6 +54,6 @@ INSERT INTO visitor VALUES (LAST_INSERT_ID(), null, '044-123456', 'matti','meik�
 
 #-----------------------KÄYTTÄJÄN LISÄÄMINEN PARKKIPAIKALLE--------------
 INSERT INTO parkinglot_has_user VALUES(
-(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-(SELECT iduser FROM user WHERE email = 'matti.meikäläinen@gmail.com'));
+	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
+	(SELECT iduser FROM user WHERE email = 'matti.meikäläinen@gmail.com'));
 

@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "parkissa",
+      "version": "1.0",
+      "contact": {
+        "name": "Henri Laaja",
+        "email": "t7lahe00@atudents.oamk.fi"
+      },
+      "description": ""
+    },
+    "servers": [
+      {
+        "url": "https://6xvgr7gti7.execute-api.eu-west-1.amazonaws.com/testing",
+        "description": "test deploy"
+      }
+    ],
+    "paths": {
+      "/parkinglot/{parkinglotID}/grids/free": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "name": "parkinglotID",
+            "in": "path",
+            "description": "",
+            "required": true
+          }
+        ],
+        "get": {
+          "summary": "Free grids",
+          "tags": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "info": {
+                        "type": "object",
+                        "properties": {
+                          "idparkinglot": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "freeSlots": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "freeGrids": {
+                        "type": "object",
+                        "properties": {
+                          "idparkinglot": {
+                            "type": "integer"
+                          },
+                          "idgrid": {
+                            "type": "integer"
+                          },
+                          "slotname": {
+                            "type": "string"
+                          },
+                          "occupied": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "examples": {
+                    "success": {
+                      "value": {
+                        "info": [
+                          {
+                            "idparkinglot": 1,
+                            "name": "OAMK parkkipaikka",
+                            "freeSlots": 85
+                          }
+                        ],
+                        "freeGrids": [
+                          {
+                            "idparkinglot": 1,
+                            "idgrid": 2,
+                            "slotname": "A2",
+                            "occupied": 0
+                          },
+                          {
+                            "idparkinglot": 1,
+                            "idgrid": 4,
+                            "slotname": "A4",
+                            "occupied": 0
+                          },
+                          {
+                            "idparkinglot": 1,
+                            "idgrid": 8,
+                            "slotname": "A8",
+                            "occupied": 0
+                          }
+                        ]
+                      }
+                    },
+                    "error": {
+                      "value": {
+                        "info": [
+                          {
+                            "error": "error",
+                            "message": "could not find parkinglot with that id"
+                          }
+                        ],
+                        "freeGrids": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "operationId": "get-parkinglot-parkinglotID-grids-free",
+          "description": "gets all free slots of parking lot",
+          "parameters": []
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {}
+    }
+  }
