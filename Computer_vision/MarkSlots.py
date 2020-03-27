@@ -40,7 +40,7 @@ def main():
     
     for s in slots:
         slotID +=1
-        details = Parkingslot(slotID,s[0],s[1],True)    
+        details = Parkingslot(slotID,s[0],s[1])    
         data.append(json.loads(details.toJson()))
     
     MakeJsonFile.makeJsonFile("Camera1_parkingSlots", data)

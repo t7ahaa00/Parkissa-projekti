@@ -10,11 +10,11 @@ import simplejson
 
 class Parkingslot(object):
     
-    def __init__(self, sID, x, y, available):
+    def __init__(self, sID, x, y):
         
-        self.sId = sID    
-        self.available = available
-        self.coords =["x:",x,"y:",y]
+        self.sId = sID   
+        self.x = x
+        self.y = y
         
         
     def toJson(self):
