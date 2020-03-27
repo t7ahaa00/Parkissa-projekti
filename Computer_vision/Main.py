@@ -31,7 +31,9 @@ def main():
         bbox, labels = processImage(fileName)
         
         print("Count of cars: " + str(countLabels(labels)))
+        print("ID:s for available parking space: ", fs.checkFreeSlots(bbox, 'Camera1_parkingSlots'))
         
+    
 
     
 if __name__ == "__main__":
