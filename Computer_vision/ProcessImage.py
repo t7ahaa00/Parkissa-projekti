@@ -26,4 +26,4 @@ def processImage(image):
         
     #plt.imshow(output_image)
     #plt.show()
-    return bbox
+    return bbox, label

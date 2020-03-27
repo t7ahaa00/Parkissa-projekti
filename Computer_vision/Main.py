@@ -7,6 +7,20 @@ Created on Sat Mar 21 15:09:18 2020
 from ProcessImage import processImage
 
 import os
+import FindSlots as fs
+
+def countLabels(labels):
+    
+    count = 0
+    label_string = ['car','bus','truck','motorcycle']
+    
+    for label in label_string:
+        
+        count += labels.count(label)
+
+
+    return count
+
 
 def main():
 
@@ -14,7 +28,11 @@ def main():
     
     for fileName in images:
         print(fileName)
-        print("Count of cars: " + str(len(processImage(fileName))))
+        bbox, labels = processImage(fileName)
         
+        print("Count of cars: " + str(countLabels(labels)))
+        
+
+    
 if __name__ == "__main__":
     main()
