@@ -124,6 +124,68 @@
           "description": "gets all free slots of parking lot",
           "parameters": []
         }
+      },
+      "/parkinglot/{parkinglotID}/grid/{gridName}/toggleState": {
+        "get": {
+          "summary": "Toggle grid state",
+          "tags": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "examples": {
+                    "success": {
+                      "value": {
+                        "success": "success"
+                      }
+                    },
+                    "error": {
+                      "value": {
+                        "error": "error",
+                        "message": "could not find parkinglot with that id"
+                      }
+                    },
+                    "error 2": {
+                      "value": {
+                        "error": "error",
+                        "message": "could not find grid with that name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "operationId": "get-parkinglot-parkinglotID-grids-toggleState",
+          "description": "Toggle grid occupied state"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "name": "parkinglotID",
+            "in": "path",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "gridName",
+            "in": "path",
+            "required": true
+          }
+        ]
       }
     },
     "components": {

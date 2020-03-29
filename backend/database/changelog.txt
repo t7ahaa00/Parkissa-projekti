@@ -52,8 +52,21 @@ Ver. 0.2.2
 
 -Muutettiin parkkipaikan nimi kenttä uniikiksi
 
--Lisätyt prodesuurit
+-Lisätyt proseduurit
 
     · toggleState(parkkipaikanNimi, parkkiruudunNimi)
 
         o Vaihtaa parkkiruudun tilan vastakkaiseksi, parkkipaikkojen nimet voidaan vaihtaa parkkipaikkojen ID:iksi kun päätetään miten parkkiruudut merkataan applikaatiossa.
+    
+    · getFreeSlots(idparkinglot)
+
+        o palauttaa vapaiden paikkojen lukumäärän ja muuta infoa parkkialueesta.
+
+
+Ver. 0.2.3
+
+-Lisätyt proseduurit
+
+    · toggleState(parkkipaikanID, parkkiruudunNimi)
+
+        o päivitettiin toimimaan rajapinnan kanssa, lisättiin erroreiden käsittely, muutettiin ensimmäinen parametri ID:ksi

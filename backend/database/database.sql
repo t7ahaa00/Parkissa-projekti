@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   PRIMARY KEY (`idparkinglot`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 16
+AUTO_INCREMENT = 91
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -231,7 +231,7 @@ DROP procedure IF EXISTS `parkissa`.`createLog`;
 
 DELIMITER $$
 USE `parkissa`$$
-CREATE PROCEDURE createLog(
+CREATE DEFINER=`admin`@`%` PROCEDURE `createLog`(
 IN 	parkinglotName VARCHAR(255))
 BEGIN
 
@@ -262,7 +262,7 @@ DROP procedure IF EXISTS `parkissa`.`createParkingGrid`;
 
 DELIMITER $$
 USE `parkissa`$$
-CREATE PROCEDURE createParkingGrid(
+CREATE DEFINER=`admin`@`%` PROCEDURE `createParkingGrid`(
     IN 	parkinglotName VARCHAR(255), 
 		rowCount INT(4),
 		placesInRow INT(4)
@@ -337,27 +337,6 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
--- procedure toggleState
--- -----------------------------------------------------
-
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`toggleState`;
-
-DELIMITER $$
-USE `parkissa`$$
-CREATE PROCEDURE toggleState (
-	IN 	parkinglotName VARCHAR(255), 
-		slotNameIn VARCHAR(5)
-)
-BEGIN
-	UPDATE grid SET grid.occupied = NOT grid.occupied 
-	WHERE idparkinglot in (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName)
-	AND slotName=slotNameIn;
-END$$
-
-DELIMITER ;
-
--- -----------------------------------------------------
 -- procedure getFreeSlots
 -- -----------------------------------------------------
 
@@ -366,7 +345,7 @@ DROP procedure IF EXISTS `parkissa`.`getFreeSlots`;
 
 DELIMITER $$
 USE `parkissa`$$
-CREATE PROCEDURE getFreeSlots (
+CREATE DEFINER=`admin`@`%` PROCEDURE `getFreeSlots`(
 	IN 	parkinglotID int(11)
 )
 BEGIN
@@ -390,6 +369,48 @@ BEGIN
             'could not find parkinglot with that id' AS message;
 	END IF;
 
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure toggleState
+-- -----------------------------------------------------
+
+USE `parkissa`;
+DROP procedure IF EXISTS `parkissa`.`toggleState`;
+
+DELIMITER $$
+USE `parkissa`$$
+CREATE DEFINER=`admin`@`%` PROCEDURE `toggleState`(
+	IN 	parkinglotIDIn int(11), 
+		slotnameIn varchar(11)
+)
+BEGIN
+	DECLARE parkinglotName varchar(300) DEFAULT null;
+    DECLARE gridID int(11) DEFAULT null;
+    SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotIDIn);
+    SET gridID:=(SELECT idgrid FROM grid WHERE slotname = slotnameIn AND idparkinglot = parkinglotIDIn);
+	
+    IF(parkinglotName IS NOT NULL AND gridID IS NOT NULL) THEN
+		UPDATE grid SET grid.occupied = NOT grid.occupied 
+			WHERE idparkinglot = parkinglotIDIn
+			AND slotName=slotNameIn;
+            
+		SELECT 'success' AS success;
+	END IF;
+        
+	IF(parkinglotName IS NULL) THEN
+		SELECT 
+			'error' AS error,
+            'could not find parkinglot with that id' AS message;
+	END IF;
+	
+    IF(gridID IS NULL) THEN
+		SELECT 
+			'error' AS error,
+            'could not find grid with that name' AS message;
+	END IF;
 END$$
 
 DELIMITER ;
