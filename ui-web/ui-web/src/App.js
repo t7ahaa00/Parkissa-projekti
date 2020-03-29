@@ -1,13 +1,16 @@
 import React from 'react';
 
 import './App.css';
+import Header from './Components/Ui/Header/Header';
+import Body from './Components/Ui/Body/Body';
+import Footer from './Components/Ui/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <h1>Parkissa!</h1>
-      <p>Tähän valmistuu Parkissa-projektin nettisivu.</p>
-      <p>...Under Construction...</p>
+      <Header />
+      <Body />
+      <Footer />   
     </div>
   );
 }
