@@ -1,194 +1,315 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "parkissa",
-      "version": "1.0",
-      "contact": {
-        "name": "Henri Laaja",
-        "email": "t7lahe00@atudents.oamk.fi"
-      },
-      "description": ""
+  "openapi": "3.0.0",
+  "info": {
+    "title": "parkissa",
+    "version": "1.0",
+    "contact": {
+      "name": "Henri Laaja",
+      "email": "t7lahe00@atudents.oamk.fi"
     },
-    "servers": [
-      {
-        "url": "https://6xvgr7gti7.execute-api.eu-west-1.amazonaws.com/testing",
-        "description": "test deploy"
-      }
-    ],
-    "paths": {
-      "/parkinglot/{parkinglotID}/grids/free": {
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "name": "parkinglotID",
-            "in": "path",
-            "description": "",
-            "required": true
-          }
-        ],
-        "get": {
-          "summary": "Free grids",
-          "tags": [],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "info": {
-                        "type": "object",
-                        "properties": {
-                          "idparkinglot": {
-                            "type": "integer"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "freeSlots": {
-                            "type": "integer"
-                          }
-                        }
-                      },
-                      "freeGrids": {
-                        "type": "object",
-                        "properties": {
-                          "idparkinglot": {
-                            "type": "integer"
-                          },
-                          "idgrid": {
-                            "type": "integer"
-                          },
-                          "slotname": {
-                            "type": "string"
-                          },
-                          "occupied": {
-                            "type": "integer"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "examples": {
-                    "success": {
-                      "value": {
-                        "info": [
-                          {
-                            "idparkinglot": 1,
-                            "name": "OAMK parkkipaikka",
-                            "freeSlots": 85
-                          }
-                        ],
-                        "freeGrids": [
-                          {
-                            "idparkinglot": 1,
-                            "idgrid": 2,
-                            "slotname": "A2",
-                            "occupied": 0
-                          },
-                          {
-                            "idparkinglot": 1,
-                            "idgrid": 4,
-                            "slotname": "A4",
-                            "occupied": 0
-                          },
-                          {
-                            "idparkinglot": 1,
-                            "idgrid": 8,
-                            "slotname": "A8",
-                            "occupied": 0
-                          }
-                        ]
-                      }
-                    },
-                    "error": {
-                      "value": {
-                        "info": [
-                          {
-                            "error": "error",
-                            "message": "could not find parkinglot with that id"
-                          }
-                        ],
-                        "freeGrids": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
+    "description": ""
+  },
+  "servers": [
+    {
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/parkinglot/{parkinglotID}/grid/free": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
           },
-          "operationId": "get-parkinglot-parkinglotID-grids-free",
-          "description": "gets all free slots of parking lot",
-          "parameters": []
+          "name": "parkinglotID",
+          "in": "path",
+          "description": "",
+          "required": true
         }
-      },
-      "/parkinglot/{parkinglotID}/grid/{gridName}/toggleState": {
-        "get": {
-          "summary": "Toggle grid state",
-          "tags": [],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "string"
+      ],
+      "get": {
+        "summary": "Free grids",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "info": {
+                      "type": "object",
+                      "properties": {
+                        "idparkinglot": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "freeSlots": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "freeGrids": {
+                      "type": "object",
+                      "properties": {
+                        "idparkinglot": {
+                          "type": "integer"
+                        },
+                        "idgrid": {
+                          "type": "integer"
+                        },
+                        "slotname": {
+                          "type": "string"
+                        },
+                        "occupied": {
+                          "type": "integer"
+                        }
                       }
                     }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "info": [
+                        {
+                          "idparkinglot": 1,
+                          "name": "OAMK parkkipaikka",
+                          "freeSlots": 85
+                        }
+                      ],
+                      "freeGrids": [
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 2,
+                          "slotname": "A2",
+                          "occupied": 0
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 4,
+                          "slotname": "A4",
+                          "occupied": 0
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 8,
+                          "slotname": "A8",
+                          "occupied": 0
+                        }
+                      ]
+                    }
                   },
-                  "examples": {
-                    "success": {
-                      "value": {
-                        "success": "success"
-                      }
-                    },
-                    "error": {
-                      "value": {
-                        "error": "error",
-                        "message": "could not find parkinglot with that id"
-                      }
-                    },
-                    "error 2": {
-                      "value": {
-                        "error": "error",
-                        "message": "could not find grid with that name"
-                      }
+                  "error": {
+                    "value": {
+                      "info": [
+                        {
+                          "error": "error",
+                          "message": "could not find parkinglot with that id"
+                        }
+                      ],
+                      "freeGrids": []
                     }
                   }
                 }
               }
             }
-          },
-          "operationId": "get-parkinglot-parkinglotID-grids-toggleState",
-          "description": "Toggle grid occupied state"
+          }
         },
+        "operationId": "get-parkinglot-parkinglotID-grids-free",
+        "description": "gets all free slots of parking lot",
+        "parameters": []
+      }
+    },
+    "/parkinglot/{parkinglotID}/grid/{gridName}/toggleState": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gridName",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Toggle grid state",
+        "tags": [],
+        "operationId": "get-parkinglot-parkinglotID-grids-toggleState",
+        "description": "Toggle grid occupied state",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find parkinglot with that id"
+                    }
+                  },
+                  "error 2": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find grid with that name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/parkinglot": {
+      "post": {
+        "summary": "Add new parkinglot",
+        "operationId": "post-parkinglot",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "error": "error",
+                      "message": "name must be unique"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "creates new parkinglot",
         "parameters": [
           {
             "schema": {
-              "type": "integer"
+              "type": "number"
             },
-            "name": "parkinglotID",
-            "in": "path",
+            "in": "query",
+            "name": "lng",
+            "description": "longitude",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "lat",
+            "description": "latitude",
             "required": true
           },
           {
             "schema": {
               "type": "string"
             },
-            "name": "gridName",
-            "in": "path",
+            "in": "query",
+            "name": "name",
+            "description": "parkinglot name (must be unique)",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "avaiblespace",
+            "description": "avaible space in parkinglot"
           }
         ]
       }
     },
-    "components": {
-      "securitySchemes": {}
+    "/parkinglot/{parkinglotID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete parkinglot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error 1": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find parkinglot with that id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-parkinglot-parkinglotID",
+        "description": "deletes parkinglot with id"
+      }
     }
+  },
+  "components": {
+    "securitySchemes": {}
   }
+}

@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
   CONSTRAINT `fk_parkkiruutu_parkkialue`
     FOREIGN KEY (`idparkinglot`)
     REFERENCES `parkissa`.`parkinglot` (`idparkinglot`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 91
@@ -349,8 +349,8 @@ CREATE DEFINER=`admin`@`%` PROCEDURE `getFreeSlots`(
 	IN 	parkinglotID int(11)
 )
 BEGIN
-	DECLARE parkinglotName varchar(300) DEFAULT "Parkinglot with id doesn't exist";
-    DECLARE freeSlots int(11) DEFAULT 0;
+	DECLARE parkinglotName varchar(300) DEFAULT null;
+    DECLARE freeSlots int(11) DEFAULT null;
 	
     SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotID);
 	
@@ -410,6 +410,38 @@ BEGIN
 		SELECT 
 			'error' AS error,
             'could not find grid with that name' AS message;
+	END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure deleteParkinglot
+-- -----------------------------------------------------
+
+USE `parkissa`;
+DROP procedure IF EXISTS `parkissa`.`deleteParkinglot`;
+
+DELIMITER $$
+USE `parkissa`$$
+CREATE PROCEDURE deleteParkinglot (
+	IN 	parkinglotID int(11)
+)
+BEGIN
+	DECLARE parkinglotName varchar(300) DEFAULT null;
+	
+    SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotID);
+	
+    IF(parkinglotName IS NOT NULL) THEN
+		DELETE from parkinglot WHERE idparkinglot = parkinglotID;
+        SELECT 
+			'success' AS success;
+	END IF;
+    
+	IF(parkinglotName IS NULL) THEN
+		SELECT 
+			'error' AS error,
+            'could not find parkinglot with that id' AS message;
 	END IF;
 END$$
 
