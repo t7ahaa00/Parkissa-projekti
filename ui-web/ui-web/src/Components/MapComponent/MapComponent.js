@@ -94,6 +94,26 @@ class MapComponent extends Component {
             {lat: 65.058479, lng: 25.470085}
           ];
 
+          const polygonCoordsA = [
+
+            //65.061034, 25.463066
+            //65.060469, 25.464655
+            {lat: 65.061034, lng: 25.463066},
+            {lat: 65.061034, lng: 25.464645},
+            {lat: 65.060467, lng: 25.464645},
+            {lat: 65.060467, lng: 25.463066}
+          ];
+
+          const polygonCoordsB = [
+
+            //65.058564, 25.461579
+            //65.057540, 25.463075
+            {lat: 65.058564, lng: 25.461579},
+            {lat: 65.058564, lng: 25.463075},
+            {lat: 65.057540, lng: 25.463075},
+            {lat: 65.057540, lng: 25.461579}
+          ];
+
         return(
             <Map
                 google={this.props.google}
@@ -110,6 +130,24 @@ class MapComponent extends Component {
                     strokeWeight={2}
                     fillColor="#959595"
                     fillOpacity={0.70} />
+
+                <Polygon 
+                    paths={polygonCoordsA}
+                    strokeColor="#00FF00"
+                    strokeOpacity={0.8}
+                    strokeWeight={2}
+                    fillColor="#959595"
+                    fillOpacity={0.70}
+                />
+
+                <Polygon 
+                    paths={polygonCoordsB}
+                    strokeColor="#FF0000"
+                    strokeOpacity={0.8}
+                    strokeWeight={2}
+                    fillColor="#959595"
+                    fillOpacity={0.70}
+                />
             
             {this.displaySites()}
         </Map>
