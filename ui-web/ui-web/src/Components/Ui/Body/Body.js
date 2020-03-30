@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-
+import MapComponent from '../../MapComponent/MapComponent'
 import classes from './Body.module.css';
 
-class BurgerIngredients extends Component {
+class Body extends Component {
 	render() {
 		return(
 		<div className={classes.Body}>
-            <p>Tähän valmistuu Parkissa-projektin nettisivu.</p>
+            <MapComponent />
         </div>
 		);
 	}
 
 };
 
-export default BurgerIngredients;
+export default Body;
