@@ -1,5 +1,10 @@
 .Body {
     width: 100vw;
+<<<<<<< HEAD
     position: relative;
     height: 85vh;
+=======
+    height: 90vh;
+    position: relative;
+>>>>>>> 5e370d1e61a38daf2eef69fc421235695afb76df
 }
