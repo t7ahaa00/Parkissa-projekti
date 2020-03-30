@@ -8,7 +8,7 @@ const Footer = (props) => {
 
     return(
         <div className={classes.Footer}>
-            © mepasme
+            Copyright © 2020 mepasme.com, Inc.      Terms of Use  | Privacy Policy - REVISED
         </div>
     );
 };
