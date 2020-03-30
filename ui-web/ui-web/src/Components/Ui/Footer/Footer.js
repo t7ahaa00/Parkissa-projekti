@@ -4,8 +4,12 @@ import classes from './Footer.module.css';
 
 const Footer = (props) => {
 
+    
+
     return(
-        <div classes={classes.Footer}>...Under Construction...</div>
+        <div className={classes.Footer}>
+            © mepasme
+        </div>
     );
 };
 
