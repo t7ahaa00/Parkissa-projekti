@@ -87,7 +87,7 @@ class MapComponent extends Component {
       
     render() {
 
-        const triangleCoords = [
+        const polygonCoords = [
             {lat: 65.060014, lng: 25.470085},
             {lat: 65.060014, lng: 25.471944},
             {lat: 65.058479, lng: 25.471944},
@@ -104,7 +104,7 @@ class MapComponent extends Component {
                 //mapTypeControlOptions={this.state.position}
                 >
                 <Polygon
-                    paths={triangleCoords}
+                    paths={PolygonCoords}
                     strokeColor="#0000FF"
                     strokeOpacity={0.8}
                     strokeWeight={2}
