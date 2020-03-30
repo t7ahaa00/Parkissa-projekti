@@ -1,15 +1,9 @@
 .Header {
     width: 100vw;
-<<<<<<< HEAD
-    height: 10vh;
-    background-color: black;
-    
-=======
     height: 5vh;
     background-color: rgb(255, 221, 235);
 }
 
 .Img {
     height: 5vh;
->>>>>>> 5e370d1e61a38daf2eef69fc421235695afb76df
 }

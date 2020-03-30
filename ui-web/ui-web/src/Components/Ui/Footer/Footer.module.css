@@ -2,13 +2,8 @@
     width: 100vw;
     height: 5vh;
     background-color: rgb(255, 221, 235);
-<<<<<<< HEAD
-    color: black;
-    position: absolute;
-=======
     position: absolute;
     vertical-align: middle;
     text-align: center;
->>>>>>> 5e370d1e61a38daf2eef69fc421235695afb76df
     bottom: 0px;
 }
