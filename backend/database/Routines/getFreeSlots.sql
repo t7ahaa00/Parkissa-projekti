@@ -2,8 +2,8 @@ CREATE DEFINER=`admin`@`%` PROCEDURE `getFreeSlots`(
 	IN 	parkinglotID int(11)
 )
 BEGIN
-	DECLARE parkinglotName varchar(300) DEFAULT "Parkinglot with id doesn't exist";
-    DECLARE freeSlots int(11) DEFAULT 0;
+	DECLARE parkinglotName varchar(300) DEFAULT null;
+    DECLARE freeSlots int(11) DEFAULT null;
 	
     SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotID);
 	

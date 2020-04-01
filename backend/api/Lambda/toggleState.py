@@ -11,21 +11,29 @@ db_name = config.db_name
 
 def toggleGridState(event):
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
-    with conn.cursor() as cursor:    
-        sql_Query = """CALL toggleState(%s,%s)"""
-        insert_tuple = event['params']['path']['parkinglotID'],event['params']['path']['gridName']
-        cursor.execute(sql_Query,insert_tuple)
-        columns = [col[0] for col in cursor.description]
-        data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+    with conn.cursor() as cursor:  
+        if event['context']['http-method'] == 'PATCH':
+            
+            sql_Query = """CALL toggleState(%s,%s)"""
+            insert_tuple = event['params']['path']['parkinglotID'],event['params']['path']['gridName']
+            cursor.execute(sql_Query,insert_tuple)
+            conn.commit()
+            columns = [col[0] for col in cursor.description]
+            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            returnValue = json.dumps(data)
+            jsonOut = json.loads(returnValue)
+            return(jsonOut)
         
-        cursor.close()
-        
-        returnValue = json.dumps(data)
-        jsonOut = json.loads(returnValue)
-        print ("Data from RDS...")
-        print (data)
-        return(jsonOut)
-
+        elif event['context']['http-method'] == 'GET':
+            
+            sql_Query = """SELECT * FROM grid WHERE idparkinglot = %s AND slotname = %s """
+            cursor.execute(sql_Query,insert_tuple)
+            columns = [col[0] for col in cursor.description]
+            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            returnValue = json.dumps(data)
+            jsonOut = json.loads(returnValue)
+            return(jsonOut)
+            
 def main(event, context):
     return toggleGridState(event)
         

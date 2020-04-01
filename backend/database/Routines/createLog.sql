@@ -1,5 +1,5 @@
 CREATE PROCEDURE createLog(
-IN 	parkinglotName VARCHAR(255))
+	IN 	parkinglotName VARCHAR(255))
 BEGIN
 
 	SET @idParkingLot := (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName);

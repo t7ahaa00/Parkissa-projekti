@@ -7,11 +7,11 @@
       "name": "Henri Laaja",
       "email": "t7lahe00@atudents.oamk.fi"
     },
-    "description": ""
+    "description": "Parkissa API"
   },
   "servers": [
     {
-      "description": ""
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/test"
     }
   ],
   "paths": {
@@ -121,7 +121,12 @@
         },
         "operationId": "get-parkinglot-parkinglotID-grids-free",
         "description": "gets all free slots of parking lot",
-        "parameters": []
+        "parameters": [],
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
       }
     },
     "/parkinglot/{parkinglotID}/grid/{gridName}/toggleState": {
@@ -145,9 +150,7 @@
       ],
       "patch": {
         "summary": "Toggle grid state",
-        "tags": [],
-        "operationId": "get-parkinglot-parkinglotID-grids-toggleState",
-        "description": "Toggle grid occupied state",
+        "operationId": "patch-parkinglot-parkinglotID-grid-gridName-toggleState",
         "responses": {
           "200": {
             "description": "OK",
@@ -155,11 +158,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "string"
-                    }
-                  }
+                  "properties": {}
                 },
                 "examples": {
                   "success": {
@@ -167,7 +166,7 @@
                       "success": "success"
                     }
                   },
-                  "error": {
+                  "error 1": {
                     "value": {
                       "error": "error",
                       "message": "could not find parkinglot with that id"
@@ -183,7 +182,37 @@
               }
             }
           }
-        }
+        },
+        "description": "Toggle grid occupied state",
+        "requestBody": {},
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get grid state",
+        "operationId": "get-parkinglot-parkinglotID-grid-gridName-toggleState",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "description": "gets grid state",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
       }
     },
     "/parkinglot": {
@@ -255,7 +284,13 @@
             },
             "in": "query",
             "name": "avaiblespace",
-            "description": "avaible space in parkinglot"
+            "description": "avaible space in parkinglot",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "API Key": []
           }
         ]
       }
@@ -305,11 +340,26 @@
           }
         },
         "operationId": "get-parkinglot-parkinglotID",
-        "description": "deletes parkinglot with id"
+        "description": "deletes parkinglot with id",
+        "requestBody": {
+          "description": ""
+        },
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "parameters": []
       }
     }
   },
   "components": {
-    "securitySchemes": {}
+    "securitySchemes": {
+      "API Key": {
+        "name": "x-api-key",
+        "type": "apiKey",
+        "in": "header"
+      }
+    }
   }
 }

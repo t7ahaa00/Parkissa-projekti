@@ -6,14 +6,15 @@ BEGIN
 	DECLARE parkinglotName varchar(300) DEFAULT null;
     DECLARE gridID int(11) DEFAULT null;
     SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotIDIn);
-    SET gridID:=(SELECT idgrid FROM grid WHERE slotname = slotnameIn);
+    SET gridID:=(SELECT idgrid FROM grid WHERE slotname = slotnameIn AND idparkinglot = parkinglotIDIn);
 	
     IF(parkinglotName IS NOT NULL AND gridID IS NOT NULL) THEN
-		UPDATE grid SET grid.occupied = NOT grid.occupied 
+		UPDATE grid SET occupied = !occupied 
 			WHERE idparkinglot = parkinglotIDIn
-			AND slotName=slotNameIn;
-            
-		SELECT 'success' AS success;
+			AND idgrid=gridID;
+		
+        SELECT 
+			'success' AS success;
 	END IF;
         
 	IF(parkinglotName IS NULL) THEN
