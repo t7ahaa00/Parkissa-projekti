@@ -1,4 +1,4 @@
-CREATE DEFINER=`admin`@`%` PROCEDURE `toggleState`(
+CREATE DEFINER=`admin`@`%` PROCEDURE `toggleStateWithoutReturn`(
 	IN 	parkingAreaIDin int(11),
     	rowIn int(11), 
 		slotIn varchar(11)
@@ -10,13 +10,6 @@ BEGIN
     IF(gridID IS NOT NULL) THEN
 		UPDATE grid SET occupied = !occupied 
 			WHERE idgrid = gridID;		
-        SELECT 
-			'success' AS success;
 	END IF;
         
-    IF(gridID IS NULL) THEN
-		SELECT 
-			'error' AS error,
-            'could not find grid with that row/slot' AS message;
-	END IF;
 END

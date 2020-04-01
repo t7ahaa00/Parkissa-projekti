@@ -15,15 +15,14 @@
     }
   ],
   "paths": {
-    "/parkinglot/{parkinglotID}/grid/free": {
+    "/parkinglot/{parkingareaID}/grid/free": {
       "parameters": [
         {
           "schema": {
-            "type": "integer"
+            "type": "string"
           },
-          "name": "parkinglotID",
+          "name": "parkingareaID",
           "in": "path",
-          "description": "",
           "required": true
         }
       ],
@@ -129,13 +128,13 @@
         ]
       }
     },
-    "/parkinglot/{parkinglotID}/grid/{gridName}/toggleState": {
+    "/parkinglot/{parkingareaID}/grid/{row}/{slot}/toggleState": {
       "parameters": [
         {
           "schema": {
-            "type": "integer"
+            "type": "string"
           },
-          "name": "parkinglotID",
+          "name": "parkingareaID",
           "in": "path",
           "required": true
         },
@@ -143,7 +142,15 @@
           "schema": {
             "type": "string"
           },
-          "name": "gridName",
+          "name": "row",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "slot",
           "in": "path",
           "required": true
         }
@@ -253,38 +260,11 @@
         "parameters": [
           {
             "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "lng",
-            "description": "longitude",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "lat",
-            "description": "latitude",
-            "required": true
-          },
-          {
-            "schema": {
               "type": "string"
             },
             "in": "query",
             "name": "name",
             "description": "parkinglot name (must be unique)",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "avaiblespace",
-            "description": "avaible space in parkinglot",
             "required": true
           }
         ],
@@ -295,7 +275,7 @@
         ]
       }
     },
-    "/parkinglot/{parkinglotID}": {
+    "/{parkinglotID}": {
       "parameters": [
         {
           "schema": {
@@ -350,6 +330,124 @@
           }
         ],
         "parameters": []
+      },
+      "get": {
+        "summary": "Gets all data in parkinglot",
+        "operationId": "get-parkinglotID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "gets all data in parkinglot with specific id",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/testdata/parkinglot": {
+      "get": {
+        "summary": "get test parkinglots",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "success": {}
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-testdata-parkinglots",
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "description": "Returns test parkinglots"
+      },
+      "parameters": []
+    },
+    "/testdata/generate": {
+      "post": {
+        "summary": "Generate test data",
+        "operationId": "post-testdata-generate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "generates/resets test dataset",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/testdata/getapikey": {
+      "get": {
+        "summary": "Get api key",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "x-api-key": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-testdata-getapikey",
+        "description": "returns testing apikey"
+      }
+    },
+    "/parkinglot/parkingarea": {
+      "post": {
+        "summary": "Add new parkingarea",
+        "operationId": "post-parkinglot-parkingarea",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Add new parkingarea"
       }
     }
   },

@@ -1,25 +1,24 @@
 CREATE DEFINER=`admin`@`%` PROCEDURE `getFreeSlots`(
-	IN 	parkinglotID int(11)
+    IN 	parkingareaID int(11)
 )
 BEGIN
-	DECLARE parkinglotName varchar(300) DEFAULT null;
+	DECLARE existss varchar(300) DEFAULT null;
     DECLARE freeSlots int(11) DEFAULT null;
 	
-    SET parkinglotName:=(SELECT name FROM parkinglot WHERE idparkinglot = parkinglotID);
+    SET existss:=(SELECT avaiblespace FROM parkingarea WHERE idparkingarea = parkingareaID);
 	
-    IF(parkinglotName IS NOT NULL) THEN
+    IF(existss IS NOT NULL) THEN
 		SELECT 
-			parkinglotID AS idparkinglot, 
-			parkinglotName AS name,
+			parkingareaID AS idparkingarea, 
 			(SELECT COUNT(*) FROM grid
-				WHERE idparkinglot = idparkinglot 
+				WHERE idparkingarea = parkingareaID 
 				AND occupied = false) AS freeSlots;
 	END IF;
     
-	IF(parkinglotName IS NULL) THEN
+	IF(existss IS NULL) THEN
 		SELECT 
 			'error' AS error,
-            'could not find parkinglot with that id' AS message;
+            'could not find parkingarea with that id' AS message;
 	END IF;
 
 END

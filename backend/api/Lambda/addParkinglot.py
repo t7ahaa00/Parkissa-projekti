@@ -13,8 +13,8 @@ def addParkinglot(event):
 
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
     with conn.cursor() as cursor:    
-        sql_Query = """INSERT INTO parkinglot VALUES(null,%s,%s,%s,%s);"""
-        insert_tuple = event['params']['querystring']['lng'],event['params']['querystring']['lat'],event['params']['querystring']['name'],event['params']['querystring']['avaiblespace']
+        sql_Query = """INSERT INTO parkinglot VALUES(null,%s);"""
+        insert_tuple = event['params']['querystring']['name']
         
         try:
             cursor.execute(sql_Query,insert_tuple)
@@ -27,12 +27,17 @@ def addParkinglot(event):
             }
             jsonOut = json.loads(json.dumps(err))
             return jsonOut
-        finally:
-            cursor.close()
         
-        jsonOut = json.loads(json.dumps({"success":"success"}))
+        sql_Query = """SELECT * FROM parkinglot WHERE name = %s;"""
+        insert_tuple = event['params']['querystring']['name']
+        cursor.execute(sql_Query,insert_tuple)
+        conn.commit()
+        columns = [col[0] for col in cursor.description]
+        data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        returnValue = json.dumps(data)
+        jsonOut = json.loads(returnValue)
         return jsonOut
 
 def main(event, context):
     return addParkinglot(event)
-        
+    

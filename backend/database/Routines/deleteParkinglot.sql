@@ -1,4 +1,4 @@
-CREATE PROCEDURE deleteParkinglot (
+CREATE DEFINER=`admin`@`%` PROCEDURE `deleteParkinglot`(
 	IN 	parkinglotID int(11)
 )
 BEGIN
