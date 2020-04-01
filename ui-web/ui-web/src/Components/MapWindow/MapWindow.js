@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker, Polygon} from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-react';
 
-import classes from './MapComponent.module.css';
+import classes from './MapWindow.module.css';
 
-class MapComponent extends Component {
+class MapWindow extends Component {
 
     constructor(props) {
         super(props);
@@ -15,15 +15,37 @@ class MapComponent extends Component {
                 {lat: 65.061, lng: 25.4638},
                 {lat: 65.0582, lng: 25.4622},
             ],
+
+            showingInfoWindow: false,
+            activeMarker: {},
+            selectedPlace: {},
         }
     }
+
+    onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
+    onMapClicked = (props) => {
+        if (this.state.showingInfoWindow) {
+        this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+        })
+        }
+    };
     // Parking place sites marker placement
     displaySites = () => {
         return this.state.parkSites.map((parkSite, index) => {
             return <Marker key={index} id={index} position={{
                 lat: parkSite.lat,
-                lng: parkSite.lng
-            }} />
+                lng: parkSite.lng,
+                }}
+                onClick={this.onMarkerClick}
+                name= {'Current location'} />
         })
     }
       
@@ -60,8 +82,19 @@ class MapComponent extends Component {
                 initialCenter={{ lat: 65.0595, lng: 25.4662}}
                 mapTypeControl={true}
                 zoomControl={true}
-                //mapTypeControlOptions={{position: 'ControlPosition.LEFT_CENTER'}}
+                mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}}
+                streetViewControl={false}
                 >
+                <InfoWindow
+                marker={this.state.activeMarker}
+                visible={this.state.showingInfoWindow}>
+                    <div>
+                    <h1>{this.state.selectedPlace.name}</h1>
+                    </div>
+                </InfoWindow>
+                <Marker 
+                    onClick={this.onMarkerClick}
+                    name={'Current location'} />
                 <Polygon //Parking place drawing
                     paths={polygonCoords}
                     strokeColor="#0000FF"
@@ -94,4 +127,4 @@ class MapComponent extends Component {
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyD38KVBa8COxekeVYZz9ypRqwUGKuJQkrM'
-    })(MapComponent);  
+    })(MapWindow);  
