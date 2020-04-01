@@ -1,0 +1,94 @@
+{
+"parkkipaikat": [ 
+	{
+		"id" :1,
+		"name": "oulunYliopisto",
+		"parkkiaAlueet": [
+			{
+				"id": 1,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 3,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id" :2,
+		"name": "teknologiakyla",
+		"parkkiaAlueet": [
+			{
+				"id": 1,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},	
+			{
+				"id": 3,
+				"lat1": 65.060014,
+				"lng1": 25.470085,
+				"lat2": 65.058479
+				"lng2": 25.471944,
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			}
+		]
+	}
+]
+}
