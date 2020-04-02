@@ -18,9 +18,9 @@ def getTestParkinglot(event):
         cursor.execute(sql_Query)
         conn.commit()
         columns = [col[0] for col in cursor.description]
-        parkinglots = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        
+        parkinglots = [dict(zip(columns, row)) for row in cursor.fetchall()]      
         loopIndex = 0
+        
         for item in parkinglots:
             insert_tuple2 = []
             sql_Query = """SELECT * FROM parkingarea WHERE idparkinglot = %s"""
@@ -36,15 +36,14 @@ def getTestParkinglot(event):
                 insert_tuple3 = item['idparkingarea']
                 cursor.execute(sql_Query,insert_tuple3)
                 columns = [col[0] for col in cursor.description]
-                rowCount = [dict(zip(columns, row)) for row in cursor.fetchall()]
-                
+                rowCount = [dict(zip(columns, row)) for row in cursor.fetchall()]          
                 loopIndex3 = 0
             
                 for itemrow in rowCount:
-                    insert_tuple3 = []
+                    insert_tuple4 = []
                     sql_Query = """SELECT idgrid,slot,occupied FROM grid WHERE idparkingarea = %s AND row = %s """
-                    insert_tuple3 = item['idparkingarea'],itemrow['rowNumber']
-                    cursor.execute(sql_Query,insert_tuple3)
+                    insert_tuple4 = item['idparkingarea'],itemrow['rowNumber']
+                    cursor.execute(sql_Query,insert_tuple4)
                     columns = [col[0] for col in cursor.description]
                     slots = [dict(zip(columns, row)) for row in cursor.fetchall()]
                     
@@ -56,8 +55,7 @@ def getTestParkinglot(event):
             
             parkinglots[loopIndex]["parkingareas"] = parkingareas
             loopIndex+=1    
-           
-        
+              
         cursor.close()
         returnValue = json.dumps(parkinglots,separators=(',', ':'))
         jsonOut = json.loads(returnValue)

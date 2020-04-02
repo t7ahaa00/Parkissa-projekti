@@ -11,7 +11,12 @@
   },
   "servers": [
     {
-      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/test"
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/test",
+      "description": "backend dev"
+    },
+    {
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests",
+      "description": "front tests"
     }
   ],
   "paths": {
@@ -256,23 +261,55 @@
             }
           }
         },
-        "description": "creates new parkinglot",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "name",
-            "description": "parkinglot name (must be unique)",
-            "required": true
-          }
-        ],
+        "description": "creates new parkinglot and parkingarea",
+        "parameters": [],
         "security": [
           {
             "API Key": []
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "areaID": {
+                    "type": "number"
+                  },
+                  "lat1": {
+                    "type": "number"
+                  },
+                  "lng1": {
+                    "type": "number"
+                  },
+                  "lat2": {
+                    "type": "number"
+                  },
+                  "lng2": {
+                    "type": "number"
+                  },
+                  "avaibleSlots": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name",
+                  "areaID",
+                  "lat1",
+                  "lng1",
+                  "lat2",
+                  "lng2",
+                  "avaibleSlots"
+                ]
+              }
+            }
+          },
+          "description": "Needed data"
+        }
       }
     },
     "/{parkinglotID}": {
@@ -438,17 +475,120 @@
         "description": "returns testing apikey"
       }
     },
-    "/parkinglot/parkingarea": {
+    "/{parkinglotID}/{parkingareaID}/grid/create": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ],
       "post": {
-        "summary": "Add new parkingarea",
-        "operationId": "post-parkinglot-parkingarea",
+        "summary": "Add parking places to grid",
+        "operationId": "post-parkinglotID-parkingareaID-grid-create",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
-        "description": "Add new parkingarea"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slots": {
+                    "type": "object",
+                    "properties": {
+                      "row": {
+                        "type": "number"
+                      },
+                      "slots": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "description": "creates grid for parkingarea"
       }
+    },
+    "/parkinglot/{parkingareaID}/grid/toggleMultipleStates": {
+      "patch": {
+        "summary": "Update multiple states",
+        "operationId": "patch-parkinglot-parkingarea-grid-toggleMultipleStates",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates multiple grid states",
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slots": {
+                    "type": "object",
+                    "required": [
+                      "row",
+                      "grid"
+                    ],
+                    "properties": {
+                      "row": {
+                        "type": "number"
+                      },
+                      "grid": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "slots"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ]
     }
   },
   "components": {
