@@ -33,13 +33,26 @@ def getParkinglot(event):
             
             for item in parkingareas:
                 insert_tuple3 = []
-                sql_Query = """SELECT * FROM grid WHERE idparkingarea = %s """
+                sql_Query = """SELECT DISTINCT(row) AS rowNumber FROM grid WHERE idparkingarea = %s """
                 insert_tuple3 = item['idparkingarea']
                 cursor.execute(sql_Query,insert_tuple3)
                 columns = [col[0] for col in cursor.description]
-                slots = [dict(zip(columns, row)) for row in cursor.fetchall()]
+                rowCount = [dict(zip(columns, row)) for row in cursor.fetchall()]
                 
-                parkingareas[loopIndex2]["slots"] = slots
+                loopIndex3 = 0
+            
+                for itemrow in rowCount:
+                    insert_tuple3 = []
+                    sql_Query = """SELECT idparkingarea,idgrid,slot,occupied FROM grid WHERE idparkingarea = %s AND row = %s """
+                    insert_tuple3 = item['idparkingarea'],itemrow['rowNumber']
+                    cursor.execute(sql_Query,insert_tuple3)
+                    columns = [col[0] for col in cursor.description]
+                    slots = [dict(zip(columns, row)) for row in cursor.fetchall()]
+                    
+                    rowCount[loopIndex3]["row"] = slots
+                    loopIndex3+=1
+                
+                parkingareas[loopIndex2]["slots"] = rowCount
                 loopIndex2+=1
             
             parkinglots[loopIndex]["parkingareas"] = parkingareas
