@@ -8,6 +8,7 @@ from ProcessImage import processImage
 
 import os
 import FindSlots as fs
+import FetchImage as fi
 
 def countLabels(labels):
     
@@ -23,16 +24,26 @@ def countLabels(labels):
 
 
 def main():
-
-    images = os.listdir("./images")
+    #Japan osaka http://220.157.160.198:8080/-wvhttp-01-/GetOneShot?image_size=640x480&frame_count=1
+    #Netherlands http://80.115.125.150/webcapture.jpg?command=snap&channel=1?
+    #israel http://188.120.135.60:60001/cgi-bin/snapshot.cgi?chn=0&u=admin&p=&q=0&1585670180
+    cameras = os.listdir("./images")
+    fi.urlToImg("camera2","http://188.120.135.60:60001/cgi-bin/snapshot.cgi?chn=0&u=admin&p=&q=0&1585670180")
+   
     
-    for fileName in images:
-        print(fileName)
-        bbox, labels = processImage(fileName)
+    for camera in cameras:
         
-        print("Count of cars: " + str(countLabels(labels)))
-        print("ID:s for available parking space: ", fs.checkFreeSlots(bbox, 'Camera1_parkingSlots'))
+        path = "./images/" + camera
+        images = os.listdir(path)
         
+        for fileName in images:
+            print(fileName)
+            bbox, labels = processImage(camera,fileName)
+            jsonFile = camera + '_parkingSlots'
+            freeIDs, allSlots = fs.checkFreeSlots(bbox,jsonFile)
+            print("IDs for available parking spaces: ", freeIDs)
+            print("Area has ", allSlots, " parking spaces")
+      
     
 
     

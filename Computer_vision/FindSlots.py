@@ -21,6 +21,8 @@ def checkFreeSlots(cars, slotsFileName):
         slots.append(slot) 
                
     data_file.close()
+    
+    
           
     for i, slot in enumerate(slots):
         for car in cars:  
@@ -32,8 +34,8 @@ def checkFreeSlots(cars, slotsFileName):
     for i,slot in enumerate(slots):
         if i not in busy_slots:
             free_slots.append(slot["sId"])
-   
-    return free_slots
+     
+    return free_slots, len(slots)
 
 
 def FindPoint(box, x, y) :   
