@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-//import ReactDOM from 'react-dom';
 import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-react';
 
 import classes from './MapWindow.module.css';
 import ParkDetailOverlay from '../ParkingDetails/ParkDetailOverlay/ParkDetailOverlay';
+import ParkJson from '../../assets/esimerkkiJSON.json';
 
 class MapWindow extends Component {
 
@@ -23,39 +23,6 @@ class MapWindow extends Component {
             selectedPlace: {},
             activePolycon: {},
             position: {},
-
-            parkSiteAreaCoordinates: [
-                {
-                    path:
-                    [
-                        {lat: 65.060014, lng: 25.470085},
-                        {lat: 65.060014, lng: 25.471944},
-                        {lat: 65.058479, lng: 25.471944},
-                        {lat: 65.058479, lng: 25.470085}
-                    ],
-                    title: 'Oulun yliopisto parkkialue 1'
-                },
-                {
-                    path:
-                    [
-                        {lat: 65.061677, lng: 25.462875},
-                        {lat: 65.061677, lng: 25.464629},
-                        {lat: 65.060503, lng: 25.464629},
-                        {lat: 65.060503, lng: 25.462875}
-                    ],
-                    title: 'Oulun yliopisto parkkialue 2'
-                },
-                {
-                    path:
-                    [
-                        {lat: 65.058841, lng: 25.461625},
-                        {lat: 65.058841, lng: 25.462808},
-                        {lat: 65.057642, lng: 25.462808},
-                        {lat: 65.057642, lng: 25.461625}
-                    ],
-                    title: 'Oulun yliopisto parkkialue 3'
-                }
-            ]
         }
     }
 
@@ -65,14 +32,14 @@ class MapWindow extends Component {
       activeMarker: marker,
       showingInfoWindow: true
     });
-
+    // Show infowindow when clicking polygon
     onPolyClick = (props, e) =>
     this.setState({
       selectedPlace: props,
       position: props.position,
       showingInfoWindow: true
     });
-
+    // Hide infowindow when clicking on the map
     onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
         this.setState({
@@ -82,10 +49,6 @@ class MapWindow extends Component {
         }
     };
 
-    // onInfoWindowOpen(props, e) {
-    //     const button = (<button onClick={e => {console.log("hmapbuttoni1");}}>mapbutton</button>);
-    //     ReactDOM.render(React.Children.only(button), document.getElementById("iwc"));
-    //   }
     // Parking place sites marker placement
     displaySiteMarkers = () => {
         return this.state.parkSites.map((parkSite, index) => {
@@ -101,55 +64,33 @@ class MapWindow extends Component {
                  </Marker>
         })
     }
-
+    // Display all the polygons in JSON file
     displaySitePolygon = () => {
-        return this.state.parkSiteAreaCoordinates.map((coords, index) => {
-            return <Polygon 
+        return ParkJson.parkkipaikat.map((coords, index) => {
+            console.log(coords.parkkialueet[0].path)
+            return coords.parkkialueet.map((parkCoords, index) => {
+                return(
+                <Polygon 
                 key={index} 
-                id={index} 
-                paths={coords.path}
+                id={coords.parkkialueet[index].id} 
+                paths={coords.parkkialueet[index].path}
                 onClick={this.onPolyClick}
-                name={coords.title}
-                position={coords.path[0]}
-                 ><div>
+                name={coords.name + ' ' + coords.parkkialueet[index].id}
+                position={coords.parkkialueet[index].path[0]}
+                 >{/* <div>
                      Moro<img src={require('../../assets/alien.png')} alt="Alien"></img>
-                 </div>
+                 </div> */}
                  </Polygon>
+                )
+            })   
         })
     }
-
+    // for testing purposes
     clickedPolygon = (props) =>{
         console.log("Polygon clicked ", props.name );
-
     }
 
-    
-      
     render() {
-         //Parking place coordinates   
-        const polygonCoords = [
-            {lat: 65.060014, lng: 25.470085},
-            {lat: 65.060014, lng: 25.471944},
-            {lat: 65.058479, lng: 25.471944},
-            {lat: 65.058479, lng: 25.470085}
-            ];
-
-        const polygonCoordsA = [
-
-            {lat: 65.061677, lng: 25.462875},
-            {lat: 65.061677, lng: 25.464629},
-            {lat: 65.060503, lng: 25.464629},
-            {lat: 65.060503, lng: 25.462875}
-            ];
-
-        const polygonCoordsB = [
-
-            {lat: 65.058841,  lng: 25.461625},
-            {lat: 65.058841, lng: 25.462808},
-            {lat: 65.057642,  lng: 25.462808},
-            {lat: 65.057642, lng: 25.461625}
-        ];
-
         return(
             <Map
                 google={this.props.google}
@@ -162,39 +103,10 @@ class MapWindow extends Component {
                 streetViewControl={false}
                 onClick={this.onMapClicked}
                 >          
-                {/* <Polygon //Parking place drawing
-                    paths={polygonCoords}
-                    strokeColor="#0000FF"
-                    strokeOpacity={0.8}
-                    strokeWeight={2}
-                    fillColor="#959595"
-                    fillOpacity={0.70}
-                    onClick={this.clickedPolygon}
-                    name={'poly'} />
-                <Polygon 
-                    paths={polygonCoordsA}
-                    strokeColor="#00FF00"
-                    strokeOpacity={0.8}
-                    strokeWeight={2}
-                    fillColor="#959595"
-                    fillOpacity={0.70}
-                    onClick={this.onPolyClick}
-                />
-                <Polygon 
-
-                    paths={polygonCoordsB}
-                    strokeColor="#FF0000"
-                    strokeOpacity={0.8}
-                    strokeWeight={2}
-                    fillColor="#959595"
-                    fillOpacity={0.70}
-                    onClick={this.onPolyClick}
-                />           */}  
+                
                 {this.displaySitePolygon()}
-                {/* {this.displaySiteMarkers()} */}
 
                 { <InfoWindow
-                    /* marker={this.state.activeMarker} */
                     position={this.state.position}
                     visible={this.state.showingInfoWindow}>
                     <div>
@@ -210,10 +122,3 @@ class MapWindow extends Component {
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyD38KVBa8COxekeVYZz9ypRqwUGKuJQkrM'
     })(MapWindow);  
-
-    // onOpen={e => {
-                //     this.onInfoWindowOpen(this.props, e);
-                //   }}
-                // >
-                //   <div id="iwc" />
-                //     

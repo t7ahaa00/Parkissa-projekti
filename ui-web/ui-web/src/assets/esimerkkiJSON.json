@@ -3,13 +3,16 @@
 	{
 		"id" :1,
 		"name": "oulunYliopisto",
-		"parkkiaAlueet": [
+		"parkkialueet": [
 			{
 				"id": 1,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
+				"path":
+                    [
+                        {"lat": 65.060014, "lng": 25.470085},
+                        {"lat": 65.060014, "lng": 25.471944},
+                        {"lat": 65.058479, "lng": 25.471944},
+                        {"lat": 65.058479, "lng": 25.470085}
+                    ],
 				"varausAste": [
 					{
 						"varausasteen" : 1,
@@ -19,10 +22,13 @@
 			},
 			{
 				"id": 2,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
+				"path":
+                    [
+                        {"lat": 65.061677, "lng": 25.462875},
+                        {"lat": 65.061677, "lng": 25.464629},
+                        {"lat": 65.060503, "lng": 25.464629},
+                        {"lat": 65.060503, "lng": 25.462875}
+                    ],
 				"varausAste": [
 					{
 						"varausasteen" : 1,
@@ -32,55 +38,13 @@
 			},
 			{
 				"id": 3,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
-				"varausAste": [
-					{
-						"varausasteen" : 1,
-						"taytettavain" : "tayte"
-					}
-				]
-			}
-		]
-	},
-	{
-		"id" :2,
-		"name": "teknologiakyla",
-		"parkkiaAlueet": [
-			{
-				"id": 1,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
-				"varausAste": [
-					{
-						"varausasteen" : 1,
-						"taytettavain" : "tayte"
-					}
-				]
-			},
-			{
-				"id": 2,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
-				"varausAste": [
-					{
-						"varausasteen" : 1,
-						"taytettavain" : "tayte"
-					}
-				]
-			},	
-			{
-				"id": 3,
-				"lat1": 65.060014,
-				"lng1": 25.470085,
-				"lat2": 65.058479,
-				"lng2": 25.471944,
+				"path":
+                    [
+                        {"lat": 65.058841, "lng": 25.461625},
+                        {"lat": 65.058841, "lng": 25.462808},
+                        {"lat": 65.057642, "lng": 25.462808},
+                        {"lat": 65.057642, "lng": 25.461625}
+                    ],
 				"varausAste": [
 					{
 						"varausasteen" : 1,
