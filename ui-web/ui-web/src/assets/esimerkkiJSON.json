@@ -53,6 +53,44 @@
 				]
 			}
 		]
+	},
+	{
+		"id" :1,
+		"name": "TeknologiaKylä",
+		"parkkialueet": [
+			{
+				"id": 1,
+				"path":
+                    [
+                        {"lat": 65.057935, "lng": 25.455743},
+                        {"lat": 65.057935, "lng": 25.457550},
+                        {"lat": 65.057675,  "lng": 25.457550},
+                        {"lat": 65.057675, "lng": 25.455743}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"path":
+                    [
+                        {"lat": 65.057675, "lng": 25.455743},
+                        {"lat": 65.057675, "lng": 25.457550},
+                        {"lat": 65.057352,  "lng": 25.457550},
+                        {"lat": 65.057352, "lng": 25.455743}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			}
+		]
 	}
 ]
 }
