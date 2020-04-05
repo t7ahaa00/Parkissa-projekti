@@ -18,7 +18,7 @@
 						"row" : "1",
 						"slots" : [
 							{
-								"slot": "1!",
+								"slot": "1",
 								"occupied": "true" 
 							},
 							{
@@ -38,12 +38,12 @@
 								"occupied": "false"
 							}
 						]
-						},
-						{
-							"row" : "2",
-							"slots" : [
+					},
+					{
+						"row" : "2",
+						"slots" : [
 							{
-								 "slot": "1!",
+								 "slot": "1",
 								 "occupied": "true" 
 							},
 							{
