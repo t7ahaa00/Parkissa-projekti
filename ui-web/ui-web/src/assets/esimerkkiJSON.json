@@ -15,8 +15,54 @@
                     ],
 				"varausAste": [
 					{
-						"varausasteen" : 1,
-						"taytettavain" : "tayte"
+						"row" : "1",
+						"slots" : [
+							{
+								"slot": "1!",
+								"occupied": "true" 
+							},
+							{
+								"slot": "2",
+								"occupied": "false"
+							},
+							{
+								"slot": "3",
+								"occupied": "false"
+							},
+							{
+								"slot": "4",
+								"occupied": "false"
+							},
+							{
+								"slot": "5",
+								"occupied": "false"
+							}
+						]
+						},
+						{
+							"row" : "2",
+							"slots" : [
+							{
+								 "slot": "1!",
+								 "occupied": "true" 
+							},
+							{
+								 "slot": "2",
+								 "occupied": "false"
+							},
+							{
+								 "slot": "3",
+								 "occupied": "true"
+							},
+							{
+								 "slot": "4",
+								 "occupied": "true"
+							},
+							{
+								 "slot": "5",
+								 "occupied": "false"
+							}
+						]
 					}
 				]
 			},

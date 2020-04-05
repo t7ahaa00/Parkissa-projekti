@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapWindow from '../../MapWindow/MapWindow'
+import MapWindow from '../MapWindow/MapWindow'
 import classes from './Body.module.css';
 
 class Body extends Component {
