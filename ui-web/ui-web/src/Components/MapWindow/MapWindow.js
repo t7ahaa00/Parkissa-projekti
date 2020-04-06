@@ -70,6 +70,35 @@ class MapWindow extends Component {
             })   
         })
     }
+
+    displayParkingSlots = () => {
+        return ParkJson.map((parkinglots, i) => {
+            return parkinglots.parkingareas.map((parkingarea, j) => {
+                
+                var horizontalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
+                var verticalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
+
+                var rows = 0
+
+                console.log(horizontalLength)
+                console.log(verticalLength)
+                
+                /*
+                var lat1 = parkingarea.path[0].lat
+                var lat2 = parkingarea.path[2].lat
+                var lng1 = parkingarea.path[0].lng
+                var lng2 = parkingarea.path[1].lng
+                */
+
+                return parkingarea.slots.map((slot, k) => {
+                    return(
+                        rows = k
+                    )
+                })
+            })
+        })
+    }
+
     // for testing purposes
     clickedPolygon = (props) =>{
         console.log("Polygon clicked ", props.name );
@@ -90,6 +119,7 @@ class MapWindow extends Component {
                 >          
                 
                 {this.displaySitePolygon()}
+                {this.displayParkingSlots()}
 
                 <InfoWindow
                     position={this.state.position}
