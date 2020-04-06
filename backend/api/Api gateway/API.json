@@ -280,35 +280,42 @@
                   "areaID": {
                     "type": "number"
                   },
-                  "lat1": {
-                    "type": "number"
-                  },
-                  "lng1": {
-                    "type": "number"
-                  },
-                  "lat2": {
-                    "type": "number"
-                  },
-                  "lng2": {
-                    "type": "number"
-                  },
                   "avaibleSlots": {
                     "type": "number"
+                  },
+                  "orientation": {
+                    "type": "number"
+                  },
+                  "path": {
+                    "type": "object",
+                    "required": [
+                      "lng",
+                      "lat"
+                    ],
+                    "properties": {
+                      "lng": {
+                        "type": "number"
+                      },
+                      "lat": {
+                        "type": "number"
+                      }
+                    }
                   }
                 },
                 "required": [
                   "name",
                   "areaID",
-                  "lat1",
-                  "lng1",
-                  "lat2",
-                  "lng2",
-                  "avaibleSlots"
+                  "avaibleSlots",
+                  "orientation",
+                  "path"
                 ]
+              },
+              "examples": {
+                "example-1": {}
               }
             }
           },
-          "description": "Needed data"
+          "description": "Needed data to generate parking lot and areas"
         }
       }
     },
@@ -475,16 +482,8 @@
         "description": "returns testing apikey"
       }
     },
-    "/{parkinglotID}/{parkingareaID}/grid/create": {
+    "/parkinglot/{parkingareaID}/grid/create": {
       "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "parkinglotID",
-          "in": "path",
-          "required": true
-        },
         {
           "schema": {
             "type": "string"

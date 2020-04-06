@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   PRIMARY KEY (`idparkinglot`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 44
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -92,13 +92,10 @@ DROP TABLE IF EXISTS `parkissa`.`parkingarea` ;
 
 CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
   `idparkinglot` INT(11) NOT NULL,
-  `idparkingarea` INT NOT NULL AUTO_INCREMENT,
+  `idparkingarea` INT(11) NOT NULL AUTO_INCREMENT,
   `id` INT(11) NOT NULL,
-  `lat1` FLOAT NOT NULL,
-  `lng1` FLOAT NOT NULL,
-  `lat2` FLOAT NOT NULL,
-  `lng2` FLOAT NOT NULL,
   `avaiblespace` INT(11) NOT NULL,
+  `orientation` DECIMAL(15,6) NOT NULL,
   PRIMARY KEY (`idparkingarea`),
   INDEX `fk_parkingarea_parkinglot1_idx` (`idparkinglot` ASC),
   CONSTRAINT `fk_parkingarea_parkinglot1`
@@ -106,7 +103,9 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
     REFERENCES `parkissa`.`parkinglot` (`idparkinglot`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 29
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -115,7 +114,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `parkissa`.`grid` ;
 
 CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
-  `idparkingarea` INT NOT NULL,
+  `idparkingarea` INT(11) NOT NULL,
   `idgrid` INT(11) NOT NULL AUTO_INCREMENT,
   `row` INT(11) NOT NULL,
   `slot` INT(11) NOT NULL,
@@ -128,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 131
+AUTO_INCREMENT = 838
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -197,6 +196,26 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot_has_user` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `parkissa`.`path`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `parkissa`.`path` ;
+
+CREATE TABLE IF NOT EXISTS `parkissa`.`path` (
+  `idparkingarea` INT(11) NOT NULL,
+  `idpath` INT(11) NOT NULL AUTO_INCREMENT,
+  `lat` DECIMAL(15,6) NOT NULL,
+  `lng` DECIMAL(15,6) NOT NULL,
+  INDEX `fk_path_parkingarea1_idx` (`idparkingarea` ASC),
+  PRIMARY KEY (`idpath`),
+  CONSTRAINT `fk_path_parkingarea1`
+    FOREIGN KEY (`idparkingarea`)
+    REFERENCES `parkissa`.`parkingarea` (`idparkingarea`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `parkissa` ;
 
 -- -----------------------------------------------------
@@ -260,7 +279,7 @@ BEGIN
 				IF looperInner = parkslots + 1 THEN
 				  LEAVE innerLoop;
 				END IF;
-					INSERT INTO grid VALUES(idParkingAreaIn,null,looperOuter,looperInner,false);
+					INSERT INTO grid VALUES(idParkingAreaIn,null,looperOuter,looperInner,true);
 				SET looperInner = looperInner + 1;
 				ITERATE innerLoop;
 		END LOOP innerLoop;
@@ -315,7 +334,7 @@ DROP procedure IF EXISTS `parkissa`.`generateDummyData`;
 
 DELIMITER $$
 USE `parkissa`$$
-CREATE PROCEDURE generateDummyData ()
+CREATE DEFINER=`admin`@`%` PROCEDURE `generateDummyData`()
 BEGIN
 	DECLARE parkinglotName varchar(300) DEFAULT null;
     DECLARE parkinglotID int(11) DEFAULT null;
@@ -326,10 +345,13 @@ BEGIN
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
     INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,65.060014,25.470085,65.058479,25.471944,20);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,90.0);
 	SET parkingAreaID = LAST_INSERT_ID();
-	CALL createParkingGrid(parkingAreaID,9,12);
-    SET parkingAreaID = null;
+    INSERT INTO path VALUES(parkingAreaID,null,65.060569, 25.464495),
+							(parkingAreaID,null,65.061023, 25.464515),
+                            (parkingAreaID,null,65.061049, 25.463253),
+                            (parkingAreaID,null,65.060574, 25.463218);
+	CALL createParkingGrid(parkingAreaID,4,10);
     CAll toggleStateWithoutReturn(parkingAreaID,1,2);
 	CAll toggleStateWithoutReturn(parkingAreaID,1,4);
     CAll toggleStateWithoutReturn(parkingAreaID,1,5);
@@ -339,12 +361,25 @@ BEGIN
 	CAll toggleStateWithoutReturn(parkingAreaID,2,7);
     CAll toggleStateWithoutReturn(parkingAreaID,2,8);
     CAll toggleStateWithoutReturn(parkingAreaID,2,9);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,9);
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,65.060014,25.470085,65.058479,25.471944,20);
-	CALL createParkingGrid(LAST_INSERT_ID(),8,4);
+    CAll toggleStateWithoutReturn(parkingAreaID,2,10);
     SET parkingAreaID = null;
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,65.060014,25.470085,65.058479,25.471944,20);
-	CALL createParkingGrid(LAST_INSERT_ID(),8,4);
+    
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    SET parkingAreaID = LAST_INSERT_ID();
+    INSERT INTO path VALUES(parkingAreaID,null,65.059523, 25.462801),
+							(parkingAreaID,null,65.060319, 25.462796),
+                            (parkingAreaID,null,65.060327, 25.461990),
+                            (parkingAreaID,null,65.059533, 25.461994);
+	CALL createParkingGrid(parkingAreaID,8,4);
+    SET parkingAreaID = null;
+    
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
+    SET parkingAreaID = LAST_INSERT_ID();
+    INSERT INTO path VALUES(parkingAreaID,null,65.057658, 25.462826),
+							(parkingAreaID,null,65.058856, 25.462799),
+                            (parkingAreaID,null,65.058834, 25.461587),
+                            (parkingAreaID,null,65.057743, 25.461570);
+	CALL createParkingGrid(parkingAreaID,8,4);
     SET parkingAreaID = null;
     
     
@@ -353,16 +388,30 @@ BEGIN
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
     INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,65.060014,25.470085,65.058479,25.471944,20);
-    CALL createParkingGrid(LAST_INSERT_ID(),8,4);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,0.0);
+    SET parkingAreaID = LAST_INSERT_ID();
+    INSERT INTO path VALUES(parkingAreaID,null,65.058328, 25.443178),
+							(parkingAreaID,null,65.059038, 25.442494),
+                            (parkingAreaID,null,65.058936, 25.441915),
+                            (parkingAreaID,null,65.058217, 25.442519);
+    CALL createParkingGrid(parkingAreaID,8,4);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,65.060014,25.470085,65.058479,25.471944,20);
-	CALL createParkingGrid(LAST_INSERT_ID(),8,12);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    SET parkingAreaID = LAST_INSERT_ID();
+    INSERT INTO path VALUES(parkingAreaID,null,65.059117, 25.442610),
+							(parkingAreaID,null,65.059766, 25.442015),
+                            (parkingAreaID,null,65.059667, 25.441382),
+                            (parkingAreaID,null,65.059021, 25.442008);
+	CALL createParkingGrid(parkingAreaID,8,12);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,65.060014,25.470085,65.058479,25.471944,20);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
 	SET parkingAreaID = LAST_INSERT_ID();
+    INSERT INTO path VALUES(parkingAreaID,null,65.057627, 25.438264),
+							(parkingAreaID,null,65.058070, 25.437856),
+                            (parkingAreaID,null,65.059514, 25.437390),
+                            (parkingAreaID,null,65.057765, 25.439166);
     CALL createParkingGrid(parkingAreaID,9,12);
     CAll toggleStateWithoutReturn(parkingAreaID,1,2);
 	CAll toggleStateWithoutReturn(parkingAreaID,1,4);
