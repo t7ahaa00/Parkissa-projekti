@@ -92,7 +92,10 @@ class MapWindow extends Component {
 
                 return parkingarea.slots.map((slot, k) => {
                     return(
-                        rows = k
+                        //rows = k
+                        <Polygon>
+
+                        </Polygon>
                     )
                 })
             })
