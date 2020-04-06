@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-r
 
 import classes from './MapWindow.module.css';
 import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
-import ParkJson from '../../assets/esimerkkiJSON.json';
+import ParkJson from '../../assets/parkkialuedata.json';
 
 class MapWindow extends Component {
 
@@ -51,17 +51,17 @@ class MapWindow extends Component {
     }
     // Display all the polygons in JSON file
     displaySitePolygon = () => {
-        return ParkJson.parkkipaikat.map((coords, index) => {
-            //console.log(coords.parkkialueet[0].path)
-            return coords.parkkialueet.map((parkCoords, index) => {
+        return ParkJson.map((parkinglots, index) => {
+            console.log(Object(parkinglots) );
+            return parkinglots.parkingareas.map((parkAreas, index) => {
                 return(
                 <Polygon 
                 key={index} 
-                id={coords.parkkialueet[index].id} 
-                paths={coords.parkkialueet[index].path}
+                id={parkAreas.id} 
+                paths={parkAreas.path}
                 onClick={this.onPolyClick}
-                name={coords.name + ' ' + coords.parkkialueet[index].id}
-                position={coords.parkkialueet[index].path[0]}
+                name={parkinglots.name + ' ' + parkAreas.id}
+                position={parkAreas.path[0]}
                  >{/* <div>
                      Moro<img src={require('../../assets/alien.png')} alt="Alien"></img>
                  </div> */}

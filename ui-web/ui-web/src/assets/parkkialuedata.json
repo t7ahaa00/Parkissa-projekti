@@ -1,0 +1,1755 @@
+[
+  {
+    "idparkinglot": 1,
+    "name": "test oulunYliopisto",
+    "parkingareas": [
+      {
+        "idparkingarea": 29,
+        "id": 1,
+        "avaiblespace": 40,
+        "orientation": "90.000000",
+        "path": [
+          {
+            "lat": 65.060014,
+            "lng": 25.470085
+          },
+          {
+            "lat": 65.060014,
+            "lng": 25.471944
+          },
+          {
+            "lat": 65.058479,
+            "lng": 25.471944
+          },
+          {
+            "lat": 65.058479,
+            "lng": 25.470085
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 0
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 0
+              },
+              {
+                "slot": 5,
+                "occupied": 0
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 0
+              },
+              {
+                "slot": 9,
+                "occupied": 0
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 0
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 0
+              },
+              {
+                "slot": 8,
+                "occupied": 0
+              },
+              {
+                "slot": 9,
+                "occupied": 0
+              },
+              {
+                "slot": 10,
+                "occupied": 0
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "idparkingarea": 30,
+        "id": 2,
+        "avaiblespace": 32,
+        "orientation": "90.000000",
+        "path": [
+          {
+            "lat": 65.061677,
+            "lng": 25.462875
+          },
+          {
+            "lat": 65.061677,
+            "lng": 25.464629
+          },
+          {
+            "lat": 65.060503,
+            "lng": 25.464629
+          },
+          {
+            "lat": 65.060503,
+            "lng": 25.462875
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 5,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 6,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 7,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 8,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "idparkingarea": 31,
+        "id": 3,
+        "avaiblespace": 32,
+        "orientation": "0.000000",
+        "path": [
+          {
+            "lat": 65.058841,
+            "lng": 25.461625
+          },
+          {
+            "lat": 65.058841,
+            "lng": 25.462808
+          },
+          {
+            "lat": 65.057642,
+            "lng": 25.462808
+          },
+          {
+            "lat": 65.057642,
+            "lng": 25.461625
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 5,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 6,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 7,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 8,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "idparkinglot": 2,
+    "name": "test teknologiakyla",
+    "parkingareas": [
+      {
+        "idparkingarea": 32,
+        "id": 1,
+        "avaiblespace": 32,
+        "orientation": "0.000000",
+        "path": [
+          {
+            "lat": 65.057935,
+            "lng": 25.455743
+          },
+          {
+            "lat": 65.057935,
+            "lng": 25.457550
+          },
+          {
+            "lat": 65.057675,
+            "lng": 25.457550
+          },
+          {
+            "lat": 65.057675,
+            "lng": 25.455743
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 5,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 6,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 7,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 8,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "idparkingarea": 33,
+        "id": 2,
+        "avaiblespace": 96,
+        "orientation": "90.000000",
+        "path": [
+          {
+            "lat": 65.057675,
+            "lng": 25.455743
+          },
+          {
+            "lat": 65.057675,
+            "lng": 25.457550
+          },
+          {
+            "lat": 65.057352,
+            "lng": 25.457550
+          },
+          {
+            "lat": 65.057352,
+            "lng": 25.455743
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 5,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 6,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 7,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 8,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "idparkingarea": 34,
+        "id": 3,
+        "avaiblespace": 108,
+        "orientation": "0.000000",
+        "path": [
+          {
+            "lat": "65.057627",
+            "lng": "25.438264"
+          },
+          {
+            "lat": "65.058070",
+            "lng": "25.437856"
+          },
+          {
+            "lat": "65.059514",
+            "lng": "25.437390"
+          },
+          {
+            "lat": "65.057765",
+            "lng": "25.439166"
+          }
+        ],
+        "slots": [
+          {
+            "rowNumber": 1,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 0
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 0
+              },
+              {
+                "slot": 5,
+                "occupied": 0
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 0
+              },
+              {
+                "slot": 9,
+                "occupied": 0
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 2,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 0
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 0
+              },
+              {
+                "slot": 8,
+                "occupied": 0
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 3,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 4,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 5,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 6,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 7,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 8,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          },
+          {
+            "rowNumber": 9,
+            "row": [
+              {
+                "slot": 1,
+                "occupied": 1
+              },
+              {
+                "slot": 2,
+                "occupied": 1
+              },
+              {
+                "slot": 3,
+                "occupied": 1
+              },
+              {
+                "slot": 4,
+                "occupied": 1
+              },
+              {
+                "slot": 5,
+                "occupied": 1
+              },
+              {
+                "slot": 6,
+                "occupied": 1
+              },
+              {
+                "slot": 7,
+                "occupied": 1
+              },
+              {
+                "slot": 8,
+                "occupied": 1
+              },
+              {
+                "slot": 9,
+                "occupied": 1
+              },
+              {
+                "slot": 10,
+                "occupied": 1
+              },
+              {
+                "slot": 11,
+                "occupied": 1
+              },
+              {
+                "slot": 12,
+                "occupied": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
