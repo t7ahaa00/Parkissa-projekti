@@ -87,4 +87,11 @@ Ver. 0.3.0
         o luo setin testidataa  
     · creatParkingGrid()
 
-        o muutetiin toimintaa, nykyään grids talulla on row ja slot kentät joiden avulla ruutu voidaan määrittää 
+        o muutetiin toimintaa, nykyään grids talulla on row ja slot kentät joiden avulla ruutu voidaan määrittää
+
+Ver. 0.3.1
+-Lisättiin parkingarea tauluun orientation joka kertoo ruutujen suunnan, postettiin lng ja lat kentät
+
+-Lisätyt taulut
+
+    · path, polku parkkialueen piirtämistä varten

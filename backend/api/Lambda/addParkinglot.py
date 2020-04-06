@@ -14,13 +14,14 @@ def addParkinglot(event):
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
     with conn.cursor() as cursor: 
         parkinglotID = -1
+        inputString =''
         sql_Query = """INSERT INTO parkinglot VALUES(null,%s);"""
         insert_tuple = event['body-json']['name']
         try:
             cursor.execute(sql_Query,insert_tuple)
             conn.commit()
         except pymysql.IntegrityError:
-            print('duplikaatti nimi')
+            print('parkinglot with that name exists')
         
         sql_Query = """SELECT idparkinglot FROM parkinglot WHERE name = %s;"""
         cursor.execute(sql_Query,insert_tuple)
@@ -35,24 +36,42 @@ def addParkinglot(event):
         conn.commit()
         columns = [col[0] for col in cursor.description]
         data = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        if len(data) == 0:
-            sql_Query = """INSERT INTO parkingarea VALUES(%s,null,%s,%s,%s,%s,%s,%s);"""
-            insert_tuple = parkinglotID,event['body-json']['areaID'],event['body-json']['lat1'],event['body-json']['lng1'],event['body-json']['lat2'], event['body-json']['lng2'],event['body-json']['avaibleSlots']
+        
+        if len(data) == 0:         
+            sql_Query = """INSERT INTO parkingarea VALUES(%s,null,%s,%s,%s);"""
+            insert_tuple = parkinglotID,event['body-json']['areaID'],event['body-json']['avaibleSlots'],event['body-json']['orientation']
             
             try:
                 cursor.execute(sql_Query,insert_tuple)
                 conn.commit()
+                parkigAreaId=cursor.lastrowid
+                for items in event['body-json']['path']:
+                    inputString = inputString + '(' + str(parkigAreaId) + ',null,' + str(items['lat'])+',' + str(items['lng']) + '),';
+                inputString = inputString[:-1]
+                sql_Query = """INSERT INTO path(idparkingarea, idpath, lat, lng) VALUES %s;"""%inputString
+                try:
+                    cursor.execute(sql_Query)
+                    conn.commit()
+                except pymysql.Error as e:
+                    err = {
+                      "error": "error",
+                      "message": "couldn't create path",
+                      "errormsg": str(e)
+                    }
+                    jsonOut = json.loads(json.dumps(err))
+                    return jsonOut
+
+                
             except pymysql.Error as e:
                 err = {
                   "error": "error",
-                  "message": "couldn't create parkingarea coordinates must be unique",
+                  "message": "couldn't create parkingarea",
                   "errormsg": str(e)
                 }
                 jsonOut = json.loads(json.dumps(err))
                 return jsonOut
             
-            
-            sql_Query2 = """SELECT idparkingarea FROM parkingarea WHERE idparkinglot = %s AND id = %s;"""
+            sql_Query2 = """SELECT idparkinglot,idparkingarea FROM parkingarea WHERE idparkinglot = %s AND id = %s;"""
             insert_tuple2 = parkinglotID,event['body-json']['areaID']
             cursor.execute(sql_Query2,insert_tuple2)
             conn.commit()
@@ -63,12 +82,9 @@ def addParkinglot(event):
             jsonOut = json.loads(returnValue)
             return(jsonOut)
         else:
-            sql_Query = """UPDATE parkingarea SET lat1=%s,lng1=%s,lat2=%s,lnf2=%s,avaiblespace= %s WHERE WHERE idparkinglot = %s AND id = %s;"""
-            insert_tuple = event['body-json']['lat1'],event['body-json']['lng1'],event['body-json']['lat2'], event['body-json']['lng2'],event['body-json']['avaibleSlots'],parkinglotID,event['body-json']['areaID']
-        
             err = {
                  "error": "error",
-                 "message": "duplicate id updated old one instead",
+                 "message": "duplicate id",
                 }
             jsonOut = json.loads(json.dumps(err))
             return jsonOut
