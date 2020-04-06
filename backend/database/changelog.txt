@@ -1,0 +1,90 @@
+Ver. 0.1
+
+-Luotiin pohja tietokannalle
+
+-Lisätyt taulut
+
+    · käyttäjä, applikaation käyttäjäkohtainen data
+
+    · auto, applikaation käyttäjien autot
+
+    · parkkialue, parkkialueiden tiedot
+
+    · kamera, parkkialuetta valvovien kameroiden tiedot
+
+    · parkkiruutu, parkkialueen ruudut ja niiden tilanne
+
+Ver. 0.2.1
+
+-Liitettiin käyttäjät parkkipaikkoihin, tehtiin proseduureja logien tekemiseen ja parkkipaikkojen ruutujen tekemiseen
+
+-Käännettiin taulujen nimet englanniksi
+
+-muutettiin taulujen kaikki kentät lower caseksi
+
+-Lisätyt taulut
+
+    · log, parkkipaikan käyttöasteen logittaminen createLog(parkkipaikanNimi) proseduurin avulla
+
+    · parkinglot_has_user, taulu joka linkittää käyttäjät parkkialueisiin
+
+    · visitor, vierailija
+
+    · admin, ohjelman ylläpidosta vastaavat käyttäjät
+
+    · staff, yksittäisten parkkipaikkojen hallinnoinnista vastaavat käyttäjät
+
+-Lisätyt proseduurit
+
+    · createLog(parkkipaikanNimi)
+
+        o Generoi logi tauluun tiedot parkkipaikan senhetkisestä tilanteesta
+
+    · CreateParkingGrid(parkkipaikanNimi, rivien lukumäärä, paikkojen lukumäärä rivissä)
+
+        o Generoi parkkipaikoille nimet muodossa (KIRJAIN RIVI)(NUMERO PAIKKA) eli A1, A2.... Z8 muodossa jos rivejä on vähemmän kuin 26 (A-Z)
+
+        o Generoi parkkipaikoille nimet muodossa (KIRJAIN RIVI)(KIRJAIN 2 RIVI)(NUMERO PAIKKA) eli AA1, AA2... AB1, AB2 ... ZZ8,ZZ9 muodossa jos rivejä on enemmän kuin 26 (AA-ZZ)
+
+        o Päivittää parkkialueen parkkipaikkojen lukumäärän vastaamaan annettua määrää.
+
+Ver. 0.2.2
+
+-Muutettiin parkkipaikan nimi kenttä uniikiksi
+
+-Lisätyt proseduurit
+
+    · toggleState(parkkialueenID,rivi,paikka)
+
+        o Vaihtaa parkkiruudun tilan vastakkaiseksi, parkkipaikkojen nimet voidaan vaihtaa parkkipaikkojen ID:iksi kun päätetään miten parkkiruudut merkataan applikaatiossa.
+    
+    · getFreeSlots(idparkingarea)
+
+        o palauttaa vapaiden paikkojen lukumäärän ja muuta infoa parkkialueesta.
+
+
+Ver. 0.2.3
+
+-Lisätyt proseduurit
+
+    · toggleState(parkkialueenID,rivi,paikka)
+
+        o päivitettiin toimimaan rajapinnan kanssa, lisättiin erroreiden käsittely, muutettiin ensimmäinen parametri ID:ksi
+
+Ver. 0.3.0
+-Muutettiin tietokantaa vastaamaan front tiimin tarvetta
+-Yhdistettiin admin ja ylläpitäjät yhteen users tauluun
+-paloiteltiin parkinglot parkinglot ja parkingarea tauluihin -> yhden hallinnoijan alla voi olla useita alueita
+-lisättiin grids tauluun rows ja slot kentät.
+
+-Lisätyt proseduurit
+
+    · toggleStateWithoutReturn(parkkialueenID,rivi,paikka)
+
+        o nopeampi versio toggleState proseduurista, käytetään testidataa luodessa
+    · generateDummyData()
+
+        o luo setin testidataa  
+    · creatParkingGrid()
+
+        o muutetiin toimintaa, nykyään grids talulla on row ja slot kentät joiden avulla ruutu voidaan määrittää 

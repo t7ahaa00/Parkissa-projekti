@@ -1,0 +1,603 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "parkissa",
+    "version": "1.0",
+    "contact": {
+      "name": "Henri Laaja",
+      "email": "t7lahe00@atudents.oamk.fi"
+    },
+    "description": "Parkissa API"
+  },
+  "servers": [
+    {
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/test",
+      "description": "backend dev"
+    },
+    {
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests",
+      "description": "front tests"
+    }
+  ],
+  "paths": {
+    "/parkinglot/{parkingareaID}/grid/free": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Free grids",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "info": {
+                      "type": "object",
+                      "properties": {
+                        "idparkinglot": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "freeSlots": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "freeGrids": {
+                      "type": "object",
+                      "properties": {
+                        "idparkinglot": {
+                          "type": "integer"
+                        },
+                        "idgrid": {
+                          "type": "integer"
+                        },
+                        "slotname": {
+                          "type": "string"
+                        },
+                        "occupied": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "info": [
+                        {
+                          "idparkinglot": 1,
+                          "name": "OAMK parkkipaikka",
+                          "freeSlots": 85
+                        }
+                      ],
+                      "freeGrids": [
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 2,
+                          "slotname": "A2",
+                          "occupied": 0
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 4,
+                          "slotname": "A4",
+                          "occupied": 0
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idgrid": 8,
+                          "slotname": "A8",
+                          "occupied": 0
+                        }
+                      ]
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "info": [
+                        {
+                          "error": "error",
+                          "message": "could not find parkinglot with that id"
+                        }
+                      ],
+                      "freeGrids": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-parkinglot-parkinglotID-grids-free",
+        "description": "gets all free slots of parking lot",
+        "parameters": [],
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/parkinglot/{parkingareaID}/grid/{row}/{slot}/toggleState": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "row",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "slot",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Toggle grid state",
+        "operationId": "patch-parkinglot-parkinglotID-grid-gridName-toggleState",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error 1": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find parkinglot with that id"
+                    }
+                  },
+                  "error 2": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find grid with that name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Toggle grid occupied state",
+        "requestBody": {},
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get grid state",
+        "operationId": "get-parkinglot-parkinglotID-grid-gridName-toggleState",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "description": "gets grid state",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/parkinglot": {
+      "post": {
+        "summary": "Add new parkinglot",
+        "operationId": "post-parkinglot",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "error": "error",
+                      "message": "name must be unique"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "creates new parkinglot and parkingarea",
+        "parameters": [],
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "areaID": {
+                    "type": "number"
+                  },
+                  "lat1": {
+                    "type": "number"
+                  },
+                  "lng1": {
+                    "type": "number"
+                  },
+                  "lat2": {
+                    "type": "number"
+                  },
+                  "lng2": {
+                    "type": "number"
+                  },
+                  "avaibleSlots": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "name",
+                  "areaID",
+                  "lat1",
+                  "lng1",
+                  "lat2",
+                  "lng2",
+                  "avaibleSlots"
+                ]
+              }
+            }
+          },
+          "description": "Needed data"
+        }
+      }
+    },
+    "/{parkinglotID}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete parkinglot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error 1": {
+                    "value": {
+                      "error": "error",
+                      "message": "could not find parkinglot with that id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-parkinglot-parkinglotID",
+        "description": "deletes parkinglot with id",
+        "requestBody": {
+          "description": ""
+        },
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "parameters": []
+      },
+      "get": {
+        "summary": "Gets all data in parkinglot",
+        "operationId": "get-parkinglotID",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "gets all data in parkinglot with specific id",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/testdata/parkinglot": {
+      "get": {
+        "summary": "get test parkinglots",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "success": {}
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-testdata-parkinglots",
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "description": "Returns test parkinglots"
+      },
+      "parameters": []
+    },
+    "/testdata/generate": {
+      "post": {
+        "summary": "Generate test data",
+        "operationId": "post-testdata-generate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "generates/resets test dataset",
+        "security": [
+          {
+            "API Key": []
+          }
+        ]
+      }
+    },
+    "/testdata/getapikey": {
+      "get": {
+        "summary": "Get api key",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "x-api-key": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-testdata-getapikey",
+        "description": "returns testing apikey"
+      }
+    },
+    "/{parkinglotID}/{parkingareaID}/grid/create": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Add parking places to grid",
+        "operationId": "post-parkinglotID-parkingareaID-grid-create",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slots": {
+                    "type": "object",
+                    "properties": {
+                      "row": {
+                        "type": "number"
+                      },
+                      "slots": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "description": "creates grid for parkingarea"
+      }
+    },
+    "/parkinglot/{parkingareaID}/grid/toggleMultipleStates": {
+      "patch": {
+        "summary": "Update multiple states",
+        "operationId": "patch-parkinglot-parkingarea-grid-toggleMultipleStates",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Updates multiple grid states",
+        "security": [
+          {
+            "API Key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slots": {
+                    "type": "object",
+                    "required": [
+                      "row",
+                      "grid"
+                    ],
+                    "properties": {
+                      "row": {
+                        "type": "number"
+                      },
+                      "grid": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "slots"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ]
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "API Key": {
+        "name": "x-api-key",
+        "type": "apiKey",
+        "in": "header"
+      }
+    }
+  }
+}
