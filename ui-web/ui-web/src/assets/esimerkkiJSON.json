@@ -1,0 +1,142 @@
+{
+"parkkipaikat": [ 
+	{
+		"id" :1,
+		"name": "oulunYliopisto",
+		"parkkialueet": [
+			{
+				"id": 1,
+				"path":
+                    [
+                        {"lat": 65.060014, "lng": 25.470085},
+                        {"lat": 65.060014, "lng": 25.471944},
+                        {"lat": 65.058479, "lng": 25.471944},
+                        {"lat": 65.058479, "lng": 25.470085}
+                    ],
+				"varausAste": [
+					{
+						"row" : "1",
+						"slots" : [
+							{
+								"slot": "1",
+								"occupied": "true" 
+							},
+							{
+								"slot": "2",
+								"occupied": "false"
+							},
+							{
+								"slot": "3",
+								"occupied": "false"
+							},
+							{
+								"slot": "4",
+								"occupied": "false"
+							},
+							{
+								"slot": "5",
+								"occupied": "false"
+							}
+						]
+					},
+					{
+						"row" : "2",
+						"slots" : [
+							{
+								 "slot": "1",
+								 "occupied": "true" 
+							},
+							{
+								 "slot": "2",
+								 "occupied": "false"
+							},
+							{
+								 "slot": "3",
+								 "occupied": "true"
+							},
+							{
+								 "slot": "4",
+								 "occupied": "true"
+							},
+							{
+								 "slot": "5",
+								 "occupied": "false"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": 2,
+				"path":
+                    [
+                        {"lat": 65.061677, "lng": 25.462875},
+                        {"lat": 65.061677, "lng": 25.464629},
+                        {"lat": 65.060503, "lng": 25.464629},
+                        {"lat": 65.060503, "lng": 25.462875}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 3,
+				"path":
+                    [
+                        {"lat": 65.058841, "lng": 25.461625},
+                        {"lat": 65.058841, "lng": 25.462808},
+                        {"lat": 65.057642, "lng": 25.462808},
+                        {"lat": 65.057642, "lng": 25.461625}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			}
+		]
+	},
+	{
+		"id" :1,
+		"name": "TeknologiaKylä",
+		"parkkialueet": [
+			{
+				"id": 1,
+				"path":
+                    [
+                        {"lat": 65.057935, "lng": 25.455743},
+                        {"lat": 65.057935, "lng": 25.457550},
+                        {"lat": 65.057675,  "lng": 25.457550},
+                        {"lat": 65.057675, "lng": 25.455743}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			},
+			{
+				"id": 2,
+				"path":
+                    [
+                        {"lat": 65.057675, "lng": 25.455743},
+                        {"lat": 65.057675, "lng": 25.457550},
+                        {"lat": 65.057352,  "lng": 25.457550},
+                        {"lat": 65.057352, "lng": 25.455743}
+                    ],
+				"varausAste": [
+					{
+						"varausasteen" : 1,
+						"taytettavain" : "tayte"
+					}
+				]
+			}
+		]
+	}
+]
+}
