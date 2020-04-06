@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-react';
 
 import classes from './MapWindow.module.css';
-import ParkDetailOverlay from '../ParkingDetails/ParkDetailOverlay/ParkDetailOverlay';
+import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 import ParkJson from '../../assets/esimerkkiJSON.json';
 
 class MapWindow extends Component {
@@ -11,27 +11,12 @@ class MapWindow extends Component {
         super(props);
 
         this.state= {
-            // Parking sites marker coordinates
-            parkSites: [
-                {lat: 65.0594, lng: 25.4711, name: 'Yliopisto1', img: <img src={require('../../assets/alien.png')} alt="Alien"></img>},
-                {lat: 65.061, lng: 25.4638, name: 'Yliopisto2'},
-                {lat: 65.0582, lng: 25.4622, name: 'Yliopisto3'},
-            ],
-
             showingInfoWindow: false,
-            activeMarker: {},
             selectedPlace: {},
-            activePolycon: {},
             position: {},
         }
     }
 
-    onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
     // Show infowindow when clicking polygon
     onPolyClick = (props, e) =>
     this.setState({
@@ -67,7 +52,7 @@ class MapWindow extends Component {
     // Display all the polygons in JSON file
     displaySitePolygon = () => {
         return ParkJson.parkkipaikat.map((coords, index) => {
-            console.log(coords.parkkialueet[0].path)
+            //console.log(coords.parkkialueet[0].path)
             return coords.parkkialueet.map((parkCoords, index) => {
                 return(
                 <Polygon 
@@ -106,14 +91,16 @@ class MapWindow extends Component {
                 
                 {this.displaySitePolygon()}
 
-                { <InfoWindow
+                <InfoWindow
                     position={this.state.position}
-                    visible={this.state.showingInfoWindow}>
-                    <div>
-                        <h2>{this.state.selectedPlace.name}</h2>
-                        <ParkDetailOverlay />
-                    </div>
-                </InfoWindow> }
+                    visible={this.state.showingInfoWindow}
+                    name={this.state.selectedPlace.name} >
+                        <div>
+                            <h3>{this.state.selectedPlace.name}</h3>
+                            <ParkDetailOverlay />
+                        </div>
+                        
+                </InfoWindow>
             </Map>
         );
     }
