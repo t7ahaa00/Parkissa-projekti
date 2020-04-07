@@ -56,8 +56,8 @@ class MapWindow extends Component {
             return parkinglots.parkingareas.map((parkAreas, index) => {
                 return(
                 <Polygon 
-                key={index} 
-                id={parkAreas.id} 
+                key={index}
+                id={parkAreas.id}
                 paths={parkAreas.path}
                 onClick={this.onPolyClick}
                 name={parkinglots.name + ' ' + parkAreas.id}
@@ -74,30 +74,88 @@ class MapWindow extends Component {
     displayParkingSlots = () => {
         return ParkJson.map((parkinglots, i) => {
             return parkinglots.parkingareas.map((parkingarea, j) => {
-                
-                var horizontalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
-                var verticalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
 
-                var rows = 0
-
-                console.log(horizontalLength)
-                console.log(verticalLength)
+                let table = []
                 
-                /*
+                var horizontalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
+                var verticalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
+
                 var lat1 = parkingarea.path[0].lat
                 var lat2 = parkingarea.path[2].lat
                 var lng1 = parkingarea.path[0].lng
                 var lng2 = parkingarea.path[1].lng
+
+                var rows = parkingarea.rows
+                var slots = parkingarea.avaiblespace
+                var slotsPerRow = slots / rows
+
+                console.log(horizontalLength)
+                console.log(verticalLength)
+
+                var plusToNextLng = horizontalLength / slotsPerRow
+                var plusToNextLat = verticalLength / rows
+
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < slotsPerRow; j++) {
+                        
+                        var pathForSlot = [
+                            {
+                                lat: lat1,
+                                lng: lng1
+                            },
+                            {
+                                lat: lat1,
+                                lng: lng2
+                            },
+                            {
+                                lat: lat2,
+                                lng: lng2
+                            },
+                            {
+                                lat: lat2,
+                                lng: lng1
+                            }
+                        ]
+                        
+                        table.push(pathForSlot)
+
+                        lng1 = lng1 - plusToNextLng
+                        console.log(lng1)
+                    }
+
+
+                    //SELVITÄ MITEN SAADAAN AJOVAYLAT PARKKIPAIKKOJEN VALIIN
+
+                    lat1 = lat1 - plusToNextLat
+                    lng1 = parkingarea.path[0].lng
+                    console.log(lat1)
+                }
+
+                //return table
+
+                /*
+
+                     SLOTS PER ROW (horizontal)
+
+                R    '''''''''' 
+                O    ''''''''''
+                W    ''''''''''
+                S    ''''''''''
+
                 */
 
-                return parkingarea.slots.map((slot, k) => {
+                return table.map((path, index) => {
                     return(
-                        //rows = k
-                        <Polygon>
-
-                        </Polygon>
+                    <Polygon 
+                    key={index}
+                    paths={path}
+                    fillOpacity={0.0}
+                    strokeWeight={1} >
+                     </Polygon>
                     )
                 })
+
+                
             })
         })
     }
@@ -123,6 +181,10 @@ class MapWindow extends Component {
                 
                 {this.displaySitePolygon()}
                 {this.displayParkingSlots()}
+
+                {/* <table>
+                    {this.displayParkingSlots()}
+                </table> */}
 
                 <InfoWindow
                     position={this.state.position}

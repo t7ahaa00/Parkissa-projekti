@@ -7,6 +7,7 @@
         "idparkingarea": 29,
         "id": 1,
         "avaiblespace": 40,
+        "rows": 4,
         "orientation": "90.000000",
         "path": [
           {
@@ -213,6 +214,7 @@
         "idparkingarea": 30,
         "id": 2,
         "avaiblespace": 32,
+        "rows": 8,
         "orientation": "90.000000",
         "path": [
           {
@@ -407,6 +409,7 @@
         "idparkingarea": 31,
         "id": 3,
         "avaiblespace": 32,
+        "rows": 8,
         "orientation": "0.000000",
         "path": [
           {
@@ -607,6 +610,7 @@
         "idparkingarea": 32,
         "id": 1,
         "avaiblespace": 32,
+        "rows": 4,
         "orientation": "0.000000",
         "path": [
           {
@@ -801,6 +805,7 @@
         "idparkingarea": 33,
         "id": 2,
         "avaiblespace": 96,
+        "rows": 8,
         "orientation": "90.000000",
         "path": [
           {
@@ -1251,23 +1256,24 @@
         "idparkingarea": 34,
         "id": 3,
         "avaiblespace": 108,
+        "rows": 8,
         "orientation": "0.000000",
         "path": [
           {
-            "lat": "65.057627",
-            "lng": "25.438264"
+            "lat": 65.057627,
+            "lng": 25.438264
           },
           {
-            "lat": "65.058070",
-            "lng": "25.437856"
+            "lat": 65.058070,
+            "lng": 25.437856
           },
           {
-            "lat": "65.059514",
-            "lng": "25.437390"
+            "lat": 65.059514,
+            "lng": 25.437390
           },
           {
-            "lat": "65.057765",
-            "lng": "25.439166"
+            "lat": 65.057765,
+            "lng": 25.439166
           }
         ],
         "slots": [
