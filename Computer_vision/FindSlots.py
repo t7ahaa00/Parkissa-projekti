@@ -6,11 +6,12 @@ Created on Thu Mar 26 13:09:35 2020
 """
 
 import json
+from Freeslot import Freeslot
 
 def checkFreeSlots(cars, slotsFileName):
     
     slots=[]
-    free_slots=[]
+    free_slots = []
     busy_slots=[]
     
     with open(slotsFileName + '.json', 'r') as data_file:
@@ -33,8 +34,9 @@ def checkFreeSlots(cars, slotsFileName):
 
     for i,slot in enumerate(slots):
         if i not in busy_slots:
-            free_slots.append(slot["sId"])
-     
+            free_slots.append(json.loads(Freeslot(slot["sId"],slot["row"]).toJson()))
+            
+    
     return free_slots, len(slots)
 
 
