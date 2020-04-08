@@ -4,6 +4,11 @@ import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-r
 import classes from './MapWindow.module.css';
 import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 import ParkJson from '../../assets/parkkialuedata.json';
+import axios from 'axios';
+import Aux from '../../hoc/Auxiliary/Auxiliary';
+import Spinner from '../../Components/Spinner/Spinner';
+
+let serverTestParkData = null;
 
 class MapWindow extends Component {
 
@@ -14,7 +19,23 @@ class MapWindow extends Component {
             showingInfoWindow: false,
             selectedPlace: {},
             position: {},
+            loadingReady : false
         }
+
+    }
+    
+    componentDidMount() {
+        
+        axios.get('https://react-jburger.firebaseio.com/parkdata.json')
+            .then(response => {
+                console.log('[ComponenDidMount] ' + response.data);
+                serverTestParkData = response.data;
+                this.setState({loadingReady: true})
+            }
+            )
+            .catch( error => {
+                console.log( error );
+            });
     }
 
     // Show infowindow when clicking polygon
@@ -51,7 +72,8 @@ class MapWindow extends Component {
     }
     // Display all the polygons in JSON file
     displaySitePolygon = () => {
-        return ParkJson.map((parkinglots, index) => {
+        //return ParkJson.map((parkinglots, index) => {
+        return serverTestParkData.map((parkinglots, index) => {
             console.log(Object(parkinglots) );
             return parkinglots.parkingareas.map((parkAreas, index) => {
                 return(
@@ -72,7 +94,8 @@ class MapWindow extends Component {
     }
 
     displayParkingSlots = () => {
-        return ParkJson.map((parkinglots, i) => {
+        //return ParkJson.map((parkinglots, i) => {
+        return serverTestParkData.map((parkinglots, i) => {
             return parkinglots.parkingareas.map((parkingarea, j) => {
 
                 let table = []
@@ -165,38 +188,55 @@ class MapWindow extends Component {
         console.log("Polygon clicked ", props.name );
     }
 
+    
+
     render() {
-        return(
-            <Map
-                google={this.props.google}
-                zoom={16}
-                className={classes.Map}
-                initialCenter={{ lat: 65.0595, lng: 25.4662}}
-                mapTypeControl={true}
-                zoomControl={true}
-                mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}}
-                streetViewControl={false}
-                onClick={this.onMapClicked}
-                >          
-                
-                {this.displaySitePolygon()}
-                {this.displayParkingSlots()}
+        // Loading wheel showed while loading data
+        let displayPolygons = this.state.loadingReady ? <p>Loading...</p> : <Spinner />;
 
-                {/* <table>
+        // Map displays when data from server has been loaded
+        if (this.state.loadingReady) {
+            displayPolygons = (
+                <Map
+                    google={this.props.google}
+                    zoom={16}
+                    className={classes.Map}
+                    initialCenter={{ lat: 65.0595, lng: 25.4662}}
+                    mapTypeControl={true}
+                    zoomControl={true}
+                    mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}}
+                    streetViewControl={false}
+                    onClick={this.onMapClicked}
+                    >          
+                    {/* {displayPolygons} */}
+                    {this.displaySitePolygon()}
                     {this.displayParkingSlots()}
-                </table> */}
 
-                <InfoWindow
-                    position={this.state.position}
-                    visible={this.state.showingInfoWindow}
-                    name={this.state.selectedPlace.name} >
-                        <div>
-                            <h3>{this.state.selectedPlace.name}</h3>
-                            <ParkDetailOverlay />
-                        </div>
-                        
-                </InfoWindow>
-            </Map>
+                    {/* <table>
+                        {this.displayParkingSlots()}
+                    </table> */}
+
+                    <InfoWindow
+                        position={this.state.position}
+                        visible={this.state.showingInfoWindow}
+                        name={this.state.selectedPlace.name} >
+                            <div>
+                                <h3>{this.state.selectedPlace.name}</h3>
+                                <ParkDetailOverlay />
+                            </div>         
+                    </InfoWindow>
+                </Map>
+            );
+        }
+            
+        
+
+        
+        return(
+            <Aux>
+                {displayPolygons}
+            </Aux>
+            
         );
     }
 };
