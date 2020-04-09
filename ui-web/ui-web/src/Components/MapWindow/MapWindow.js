@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-r
 
 import classes from './MapWindow.module.css';
 import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
-import ParkJson from '../../assets/parkkialuedata.json';
+//import ParkJson from '../../assets/parkkialuedata.json';
 import axios from 'axios';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
@@ -21,7 +21,6 @@ class MapWindow extends Component {
             position: {},
             loadingReady : false
         }
-
     }
     
     componentDidMount() {
@@ -56,7 +55,7 @@ class MapWindow extends Component {
     };
 
     // Parking place sites marker placement
-    displaySiteMarkers = () => {
+    /* displaySiteMarkers = () => {
         return this.state.parkSites.map((parkSite, index) => {
             return <Marker key={index} id={index} position={{
                 lat: parkSite.lat,
@@ -69,7 +68,7 @@ class MapWindow extends Component {
                  </div>
                  </Marker>
         })
-    }
+    } */
     // Display all the polygons in JSON file
     displaySitePolygon = () => {
         //return ParkJson.map((parkinglots, index) => {
@@ -177,8 +176,6 @@ class MapWindow extends Component {
                      </Polygon>
                     )
                 })
-
-                
             })
         })
     }
@@ -187,8 +184,6 @@ class MapWindow extends Component {
     clickedPolygon = (props) =>{
         console.log("Polygon clicked ", props.name );
     }
-
-    
 
     render() {
         // Loading wheel showed while loading data
@@ -208,13 +203,8 @@ class MapWindow extends Component {
                     streetViewControl={false}
                     onClick={this.onMapClicked}
                     >          
-                    {/* {displayPolygons} */}
                     {this.displaySitePolygon()}
                     {this.displayParkingSlots()}
-
-                    {/* <table>
-                        {this.displayParkingSlots()}
-                    </table> */}
 
                     <InfoWindow
                         position={this.state.position}
@@ -229,18 +219,14 @@ class MapWindow extends Component {
             );
         }
             
-        
-
-        
         return(
             <Aux>
                 {displayPolygons}
             </Aux>
-            
         );
     }
 };
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyD38KVBa8COxekeVYZz9ypRqwUGKuJQkrM'
+    apiKey: process.env.GOOGLE_API_KEY
     })(MapWindow);  
