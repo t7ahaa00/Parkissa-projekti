@@ -188,6 +188,7 @@ class MapWindow extends Component {
     render() {
         // Loading wheel showed while loading data
         let displayPolygons = this.state.loadingReady ? <p>Loading...</p> : <Spinner />;
+        console.log(process.env);
 
         // Map displays when data from server has been loaded
         if (this.state.loadingReady) {
@@ -228,5 +229,5 @@ class MapWindow extends Component {
 };
 
 export default GoogleApiWrapper({
-    apiKey: process.env.GOOGLE_API_KEY
+    apiKey: process.env.REACT_APP_GOOGLE_API_KEY
     })(MapWindow);  
