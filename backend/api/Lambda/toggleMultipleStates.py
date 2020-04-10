@@ -13,6 +13,7 @@ def toggleMultipleGridStates(event):
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
     with conn.cursor() as cursor:
         inputString =''
+        inputString2 =''
         looper = 0
         lenght = len(event['body-json']['slots'])
         
@@ -23,15 +24,22 @@ def toggleMultipleGridStates(event):
         rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
         
         if not rows:
-            returnValue = json.dumps({'error':'parkingarea doesnt exist'})
+            returnValue = json.dumps({
+                'error':'parkingarea with that id doesnt exist'
+            })
             return(json.loads(returnValue))
         
             
         for items in event['body-json']['slots']:
             inputString = inputString + 'row='+str(items['row']) +' AND slot=' + str(items['grid']) + ' AND idparkingarea = ' + str(event['params']['path']['parkingareaID']) + ' OR ' 
-                
+
         inputString = inputString[:-4]
-        sql_Query = """UPDATE grid SET occupied = !occupied WHERE %s"""%inputString
+        
+        sql_Query = """UPDATE grid SET occupied = 1 WHERE idparkingarea = %s"""
+        args = event['params']['path']['parkingareaID']
+        cursor.execute(sql_Query,args)
+        conn.commit()
+        sql_Query = """UPDATE grid SET occupied = 0 WHERE %s"""%inputString
         cursor.execute(sql_Query)
         conn.commit()
         returnValue = json.dumps({'success':'success'})

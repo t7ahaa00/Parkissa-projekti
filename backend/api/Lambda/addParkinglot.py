@@ -37,7 +37,8 @@ def addParkinglot(event):
         columns = [col[0] for col in cursor.description]
         data = [dict(zip(columns, row)) for row in cursor.fetchall()]
         
-        if len(data) == 0:         
+        if len(data) == 0:
+            
             sql_Query = """INSERT INTO parkingarea VALUES(%s,null,%s,%s,%s);"""
             insert_tuple = parkinglotID,event['body-json']['areaID'],event['body-json']['avaibleSlots'],event['body-json']['orientation']
             
@@ -54,8 +55,7 @@ def addParkinglot(event):
                     conn.commit()
                 except pymysql.Error as e:
                     err = {
-                      "error": "error",
-                      "message": "couldn't create path",
+                      "error": "couldn't create path",
                       "errormsg": str(e)
                     }
                     jsonOut = json.loads(json.dumps(err))
@@ -64,8 +64,7 @@ def addParkinglot(event):
                 
             except pymysql.Error as e:
                 err = {
-                  "error": "error",
-                  "message": "couldn't create parkingarea",
+                  "error": "couldn't create parkingarea",
                   "errormsg": str(e)
                 }
                 jsonOut = json.loads(json.dumps(err))
@@ -83,8 +82,7 @@ def addParkinglot(event):
             return(jsonOut)
         else:
             err = {
-                 "error": "error",
-                 "message": "duplicate id",
+                 "error": "duplicate id"
                 }
             jsonOut = json.loads(json.dumps(err))
             return jsonOut

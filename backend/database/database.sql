@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`path` (
   CONSTRAINT `fk_path_parkingarea1`
     FOREIGN KEY (`idparkingarea`)
     REFERENCES `parkissa`.`parkingarea` (`idparkingarea`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -494,7 +494,6 @@ BEGIN
         
     IF(gridID IS NULL) THEN
 		SELECT 
-			'error' AS error,
             'could not find grid with that row/slot' AS message;
 	END IF;
 END$$

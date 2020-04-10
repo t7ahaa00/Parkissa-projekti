@@ -15,7 +15,7 @@ BEGIN
 				IF looperInner = parkslots + 1 THEN
 				  LEAVE innerLoop;
 				END IF;
-					INSERT INTO grid VALUES(idParkingAreaIn,null,looperOuter,looperInner,false);
+					INSERT INTO grid VALUES(idParkingAreaIn,null,looperOuter,looperInner,true);
 				SET looperInner = looperInner + 1;
 				ITERATE innerLoop;
 		END LOOP innerLoop;

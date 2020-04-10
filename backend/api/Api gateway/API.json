@@ -80,28 +80,79 @@
                     "value": {
                       "info": [
                         {
-                          "idparkinglot": 1,
-                          "name": "OAMK parkkipaikka",
-                          "freeSlots": 85
+                          "idparkingarea": 1,
+                          "freeSlots": 10
                         }
                       ],
                       "freeGrids": [
                         {
-                          "idparkinglot": 1,
+                          "idparkingarea": 1,
                           "idgrid": 2,
-                          "slotname": "A2",
+                          "row": 1,
+                          "slot": 2,
                           "occupied": 0
                         },
                         {
-                          "idparkinglot": 1,
+                          "idparkingarea": 1,
                           "idgrid": 4,
-                          "slotname": "A4",
+                          "row": 1,
+                          "slot": 4,
                           "occupied": 0
                         },
                         {
-                          "idparkinglot": 1,
+                          "idparkingarea": 1,
+                          "idgrid": 5,
+                          "row": 1,
+                          "slot": 5,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
                           "idgrid": 8,
-                          "slotname": "A8",
+                          "row": 1,
+                          "slot": 8,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 9,
+                          "row": 1,
+                          "slot": 9,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 12,
+                          "row": 2,
+                          "slot": 2,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 17,
+                          "row": 2,
+                          "slot": 7,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 18,
+                          "row": 2,
+                          "slot": 8,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 19,
+                          "row": 2,
+                          "slot": 9,
+                          "occupied": 0
+                        },
+                        {
+                          "idparkingarea": 1,
+                          "idgrid": 20,
+                          "row": 2,
+                          "slot": 10,
                           "occupied": 0
                         }
                       ]
@@ -161,7 +212,7 @@
         }
       ],
       "patch": {
-        "summary": "Toggle grid state",
+        "summary": "Toggle slot state",
         "operationId": "patch-parkinglot-parkinglotID-grid-gridName-toggleState",
         "responses": {
           "200": {
@@ -180,14 +231,12 @@
                   },
                   "error 1": {
                     "value": {
-                      "error": "error",
-                      "message": "could not find parkinglot with that id"
+                      "error": "no parkingarea with that ID"
                     }
                   },
                   "error 2": {
                     "value": {
-                      "error": "error",
-                      "message": "could not find grid with that name"
+                      "message": "could not find grid with that row/slot"
                     }
                   }
                 }
@@ -195,7 +244,7 @@
             }
           }
         },
-        "description": "Toggle grid occupied state",
+        "description": "Toggle slots occupied state",
         "requestBody": {},
         "security": [
           {
@@ -204,7 +253,7 @@
         ]
       },
       "get": {
-        "summary": "Get grid state",
+        "summary": "Get slot state",
         "operationId": "get-parkinglot-parkinglotID-grid-gridName-toggleState",
         "responses": {
           "200": {
@@ -213,13 +262,45 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {}
+                  "properties": {
+                    "idparkingarea": {
+                      "type": "number"
+                    },
+                    "idgrid": {
+                      "type": "number"
+                    },
+                    "row": {
+                      "type": "number"
+                    },
+                    "slot": {
+                      "type": "number"
+                    },
+                    "occupied": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "idparkingarea": 1,
+                      "idgrid": 1,
+                      "row": 1,
+                      "slot": 1,
+                      "occupied": 1
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "error": "no grid with those params"
+                    }
+                  }
                 }
               }
             }
           }
         },
-        "description": "gets grid state",
+        "description": "Gets the state of specific slot",
         "security": [
           {
             "API Key": []
@@ -239,21 +320,36 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success": {
-                      "type": "string"
+                    "idparkinglot": {
+                      "type": "number"
+                    },
+                    "idparkingarea": {
+                      "type": "number"
                     }
                   }
                 },
                 "examples": {
                   "success": {
                     "value": {
-                      "success": "success"
+                      "idparkinglot": 3,
+                      "idparkingarea": 7
                     }
                   },
                   "error": {
                     "value": {
-                      "error": "error",
-                      "message": "name must be unique"
+                      "error": "duplicate id"
+                    }
+                  },
+                  "error 2": {
+                    "value": {
+                      "error": "couldn't create path",
+                      "errormsg": "errormsg"
+                    }
+                  },
+                  "error 3": {
+                    "value": {
+                      "error": "couldn't create parkingarea",
+                      "errormsg": "errormsg"
                     }
                   }
                 }
@@ -261,7 +357,7 @@
             }
           }
         },
-        "description": "creates new parkinglot and parkingarea",
+        "description": "Creates new parkinglot and parkingarea",
         "parameters": [],
         "security": [
           {
@@ -311,7 +407,32 @@
                 ]
               },
               "examples": {
-                "example-1": {}
+                "example": {
+                  "value": {
+                    "name": "string",
+                    "areaID": 0,
+                    "avaibleSlots": 0,
+                    "orientation": 0,
+                    "path": [
+                      {
+                        "lng": 0,
+                        "lat": 0
+                      },
+                      {
+                        "lng": 0,
+                        "lat": 0
+                      },
+                      {
+                        "lng": 0,
+                        "lat": 0
+                      },
+                      {
+                        "lng": 0,
+                        "lat": 0
+                      }
+                    ]
+                  }
+                }
               }
             }
           },
@@ -380,7 +501,889 @@
         "operationId": "get-parkinglotID",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "idparkinglot": {
+                      "type": "number"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "parkingareas": {
+                      "type": "object",
+                      "properties": {
+                        "idparkingarea": {
+                          "type": "number"
+                        },
+                        "id": {
+                          "type": "number"
+                        },
+                        "avaiblespace": {
+                          "type": "number"
+                        },
+                        "orientation": {
+                          "type": "number"
+                        },
+                        "path": {
+                          "type": "object",
+                          "properties": {
+                            "lat": {
+                              "type": "number"
+                            },
+                            "lng": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "slots": {
+                          "type": "object",
+                          "properties": {
+                            "rowNumber": {
+                              "type": "number"
+                            },
+                            "row": {
+                              "type": "object",
+                              "properties": {
+                                "slot": {
+                                  "type": "number"
+                                },
+                                "occupied": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "idparkinglot": 1,
+                      "name": "test oulunYliopisto",
+                      "parkingareas": [
+                        {
+                          "idparkinglot": 1,
+                          "idparkingarea": 1,
+                          "id": 1,
+                          "avaiblespace": 40,
+                          "orientation": 90,
+                          "path": [
+                            {
+                              "lat": 65.060569,
+                              "lng": 25.464495
+                            },
+                            {
+                              "lat": 65.061023,
+                              "lng": 25.464515
+                            },
+                            {
+                              "lat": 65.061049,
+                              "lng": 25.463253
+                            },
+                            {
+                              "lat": 65.060574,
+                              "lng": 25.463218
+                            }
+                          ],
+                          "slots": [
+                            {
+                              "rowNumber": 1,
+                              "row": [
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 1,
+                                  "slot": 1,
+                                  "occupied": 0
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 2,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 3,
+                                  "slot": 3,
+                                  "occupied": 0
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 4,
+                                  "slot": 4,
+                                  "occupied": 0
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 5,
+                                  "slot": 5,
+                                  "occupied": 0
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 6,
+                                  "slot": 6,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 7,
+                                  "slot": 7,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 8,
+                                  "slot": 8,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 9,
+                                  "slot": 9,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 10,
+                                  "slot": 10,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 2,
+                              "row": [
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 11,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 12,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 13,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 14,
+                                  "slot": 4,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 15,
+                                  "slot": 5,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 16,
+                                  "slot": 6,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 17,
+                                  "slot": 7,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 18,
+                                  "slot": 8,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 19,
+                                  "slot": 9,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 20,
+                                  "slot": 10,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 3,
+                              "row": [
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 21,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 22,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 23,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 24,
+                                  "slot": 4,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 25,
+                                  "slot": 5,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 26,
+                                  "slot": 6,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 27,
+                                  "slot": 7,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 28,
+                                  "slot": 8,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 29,
+                                  "slot": 9,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 30,
+                                  "slot": 10,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 4,
+                              "row": [
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 31,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 32,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 33,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 34,
+                                  "slot": 4,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 35,
+                                  "slot": 5,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 36,
+                                  "slot": 6,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 37,
+                                  "slot": 7,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 38,
+                                  "slot": 8,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 39,
+                                  "slot": 9,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 1,
+                                  "idgrid": 40,
+                                  "slot": 10,
+                                  "occupied": 1
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idparkingarea": 2,
+                          "id": 2,
+                          "avaiblespace": 32,
+                          "orientation": 90,
+                          "path": [
+                            {
+                              "lat": 65.059523,
+                              "lng": 25.462801
+                            },
+                            {
+                              "lat": 65.060319,
+                              "lng": 25.462796
+                            },
+                            {
+                              "lat": 65.060327,
+                              "lng": 25.46199
+                            },
+                            {
+                              "lat": 65.059533,
+                              "lng": 25.461994
+                            }
+                          ],
+                          "slots": [
+                            {
+                              "rowNumber": 1,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 41,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 42,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 43,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 44,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 2,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 45,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 46,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 47,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 48,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 3,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 49,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 50,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 51,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 52,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 4,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 53,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 54,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 55,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 56,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 5,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 57,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 58,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 59,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 60,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 6,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 61,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 62,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 63,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 64,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 7,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 65,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 66,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 67,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 68,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 8,
+                              "row": [
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 69,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 70,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 71,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 2,
+                                  "idgrid": 72,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "idparkinglot": 1,
+                          "idparkingarea": 3,
+                          "id": 3,
+                          "avaiblespace": 32,
+                          "orientation": 0,
+                          "path": [
+                            {
+                              "lat": 65.057658,
+                              "lng": 25.462826
+                            },
+                            {
+                              "lat": 65.058856,
+                              "lng": 25.462799
+                            },
+                            {
+                              "lat": 65.058834,
+                              "lng": 25.461587
+                            },
+                            {
+                              "lat": 65.057743,
+                              "lng": 25.46157
+                            }
+                          ],
+                          "slots": [
+                            {
+                              "rowNumber": 1,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 73,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 74,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 75,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 76,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 2,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 77,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 78,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 79,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 80,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 3,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 81,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 82,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 83,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 84,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 4,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 85,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 86,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 87,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 88,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 5,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 89,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 90,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 91,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 92,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 6,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 93,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 94,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 95,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 96,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 7,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 97,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 98,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 99,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 100,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            },
+                            {
+                              "rowNumber": 8,
+                              "row": [
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 101,
+                                  "slot": 1,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 102,
+                                  "slot": 2,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 103,
+                                  "slot": 3,
+                                  "occupied": 1
+                                },
+                                {
+                                  "idparkingarea": 3,
+                                  "idgrid": 104,
+                                  "slot": 4,
+                                  "occupied": 1
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "failure": {
+                    "value": {
+                      "error": "no parkingarea with that id"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "gets all data in parkinglot with specific id",
@@ -417,7 +1420,7 @@
             "API Key": []
           }
         ],
-        "description": "Returns test parkinglots"
+        "description": "Returns test parkinglots (poistetaan lopullisesta API:sta)"
       },
       "parameters": []
     },
@@ -449,7 +1452,7 @@
             }
           }
         },
-        "description": "generates/resets test dataset",
+        "description": "generates/resets test dataset (poistetaan lopullisesta API:sta)",
         "security": [
           {
             "API Key": []
@@ -479,7 +1482,7 @@
           }
         },
         "operationId": "get-testdata-getapikey",
-        "description": "returns testing apikey"
+        "description": "returns testing apikey (poistetaan lopullisesta API:sta)"
       }
     },
     "/parkinglot/{parkingareaID}/grid/create": {
@@ -498,7 +1501,32 @@
         "operationId": "post-parkinglotID-parkingareaID-grid-create",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error 1": {
+                    "value": {
+                      "error": "grid already exists"
+                    }
+                  },
+                  "error 2": {
+                    "value": {
+                      "error": "parkingarea doesnt exist"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -519,6 +1547,30 @@
                     }
                   }
                 }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "slots": [
+                      {
+                        "row": 1,
+                        "slots": 12
+                      },
+                      {
+                        "row": 2,
+                        "slots": 12
+                      },
+                      {
+                        "row": 3,
+                        "slots": 13
+                      },
+                      {
+                        "row": 4,
+                        "slots": 13
+                      }
+                    ]
+                  }
+                }
               }
             }
           },
@@ -534,11 +1586,35 @@
     },
     "/parkinglot/{parkingareaID}/grid/toggleMultipleStates": {
       "patch": {
-        "summary": "Update multiple states",
+        "summary": "Update multiple states to free",
         "operationId": "patch-parkinglot-parkingarea-grid-toggleMultipleStates",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "success": "success"
+                    }
+                  },
+                  "error": {
+                    "value": {
+                      "error": "parkingarea with that id doesnt exist"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "Updates multiple grid states",
@@ -572,6 +1648,30 @@
                 "required": [
                   "slots"
                 ]
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "slots": [
+                      {
+                        "row": 1,
+                        "grid": 2
+                      },
+                      {
+                        "row": 1,
+                        "grid": 3
+                      },
+                      {
+                        "row": 1,
+                        "grid": 4
+                      },
+                      {
+                        "row": 1,
+                        "grid": 5
+                      }
+                    ]
+                  }
+                }
               }
             }
           },

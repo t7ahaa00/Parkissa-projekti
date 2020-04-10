@@ -13,7 +13,7 @@ db_name = config.db_name
 
 def default(obj):
     if isinstance(obj, Decimal):
-        return str(obj)
+        return float(obj)
     raise TypeError("Object of type '%s' is not JSON serializable" % type(obj).__name__)
 
 def getParkinglot(event):
@@ -27,11 +27,16 @@ def getParkinglot(event):
         conn.commit()
         columns = [col[0] for col in cursor.description]
         parkinglots = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        
+        if not parkinglots:
+            
+            returnValue = json.dumps({
+                'error':'no parkingarea with that id'
+            })
+            return(json.loads(returnValue))
         loopIndex = 0
         for item in parkinglots:
             insert_tuple2 = []
-            sql_Query = """SELECT * FROM parkingarea WHERE idparkinglot = %s"""
+            sql_Query = """SELECT idparkingarea,id,avaiblespace,orientation FROM parkingarea WHERE idparkinglot = %s"""
             insert_tuple2 = item['idparkinglot']
             cursor.execute(sql_Query,insert_tuple2)
             columns = [col[0] for col in cursor.description]
@@ -59,7 +64,7 @@ def getParkinglot(event):
             
                 for itemrow in rowCount:
                     insert_tuple3 = []
-                    sql_Query = """SELECT idparkingarea,idgrid,slot,occupied FROM grid WHERE idparkingarea = %s AND row = %s """
+                    sql_Query = """SELECT slot,occupied FROM grid WHERE idparkingarea = %s AND row = %s """
                     insert_tuple3 = item['idparkingarea'],itemrow['rowNumber']
                     cursor.execute(sql_Query,insert_tuple3)
                     columns = [col[0] for col in cursor.description]

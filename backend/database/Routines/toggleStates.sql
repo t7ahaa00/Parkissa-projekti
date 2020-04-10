@@ -16,7 +16,6 @@ BEGIN
         
     IF(gridID IS NULL) THEN
 		SELECT 
-			'error' AS error,
             'could not find grid with that row/slot' AS message;
 	END IF;
 END
