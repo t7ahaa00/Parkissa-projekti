@@ -11,18 +11,29 @@ import json
 import MakeJsonFile
 from MakeJsonFile import Parkingslot
 
-image = cv2.imread("./images/camera1_img1.jpg")
+image = cv2.imread("./images/camera1/camera1_img1.jpg")
+#image = cv2.imread("./test_image/camera3img.jpg")
 slots = []
 slot = []
+row = 1
+slotID = 1   
 
-        
 
 def draw_circle(event,x,y,flags,param):
+    global row, slotID
+    
     if event == cv2.EVENT_LBUTTONDBLCLK:
         cv2.circle(image,(x,y),5,(124,252,0),-1)
-        slot = [x,y]
+        slot = [slotID,x,y,row]
         slots.append(slot)
-        print(" X= ", x, "Y= ", y)
+        print("slotID = ", slotID, "Row = ", row, " X= ", x, "Y= ", y)
+        slotID +=1
+       
+        
+    if event == cv2.EVENT_RBUTTONDBLCLK:
+        row +=1
+        slotID = 1
+        print("row is now ", row)
         
 def main():
     
@@ -35,15 +46,15 @@ def main():
         if cv2.waitKey(5) & 0xFF == 27:
             break
         
-    slotID = 0           
+      
     data = []
     
     for s in slots:
-        slotID +=1
-        details = Parkingslot(slotID,s[0],s[1])    
+        details = Parkingslot(s[0],s[1],s[2],s[3])    
         data.append(json.loads(details.toJson()))
     
-    MakeJsonFile.makeJsonFile("Camera1_parkingSlots", data)
+    
+    MakeJsonFile.makeJsonFile("camera1_parkingSlots", data)
     cv2.destroyAllWindows()
 
 if __name__== "__main__":
