@@ -98,6 +98,7 @@ class MapWindow extends Component {
             return parkinglots.parkingareas.map((parkingarea, j) => {
 
                 let table = []
+                let tableOccupied = []
                 
                 var horizontalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
                 var verticalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
@@ -107,7 +108,7 @@ class MapWindow extends Component {
                 var lng1 = parkingarea.path[0].lng
                 var lng2 = parkingarea.path[1].lng
 
-                var rows = parkingarea.rows
+                var rows = parkingarea.slots.length
                 var slots = parkingarea.avaiblespace
                 var slotsPerRow = slots / rows
 
@@ -120,6 +121,14 @@ class MapWindow extends Component {
                 for (let i = 0; i < rows; i++) {
                     for (let j = 0; j < slotsPerRow; j++) {
                         
+                        //ROWS == e.g 1 slots object in parkkialuedata.json
+                        //SLOTSPERROW == e.g first row object in parkkialuedata.json
+
+                        var isOccupied = parkingarea.slots[i].row[j].occupied
+
+                        console.log("TAMA ON isOccupied ARVO = " + isOccupied)
+
+
                         var pathForSlot = [
                             {
                                 lat: lat1,
@@ -140,9 +149,11 @@ class MapWindow extends Component {
                         ]
                         
                         table.push(pathForSlot)
+                        tableOccupied.push(isOccupied)
 
                         lng1 = lng1 - plusToNextLng
                         console.log(lng1)
+                        console.log(isOccupied)
                     }
 
 
@@ -167,12 +178,27 @@ class MapWindow extends Component {
                 */
 
                 return table.map((path, index) => {
+                    
+                    var green = '#7CFC00'
+                    var red = '#DC143C'
+                    var color = ''
+                    var checkable = tableOccupied[index]
+                    if (checkable == 0) {
+                        color = red
+                    } else {
+                        color = green
+                    }
+
+                    console.log(tableOccupied[index].isOccupied + " " + color)
+                    console.log(checkable + " " + color)
+                    
                     return(
                     <Polygon 
                     key={index}
                     paths={path}
-                    fillOpacity={0.0}
-                    strokeWeight={1} >
+                    fillOpacity={1}
+                    strokeWeight={1}
+                    fillColor={color} >
                      </Polygon>
                     )
                 })
