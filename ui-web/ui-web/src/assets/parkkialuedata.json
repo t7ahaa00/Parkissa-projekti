@@ -7,6 +7,7 @@
         "idparkingarea": 29,
         "id": 1,
         "avaiblespace": 40,
+        "rows": 4,
         "orientation": "90.000000",
         "path": [
           {
@@ -126,7 +127,7 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -138,7 +139,7 @@
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -150,7 +151,7 @@
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
@@ -158,7 +159,7 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -171,11 +172,11 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -183,7 +184,7 @@
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -191,19 +192,19 @@
               },
               {
                 "slot": 7,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           }
@@ -213,6 +214,7 @@
         "idparkingarea": 30,
         "id": 2,
         "avaiblespace": 32,
+        "rows": 8,
         "orientation": "90.000000",
         "path": [
           {
@@ -237,12 +239,12 @@
             "rowNumber": 1,
             "row": [
               {
-                "slot": 1,
+                "slotId": 1,
                 "occupied": 1
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -263,11 +265,11 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -309,7 +311,7 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -326,7 +328,7 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -355,7 +357,7 @@
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -364,15 +366,15 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -407,6 +409,7 @@
         "idparkingarea": 31,
         "id": 3,
         "avaiblespace": 32,
+        "rows": 8,
         "orientation": "0.000000",
         "path": [
           {
@@ -432,11 +435,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -461,11 +464,11 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -482,11 +485,11 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -516,11 +519,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -549,7 +552,7 @@
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -583,7 +586,7 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -607,6 +610,7 @@
         "idparkingarea": 32,
         "id": 1,
         "avaiblespace": 32,
+        "rows": 4,
         "orientation": "0.000000",
         "path": [
           {
@@ -640,7 +644,7 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -653,7 +657,7 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
@@ -674,11 +678,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -737,11 +741,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -758,11 +762,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -779,7 +783,7 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
@@ -801,6 +805,7 @@
         "idparkingarea": 33,
         "id": 2,
         "avaiblespace": 96,
+        "rows": 8,
         "orientation": "90.000000",
         "path": [
           {
@@ -834,15 +839,15 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -862,11 +867,11 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 12,
@@ -879,7 +884,7 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
@@ -887,11 +892,11 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
@@ -907,11 +912,11 @@
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
@@ -932,15 +937,15 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -956,7 +961,7 @@
               },
               {
                 "slot": 7,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 8,
@@ -976,7 +981,7 @@
               },
               {
                 "slot": 12,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -993,11 +998,11 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
@@ -1013,7 +1018,7 @@
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
@@ -1021,15 +1026,15 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 12,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -1046,15 +1051,15 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -1070,11 +1075,11 @@
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
@@ -1111,11 +1116,11 @@
               },
               {
                 "slot": 6,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 7,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 8,
@@ -1148,11 +1153,11 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -1164,15 +1169,15 @@
               },
               {
                 "slot": 6,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 7,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
@@ -1205,7 +1210,7 @@
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -1213,7 +1218,7 @@
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -1233,7 +1238,7 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
@@ -1251,6 +1256,7 @@
         "idparkingarea": 34,
         "id": 3,
         "avaiblespace": 108,
+        "rows": 8,
         "orientation": "0.000000",
         "path": [
           {
@@ -1467,11 +1473,11 @@
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
@@ -1492,15 +1498,15 @@
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
@@ -1524,7 +1530,7 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
@@ -1541,11 +1547,11 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
@@ -1557,7 +1563,7 @@
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -1585,7 +1591,7 @@
               },
               {
                 "slot": 12,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -1594,15 +1600,15 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 3,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 4,
@@ -1622,7 +1628,7 @@
               },
               {
                 "slot": 8,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 9,
@@ -1630,7 +1636,7 @@
               },
               {
                 "slot": 10,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 11,
@@ -1647,7 +1653,7 @@
             "row": [
               {
                 "slot": 1,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 2,
@@ -1667,7 +1673,7 @@
               },
               {
                 "slot": 6,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 7,
@@ -1679,7 +1685,7 @@
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
@@ -1691,7 +1697,7 @@
               },
               {
                 "slot": 12,
-                "occupied": 1
+                "occupied": 0
               }
             ]
           },
@@ -1712,11 +1718,11 @@
               },
               {
                 "slot": 4,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 5,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 6,
@@ -1724,7 +1730,7 @@
               },
               {
                 "slot": 7,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 8,
@@ -1732,7 +1738,7 @@
               },
               {
                 "slot": 9,
-                "occupied": 1
+                "occupied": 0
               },
               {
                 "slot": 10,
