@@ -14,16 +14,14 @@ def checkFreeSlots(cars, slotsFileName):
     free_slots = []
     busy_slots=[]
     
-    with open(slotsFileName + '.json', 'r') as data_file:
+    with open("./Jsons/" + slotsFileName + '.json', 'r') as data_file:
         
         data = json.load(data_file)
             
     for slot in data["parkingslots"]:
         slots.append(slot) 
                
-    data_file.close()
-    
-    
+    data_file.close()    
           
     for i, slot in enumerate(slots):
         for car in cars:  
@@ -37,7 +35,7 @@ def checkFreeSlots(cars, slotsFileName):
             free_slots.append(json.loads(Freeslot(slot["sId"],slot["row"]).toJson()))
             
     
-    return free_slots, len(slots)
+    return {"slots":free_slots}, len(slots)
 
 
 def FindPoint(box, x, y) :   

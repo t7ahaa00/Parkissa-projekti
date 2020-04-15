@@ -11,7 +11,8 @@ import json
 import MakeJsonFile
 from MakeJsonFile import Parkingslot
 
-image = cv2.imread("./images/camera1/camera1_img1.jpg")
+imageFileName = "testImg.jpg"
+image = cv2.imread(f"./test_image/{imageFileName}")
 #image = cv2.imread("./test_image/camera3img.jpg")
 slots = []
 slot = []
@@ -54,7 +55,7 @@ def main():
         data.append(json.loads(details.toJson()))
     
     
-    MakeJsonFile.makeJsonFile("camera1_parkingSlots", data)
+    MakeJsonFile.makeJsonFile(f"testi_parkingSlots", data)
     cv2.destroyAllWindows()
 
 if __name__== "__main__":
