@@ -1,3 +1,5 @@
+
+#NOT USED ANYMORE
 import pymysql
 import sys
 import config

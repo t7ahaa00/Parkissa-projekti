@@ -11,39 +11,39 @@ BEGIN
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,90.0);
 	SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.060569, 25.464495),
-							(parkingAreaID,null,65.061023, 25.464515),
-                            (parkingAreaID,null,65.061049, 25.463253),
-                            (parkingAreaID,null,65.060574, 25.463218);
-	CALL createParkingGrid(parkingAreaID,4,10);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,2);
-	CAll toggleStateWithoutReturn(parkingAreaID,1,4);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,5);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,8);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,9);
-	CAll toggleStateWithoutReturn(parkingAreaID,2,2);
-	CAll toggleStateWithoutReturn(parkingAreaID,2,7);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,8);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,9);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,10);
+    INSERT INTO path VALUES(parkingAreaID,null,65.060582, 25.462892),
+							(parkingAreaID,null,65.060573, 25.464510),
+                            (parkingAreaID,null,65.061669, 25.464576),
+                            (parkingAreaID,null,65.061665, 25.462881);
+	CALL createParkingGrid(parkingAreaID,45);
+    CAll toggleStateWithoutReturn(parkingAreaID,2);
+	CAll toggleStateWithoutReturn(parkingAreaID,4);
+    CAll toggleStateWithoutReturn(parkingAreaID,5);
+    CAll toggleStateWithoutReturn(parkingAreaID,8);
+    CAll toggleStateWithoutReturn(parkingAreaID,9);
+	CAll toggleStateWithoutReturn(parkingAreaID,19);
+	CAll toggleStateWithoutReturn(parkingAreaID,20);
+    CAll toggleStateWithoutReturn(parkingAreaID,22);
+    CAll toggleStateWithoutReturn(parkingAreaID,23);
+    CAll toggleStateWithoutReturn(parkingAreaID,35);
     SET parkingAreaID = null;
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
     SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.059523, 25.462801),
-							(parkingAreaID,null,65.060319, 25.462796),
-                            (parkingAreaID,null,65.060327, 25.461990),
-                            (parkingAreaID,null,65.059533, 25.461994);
-	CALL createParkingGrid(parkingAreaID,8,4);
+    INSERT INTO path VALUES(parkingAreaID,null,65.059511, 25.462798),
+							(parkingAreaID,null,65.060321, 25.462787),
+                            (parkingAreaID,null,65.060333, 25.461981),
+                            (parkingAreaID,null,65.059516, 25.461992);
+	CALL createParkingGrid(parkingAreaID,34);
     SET parkingAreaID = null;
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
     SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.057658, 25.462826),
-							(parkingAreaID,null,65.058856, 25.462799),
-                            (parkingAreaID,null,65.058834, 25.461587),
-                            (parkingAreaID,null,65.057743, 25.461570);
-	CALL createParkingGrid(parkingAreaID,8,4);
+    INSERT INTO path VALUES(parkingAreaID,null,65.057739, 25.462804),
+							(parkingAreaID,null,65.058847, 25.462809),
+                            (parkingAreaID,null,65.058841, 25.461611),
+                            (parkingAreaID,null,65.057741, 25.461567);
+	CALL createParkingGrid(parkingAreaID,44);
     SET parkingAreaID = null;
     
     
@@ -54,39 +54,39 @@ BEGIN
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,0.0);
     SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.058328, 25.443178),
-							(parkingAreaID,null,65.059038, 25.442494),
-                            (parkingAreaID,null,65.058936, 25.441915),
-                            (parkingAreaID,null,65.058217, 25.442519);
-    CALL createParkingGrid(parkingAreaID,8,4);
+    INSERT INTO path VALUES(parkingAreaID,null,65.059129, 25.453084),
+							(parkingAreaID,null,65.059630, 25.452490),
+                            (parkingAreaID,null,65.059567, 25.452178),
+                            (parkingAreaID,null,65.059070, 25.452777);
+    CALL createParkingGrid(parkingAreaID,25);
     SET parkingAreaID = null;
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
     SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.059117, 25.442610),
-							(parkingAreaID,null,65.059766, 25.442015),
-                            (parkingAreaID,null,65.059667, 25.441382),
-                            (parkingAreaID,null,65.059021, 25.442008);
-	CALL createParkingGrid(parkingAreaID,8,12);
+    INSERT INTO path VALUES(parkingAreaID,null,65.061452, 25.447493),
+							(parkingAreaID,null,65.062070, 25.446935),
+                            (parkingAreaID,null,65.061695, 25.444566),
+                            (parkingAreaID,null,65.061069, 25.445036);
+	CALL createParkingGrid(parkingAreaID,40);
     SET parkingAreaID = null;
     
     INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
 	SET parkingAreaID = LAST_INSERT_ID();
-    INSERT INTO path VALUES(parkingAreaID,null,65.057627, 25.438264),
-							(parkingAreaID,null,65.058070, 25.437856),
-                            (parkingAreaID,null,65.059514, 25.437390),
-                            (parkingAreaID,null,65.057765, 25.439166);
-    CALL createParkingGrid(parkingAreaID,9,12);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,2);
-	CAll toggleStateWithoutReturn(parkingAreaID,1,4);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,5);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,8);
-    CAll toggleStateWithoutReturn(parkingAreaID,1,9);
-	CAll toggleStateWithoutReturn(parkingAreaID,2,2);
-	CAll toggleStateWithoutReturn(parkingAreaID,2,7);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,8);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,9);
-    CAll toggleStateWithoutReturn(parkingAreaID,2,9);
+    INSERT INTO path VALUES(parkingAreaID,null,65.057354, 25.455739),
+							(parkingAreaID,null,65.057359, 25.457524),
+                            (parkingAreaID,null,65.057961, 25.457521),
+                            (parkingAreaID,null,65.057975, 25.455755);
+    CALL createParkingGrid(parkingAreaID,10);
+    CAll toggleStateWithoutReturn(parkingAreaID,2);
+	CAll toggleStateWithoutReturn(parkingAreaID,4);
+    CAll toggleStateWithoutReturn(parkingAreaID,5);
+    CAll toggleStateWithoutReturn(parkingAreaID,8);
+    CAll toggleStateWithoutReturn(parkingAreaID,9);
+	CAll toggleStateWithoutReturn(parkingAreaID,10);
+	CAll toggleStateWithoutReturn(parkingAreaID,11);
+    CAll toggleStateWithoutReturn(parkingAreaID,12);
+    CAll toggleStateWithoutReturn(parkingAreaID,25);
+    CAll toggleStateWithoutReturn(parkingAreaID,26);
     SET parkingAreaID = null;
     
     SELECT 

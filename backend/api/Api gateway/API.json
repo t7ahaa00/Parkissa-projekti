@@ -17,6 +17,10 @@
     {
       "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests",
       "description": "front tests"
+    },
+    {
+      "url": "https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/imageupload",
+      "description": "image upload tests"
     }
   ],
   "paths": {
@@ -184,21 +188,13 @@
         ]
       }
     },
-    "/parkinglot/{parkingareaID}/grid/{row}/{slot}/toggleState": {
+    "/parkinglot/{parkingareaID}/grid/{slot}/toggleState": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "parkingareaID",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "row",
           "in": "path",
           "required": true
         },
@@ -245,7 +241,16 @@
           }
         },
         "description": "Toggle slots occupied state",
-        "requestBody": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
         "security": [
           {
             "API Key": []
@@ -354,6 +359,13 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           }
         },
@@ -438,6 +450,37 @@
           },
           "description": "Needed data to generate parking lot and areas"
         }
+      },
+      "options": {
+        "summary": "",
+        "operationId": "options-parkinglot",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Requested-With": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/{parkinglotID}": {
@@ -487,7 +530,15 @@
         "operationId": "get-parkinglot-parkinglotID",
         "description": "deletes parkinglot with id",
         "requestBody": {
-          "description": ""
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
         },
         "security": [
           {
@@ -1394,36 +1445,6 @@
         ]
       }
     },
-    "/testdata/parkinglot": {
-      "get": {
-        "summary": "get test parkinglots",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                },
-                "examples": {
-                  "success": {}
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-testdata-parkinglots",
-        "security": [
-          {
-            "API Key": []
-          }
-        ],
-        "description": "Returns test parkinglots (poistetaan lopullisesta API:sta)"
-      },
-      "parameters": []
-    },
     "/testdata/generate": {
       "post": {
         "summary": "Generate test data",
@@ -1449,6 +1470,13 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           }
         },
@@ -1458,9 +1486,41 @@
             "API Key": []
           }
         ]
+      },
+      "options": {
+        "summary": "",
+        "operationId": "options-testdata-generate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Requested-With": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {}
       }
     },
-    "/testdata/getapikey": {
+    "/getapikey": {
       "get": {
         "summary": "Get api key",
         "tags": [],
@@ -1476,6 +1536,20 @@
                       "type": "string"
                     }
                   }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "x-api-key": "api key"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -1483,7 +1557,39 @@
         },
         "operationId": "get-testdata-getapikey",
         "description": "returns testing apikey (poistetaan lopullisesta API:sta)"
-      }
+      },
+      "options": {
+        "summary": "",
+        "operationId": "options-testdata-getapikey",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Requested-With": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
     },
     "/parkinglot/{parkingareaID}/grid/create": {
       "parameters": [
@@ -1511,7 +1617,8 @@
                 "examples": {
                   "success": {
                     "value": {
-                      "success": "success"
+                      "success": "success",
+                      "added slots": 22
                     }
                   },
                   "error 1": {
@@ -1526,6 +1633,13 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           }
         },
@@ -1538,13 +1652,21 @@
                   "slots": {
                     "type": "object",
                     "properties": {
-                      "row": {
+                      "slot": {
                         "type": "number"
                       },
-                      "slots": {
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lng": {
                         "type": "number"
                       }
-                    }
+                    },
+                    "required": [
+                      "slot",
+                      "lat",
+                      "lng"
+                    ]
                   }
                 }
               },
@@ -1553,11 +1675,9 @@
                   "value": {
                     "slots": [
                       {
-                        "row": 1,
                         "slots": 12
                       },
                       {
-                        "row": 2,
                         "slots": 12
                       },
                       {
@@ -1582,9 +1702,42 @@
           }
         ],
         "description": "creates grid for parkingarea"
+      },
+      "options": {
+        "summary": "",
+        "operationId": "options-parkinglot-parkingareaID-grid-create",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Requested-With": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "description": "CORS options",
+        "requestBody": {}
       }
     },
-    "/parkinglot/{parkingareaID}/grid/toggleMultipleStates": {
+    "/parkinglot/{parkingareaID}/grid/setAvaibleGrids": {
       "patch": {
         "summary": "Update multiple states to free",
         "operationId": "patch-parkinglot-parkingarea-grid-toggleMultipleStates",
@@ -1632,14 +1785,10 @@
                   "slots": {
                     "type": "object",
                     "required": [
-                      "row",
-                      "grid"
+                      "slot"
                     ],
                     "properties": {
-                      "row": {
-                        "type": "number"
-                      },
-                      "grid": {
+                      "slot": {
                         "type": "number"
                       }
                     }
@@ -1654,20 +1803,16 @@
                   "value": {
                     "slots": [
                       {
-                        "row": 1,
-                        "grid": 2
+                        "slot": 2
                       },
                       {
-                        "row": 1,
-                        "grid": 3
+                        "slot": 3
                       },
                       {
-                        "row": 1,
-                        "grid": 4
+                        "slot": 4
                       },
                       {
-                        "row": 1,
-                        "grid": 5
+                        "slot": 5
                       }
                     ]
                   }
@@ -1688,6 +1833,60 @@
           "required": true
         }
       ]
+    },
+    "/{parkinglotID}/{parkingareaID}/images": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkinglotID",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "parkingareaID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "put-parkinglotID-parkingareaID-images",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "upload image to S3 bucket",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "base64Image": {
+                    "type": "string"
+                  },
+                  "cameraNumber": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "base64Image",
+                  "cameraNumber"
+                ]
+              },
+              "examples": {}
+            }
+          },
+          "description": ""
+        }
+      }
     }
   },
   "components": {
@@ -1697,6 +1896,7 @@
         "type": "apiKey",
         "in": "header"
       }
-    }
+    },
+    "schemas": {}
   }
 }

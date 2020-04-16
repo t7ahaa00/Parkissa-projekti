@@ -24,8 +24,6 @@ def deleteParkinglot(event):
         cursor.close()
         returnValue = json.dumps(rows,separators=(',', ':'))
         jsonOut = json.loads(returnValue)
-        print ("Data from RDS...")
-        print (rows)
         return(jsonOut)
 
 def main(event, context):
