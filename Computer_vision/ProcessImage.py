@@ -12,14 +12,14 @@ from cvlib.object_detection import draw_bbox
 from pathlib import Path
 import os
 
-def processImage(camera, image): 
-     
+def processImage(cameraPath, image): 
+    """ 
     ROOT_DIR = Path(".")
     # Directory of images to run detection on
     IMAGE_DIR = os.path.join(ROOT_DIR, "images")
-    CAMERA_DIR = os.path.join(IMAGE_DIR, camera)
+    """
     
-    IMAGE_SOURCE = os.path.join(CAMERA_DIR,image)
+    IMAGE_SOURCE = os.path.join(cameraPath,image)
    
     im = cv2.imread(IMAGE_SOURCE)
     bbox, label, conf = cv.detect_common_objects(im)

@@ -8,8 +8,6 @@ import axios from 'axios';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
 
-let serverTestParkData = null;
-
 class MapWindow extends Component {
 
     constructor(props) {
@@ -19,23 +17,28 @@ class MapWindow extends Component {
             showingInfoWindow: false,
             selectedPlace: {},
             position: {},
-            loadingReady : false
+            loadingReady : false,
+            serverTestParkData: null
         }
     }
     
     componentDidMount() {
-        
-        axios.get('https://react-jburger.firebaseio.com/parkdata.json')
+
+            //axios.get('https://react-jburger.firebaseio.com/parkdata.json')
+            axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/testdata/parkinglot', {
+                headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
+                crossDomain: true,
+                responseType:"json"})
             .then(response => {
-                console.log('[ComponenDidMount] ' + response.data);
-                serverTestParkData = response.data;
+                console.log('[ComponenDidMount] ' + JSON.stringify(response.data));
+                this.setState({serverTestParkData: response.data})
                 this.setState({loadingReady: true})
             }
             )
             .catch( error => {
                 console.log( error );
             });
-    }
+    } 
 
     // Show infowindow when clicking polygon
     onPolyClick = (props, e) =>
@@ -72,9 +75,10 @@ class MapWindow extends Component {
     // Display all the polygons in JSON file
     displaySitePolygon = () => {
         //return ParkJson.map((parkinglots, index) => {
-        return serverTestParkData.map((parkinglots, index) => {
-            console.log(Object(parkinglots) );
+        return this.state.serverTestParkData.map((parkinglots, index) => {
+            //console.log('[Polygon parkinglot' + JSON.stringify(parkinglots) );
             return parkinglots.parkingareas.map((parkAreas, index) => {
+                //console.log('[ParkAreas] ' + JSON.stringify(parkAreas))
                 return(
                 <Polygon 
                 key={index}
@@ -94,63 +98,77 @@ class MapWindow extends Component {
 
     displayParkingSlots = () => {
         //return ParkJson.map((parkinglots, i) => {
-        return serverTestParkData.map((parkinglots, i) => {
+        return this.state.serverTestParkData.map((parkinglots, i) => {
             return parkinglots.parkingareas.map((parkingarea, j) => {
-
+                //console.log('[parkingarea]' + JSON.stringify(parkingarea))
                 let table = []
+                let tableOccupied = []
                 
-                var horizontalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
-                var verticalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
+                // If-lausekkeella vältetään undefined error niiltä parkkialueilta joissa ei ole koordinaatteja määritelty
+                if(parkingarea.path.length !== 0) {
+                    var horizontalLength = parkingarea.path[0].lng - parkingarea.path[1].lng
+                    var verticalLength = parkingarea.path[0].lat - parkingarea.path[2].lat
 
-                var lat1 = parkingarea.path[0].lat
-                var lat2 = parkingarea.path[2].lat
-                var lng1 = parkingarea.path[0].lng
-                var lng2 = parkingarea.path[1].lng
+                    var lat1 = parkingarea.path[0].lat
+                    var lat2 = parkingarea.path[2].lat
+                    var lng1 = parkingarea.path[0].lng
+                    var lng2 = parkingarea.path[1].lng
 
-                var rows = parkingarea.rows
-                var slots = parkingarea.avaiblespace
-                var slotsPerRow = slots / rows
+                    var rows = parkingarea.slots.length
+                    var slots = parkingarea.avaiblespace
+                    var slotsPerRow = slots / rows
 
-                console.log(horizontalLength)
-                console.log(verticalLength)
+                    console.log(horizontalLength)
+                    console.log(verticalLength)
 
-                var plusToNextLng = horizontalLength / slotsPerRow
-                var plusToNextLat = verticalLength / rows
+                    var plusToNextLng = horizontalLength / slotsPerRow
+                    var plusToNextLat = verticalLength / rows
 
-                for (let i = 0; i < rows; i++) {
-                    for (let j = 0; j < slotsPerRow; j++) {
-                        
-                        var pathForSlot = [
-                            {
-                                lat: lat1,
-                                lng: lng1
-                            },
-                            {
-                                lat: lat1,
-                                lng: lng2
-                            },
-                            {
-                                lat: lat2,
-                                lng: lng2
-                            },
-                            {
-                                lat: lat2,
-                                lng: lng1
-                            }
-                        ]
-                        
-                        table.push(pathForSlot)
+                    for (let i = 0; i < rows; i++) {
+                        for (let j = 0; j < slotsPerRow; j++) {
+                            
+                            //ROWS == e.g 1 slots object in parkkialuedata.json
+                            //SLOTSPERROW == e.g first row object in parkkialuedata.json
 
-                        lng1 = lng1 - plusToNextLng
-                        console.log(lng1)
+                            var isOccupied = parkingarea.slots[i].row[j].occupied
+
+                            console.log("TAMA ON isOccupied ARVO = " + isOccupied)
+
+
+                            var pathForSlot = [
+                                {
+                                    lat: lat1,
+                                    lng: lng1
+                                },
+                                {
+                                    lat: lat1,
+                                    lng: lng2
+                                },
+                                {
+                                    lat: lat2,
+                                    lng: lng2
+                                },
+                                {
+                                    lat: lat2,
+                                    lng: lng1
+                                }
+                            ]
+                            
+                            table.push(pathForSlot)
+                            tableOccupied.push(isOccupied)
+
+                            lng1 = lng1 - plusToNextLng
+                            console.log(lng1)
+                            console.log(isOccupied)
+                        }
+
+
+                        //SELVITÄ MITEN SAADAAN AJOVAYLAT PARKKIPAIKKOJEN VALIIN
+
+                        lat1 = lat1 - plusToNextLat
+                        lng1 = parkingarea.path[0].lng
+                        console.log(lat1)
                     }
-
-
-                    //SELVITÄ MITEN SAADAAN AJOVAYLAT PARKKIPAIKKOJEN VALIIN
-
-                    lat1 = lat1 - plusToNextLat
-                    lng1 = parkingarea.path[0].lng
-                    console.log(lat1)
                 }
 
                 //return table
@@ -167,12 +185,27 @@ class MapWindow extends Component {
                 */
 
                 return table.map((path, index) => {
+                    
+                    var green = '#7CFC00'
+                    var red = '#DC143C'
+                    var color = ''
+                    var checkable = tableOccupied[index]
+                    if (checkable == 0) {
+                        color = red
+                    } else {
+                        color = green
+                    }
+
+                    console.log(tableOccupied[index].isOccupied + " " + color)
+                    console.log(checkable + " " + color)
+                    
                     return(
                     <Polygon 
                     key={index}
                     paths={path}
-                    fillOpacity={0.0}
-                    strokeWeight={1} >
+                    fillOpacity={1}
+                    strokeWeight={1}
+                    fillColor={color} >
                      </Polygon>
                     )
                 })
@@ -188,10 +221,10 @@ class MapWindow extends Component {
     render() {
         // Loading wheel showed while loading data
         let displayPolygons = this.state.loadingReady ? <p>Loading...</p> : <Spinner />;
-        console.log(process.env);
+        //console.log(process.env);
 
         // Map displays when data from server has been loaded
-        if (this.state.loadingReady) {
+        if (this.state.serverTestParkData !== null) {
             displayPolygons = (
                 <Map
                     google={this.props.google}

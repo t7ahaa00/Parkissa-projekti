@@ -8,10 +8,21 @@ from urllib.request import urlopen
 from PIL import Image
 import cv2
 import numpy as np
+import os
 
-def urlToImg(camera, url):
+def urlToImg(lotname, area, camera, url):
     
-    img = np.array(Image.open(urlopen(url)))
-    path ="./images/" + camera + "/" + camera + "Img.jpg"
+    if not any(camera for dirName in os.listdir(f'./Parkinglots/{lotname}/{area}')):
+        os.makedirs(f"./Parkinglots/{lotname}/{area}/{camera}", 493) # 493 is permission mode to folder
+    cap = cv2.VideoCapture(url)
+    ret, img = cap.read()
+    path =f"./Parkinglots/{lotname}/{area}/{camera}/{camera}.Img.jpg"
     cv2.imwrite(path, img)
     
+def testImgFromUrl(url):
+    
+    
+    cap = cv2.VideoCapture(url)
+    ret, img = cap.read()
+    path =f"./test_image/testImg.jpg"
+    cv2.imwrite(path, img)

@@ -8,10 +8,11 @@ import json
 
 class Freeslot(object):
     
-    def __init__(self, sID, row):
+    def __init__(self, grid, row):
         
-        self.sId = sID   
+        
         self.row = row
+        self.grid = grid  
         
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__, 

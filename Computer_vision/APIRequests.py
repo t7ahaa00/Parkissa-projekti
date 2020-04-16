@@ -1,5 +1,5 @@
 import requests
-import headers
+import Headers
 
 
 class ApiRequests:
@@ -11,21 +11,27 @@ class ApiRequests:
         
     def createParkinglot(self):
         
-        url = headers.urlCreateArea
-        return requests.post(url = url, headers = headers.headers, json = self.data, timeout=(2,5))
+        url = Headers.urlCreateArea
+        return requests.post(url = url, headers = Headers.headers, json = self.data, timeout=(2,5))
     
     
-def createParkingSpots(parkinglotID, parkingareaID, spots):
+def createParkingSpots(parkingareaID, spots):
     
-    url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/{parkinglotID}/{parkingareaID}/grid/create'
-    return requests.post(url = url, headers = headers.headers, json = spots, timeout=(2, 5))
+    url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/{parkingareaID}/grid/create'
+    return requests.post(url = url, headers = Headers.headers, json = spots, timeout=(2, 5))
 
 def toggleAvailability(parkingareaID, updates):
-    url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/{parkingareaID}/grid/toggleMultipleStates'
-    return requests.patch(url = url, headers = headers.headers, json = updates, timeout=(2, 5))
+    url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/{parkingareaID}/grid/setAvaibleGrids' 
+    #url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/{parkingareaID}/grid/toggleMultipleStates'
+    return requests.patch(url = url, headers = Headers.headers, json = updates, timeout=(2, 5))
     
         
-        
-        
+def getParkinglot(parkinglotID): 
+        url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/{parkinglotID}/'
+        return requests.get(url = url, headers = Headers.headers, timeout=(2, 5))
+    
+def deleteParkinglot(parkinglotID): 
+        url = f'https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/{parkinglotID}/'
+        return requests.delete(url = url, headers = Headers.headers, timeout=(2, 5))
         
         
