@@ -1,12 +1,59 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker, Polygon, InfoWindow} from 'google-maps-react';
+//import { Map, GoogleApiWrapper, Marker, Polygon, Circle, InfoWindow} from 'google-maps-react';
 
-import classes from './MapWindow.module.css';
-import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
-//import ParkJson from '../../assets/parkkialuedata.json';
-import axios from 'axios';
+//import classes from './MapWindow.module.css';
+//import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
+import ParkJson from '../../assets/parkkipaikkadatatest.json';
+//import axios from 'axios';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
+import GoogleMapReact from 'google-map-react';
+
+const handleApiLoaded = (map, maps) => {
+    // use map and maps objects
+    ParkJson.parkingareas.map((parkAreas, index) => {
+        console.log('[ParkAreas] ' + JSON.stringify(parkAreas.path))
+        new maps.Polygon({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#888888',
+            fillOpacity: 0.1,
+            map,
+            path: parkAreas.path,
+            
+          })
+    })
+
+    ParkJson.parkingareas.map((parkAreas, index) => {
+        console.log('[ParkAreas] ' + JSON.stringify(parkAreas.path))
+        return parkAreas.slots.map((parkingSlots, index) => {
+
+            var green = '#7CFC00'
+            var red = '#DC143C'
+            var color = ''
+            var checkable = parkingSlots.occupied
+            if (checkable === 1) {
+                color = red
+            } else {
+                color = green
+            }
+
+            new maps.Circle({
+                strokeColor: color,
+                strokeOpacity: 1,
+                strokeWeight: 1,
+                fillColor: color,
+                fillOpacity: 1,
+                map,
+                center: parkingSlots.center,
+                radius: 1
+              })
+        })
+    })
+        
+    
+  };
 
 class MapWindow extends Component {
 
@@ -17,7 +64,7 @@ class MapWindow extends Component {
             showingInfoWindow: false,
             selectedPlace: {},
             position: {},
-            loadingReady : false,
+            loadingReady : true, 
             serverTestParkData: null
         }
     }
@@ -25,7 +72,7 @@ class MapWindow extends Component {
     componentDidMount() {
 
             //axios.get('https://react-jburger.firebaseio.com/parkdata.json')
-            axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/testdata/parkinglot', {
+           /*  axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/testdata/parkinglot', {
                 headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
                 crossDomain: true,
                 responseType:"json"})
@@ -37,7 +84,7 @@ class MapWindow extends Component {
             )
             .catch( error => {
                 console.log( error );
-            });
+            }); */
     } 
 
     // Show infowindow when clicking polygon
@@ -73,30 +120,50 @@ class MapWindow extends Component {
         })
     } */
     // Display all the polygons in JSON file
-    displaySitePolygon = () => {
+    displaySitePolygon = (map, maps) => {
         //return ParkJson.map((parkinglots, index) => {
-        return this.state.serverTestParkData.map((parkinglots, index) => {
+        //return this.state.serverTestParkData.map((parkinglots, index) => {
             //console.log('[Polygon parkinglot' + JSON.stringify(parkinglots) );
-            return parkinglots.parkingareas.map((parkAreas, index) => {
-                //console.log('[ParkAreas] ' + JSON.stringify(parkAreas))
+            return ParkJson.parkingareas.map((parkAreas, index) => {
+                console.log('[ParkAreas] ' + JSON.stringify(parkAreas.path))
+                
                 return(
-                <Polygon 
-                key={index}
-                id={parkAreas.id}
-                paths={parkAreas.path}
-                onClick={this.onPolyClick}
-                name={parkinglots.name + ' ' + parkAreas.id}
-                position={parkAreas.path[0]}
-                 >{/* <div>
-                     Moro<img src={require('../../assets/alien.png')} alt="Alien"></img>
-                 </div> */}
-                 </Polygon>
+                    
+                    new maps.Polygon({
+                        paths: parkAreas.path,
+                        strokeColor: '#FF0000',
+                        strokeWeight: 2,
+                        fillColor: '#FF0000'
+                    })
                 )
-            })   
-        })
+            })
     }
 
     displayParkingSlots = () => {
+        return ParkJson.parkingareas.map((parkinglots, i) => {
+            return parkinglots.slots.map((parkingSlots, i) => {
+                const rad = 2;
+                let circle = new this.props.google.maps.Circle({
+
+                    center: parkingSlots.center,
+                    radius: rad
+                })
+
+                return (
+                    
+                        {circle}
+                    
+                   
+
+                    )}
+
+                    
+                )
+            })
+
+    }
+
+    /* displayParkingSlots = () => {
         //return ParkJson.map((parkinglots, i) => {
         return this.state.serverTestParkData.map((parkinglots, i) => {
             return parkinglots.parkingareas.map((parkingarea, j) => {
@@ -132,7 +199,7 @@ class MapWindow extends Component {
 
                             var isOccupied = parkingarea.slots[i].row[j].occupied
 
-                            console.log("TAMA ON isOccupied ARVO = " + isOccupied)
+                            //console.log("TAMA ON isOccupied ARVO = " + isOccupied)
 
 
                             var pathForSlot = [
@@ -158,8 +225,8 @@ class MapWindow extends Component {
                             tableOccupied.push(isOccupied)
 
                             lng1 = lng1 - plusToNextLng
-                            console.log(lng1)
-                            console.log(isOccupied)
+                            //console.log(lng1)
+                            //console.log(isOccupied)
                         }
 
 
@@ -167,10 +234,10 @@ class MapWindow extends Component {
 
                         lat1 = lat1 - plusToNextLat
                         lng1 = parkingarea.path[0].lng
-                        console.log(lat1)
+                        //console.log(lat1)
                     }
                 }
-
+*/
                 //return table
 
                 /*
@@ -183,21 +250,21 @@ class MapWindow extends Component {
                 S    ''''''''''
 
                 */
-
+/*
                 return table.map((path, index) => {
                     
                     var green = '#7CFC00'
                     var red = '#DC143C'
                     var color = ''
                     var checkable = tableOccupied[index]
-                    if (checkable == 0) {
+                    if (checkable === 1) {
                         color = red
                     } else {
                         color = green
                     }
 
-                    console.log(tableOccupied[index].isOccupied + " " + color)
-                    console.log(checkable + " " + color)
+                    //console.log(tableOccupied[index].isOccupied + " " + color)
+                    //console.log(checkable + " " + color)
                     
                     return(
                     <Polygon 
@@ -211,36 +278,50 @@ class MapWindow extends Component {
                 })
             })
         })
-    }
+    } */
 
     // for testing purposes
     clickedPolygon = (props) =>{
         console.log("Polygon clicked ", props.name );
     }
 
+    createMapOptions = (maps) => {
+        return {
+            zoomControlOptions: {
+                position: maps.ControlPosition.RIGHT_CENTER,
+                style: maps.ZoomControlStyle.SMALL
+              },
+              mapTypeControlOptions: {
+                position: maps.ControlPosition.LEFT_BOTTOM
+              },
+              mapTypeControl: true
+            };
+}
+    
     render() {
         // Loading wheel showed while loading data
         let displayPolygons = this.state.loadingReady ? <p>Loading...</p> : <Spinner />;
         //console.log(process.env);
 
         // Map displays when data from server has been loaded
-        if (this.state.serverTestParkData !== null) {
+        if (ParkJson !== null) {
+            
             displayPolygons = (
-                <Map
-                    google={this.props.google}
-                    zoom={16}
-                    className={classes.Map}
-                    initialCenter={{ lat: 65.0595, lng: 25.4662}}
-                    mapTypeControl={true}
-                    zoomControl={true}
-                    mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}}
-                    streetViewControl={false}
+                <div style={{ height: '90vh', width: '100%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+                    defaultCenter={{ lat: 65.0595, lng: 25.4662}}
+                    defaultZoom={16}
+                    /* mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}} */
                     onClick={this.onMapClicked}
+                    yesIWantToUseGoogleMapApiInternals
+                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                    options={this.createMapOptions}
                     >          
-                    {this.displaySitePolygon()}
-                    {this.displayParkingSlots()}
-
-                    <InfoWindow
+                    {/* {this.displaySitePolygon()}
+                    {this.displayParkingSlots()}  */}
+                     
+                    {/* <InfoWindow
                         position={this.state.position}
                         visible={this.state.showingInfoWindow}
                         name={this.state.selectedPlace.name} >
@@ -248,8 +329,9 @@ class MapWindow extends Component {
                                 <h3>{this.state.selectedPlace.name}</h3>
                                 <ParkDetailOverlay />
                             </div>         
-                    </InfoWindow>
-                </Map>
+                    </InfoWindow> */}
+                </GoogleMapReact>
+                </div>
             );
         }
             
@@ -261,6 +343,8 @@ class MapWindow extends Component {
     }
 };
 
-export default GoogleApiWrapper({
+export default MapWindow;
+
+/* GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY
-    })(MapWindow);  
+    })(MapWindow);   */
