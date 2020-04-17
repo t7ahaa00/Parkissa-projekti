@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 //import { Map, GoogleApiWrapper, Marker, Polygon, Circle, InfoWindow} from 'google-maps-react';
-
 //import classes from './MapWindow.module.css';
 //import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 import ParkJson from '../../assets/parkkipaikkadatatest.json';
@@ -13,16 +12,17 @@ const handleApiLoaded = (map, maps) => {
     // use map and maps objects
     ParkJson.parkingareas.map((parkAreas, index) => {
         console.log('[ParkAreas] ' + JSON.stringify(parkAreas.path))
-        new maps.Polygon({
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#888888',
-            fillOpacity: 0.1,
-            map,
-            path: parkAreas.path,
-            
-          })
+        return(
+            new maps.Polygon({
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#888888',
+                fillOpacity: 0.1,
+                map,
+                path: parkAreas.path,
+            })
+        )
     })
 
     ParkJson.parkingareas.map((parkAreas, index) => {
@@ -38,21 +38,20 @@ const handleApiLoaded = (map, maps) => {
             } else {
                 color = green
             }
-
-            new maps.Circle({
-                strokeColor: color,
-                strokeOpacity: 1,
-                strokeWeight: 1,
-                fillColor: color,
-                fillOpacity: 1,
-                map,
-                center: parkingSlots.center,
-                radius: 1
-              })
+            return(
+                new maps.Circle({
+                    strokeColor: color,
+                    strokeOpacity: 1,
+                    strokeWeight: 1,
+                    fillColor: color,
+                    fillOpacity: 1,
+                    map,
+                    center: parkingSlots.center,
+                    radius: 1
+                })
+            )
         })
     })
-        
-    
   };
 
 class MapWindow extends Component {
@@ -281,9 +280,9 @@ class MapWindow extends Component {
     } */
 
     // for testing purposes
-    clickedPolygon = (props) =>{
+    /* clickedPolygon = (props) =>{
         console.log("Polygon clicked ", props.name );
-    }
+    } */
 
     createMapOptions = (maps) => {
         return {
