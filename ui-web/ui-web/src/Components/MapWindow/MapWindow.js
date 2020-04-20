@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { Map, GoogleApiWrapper, Marker, Polygon, Circle, InfoWindow} from 'google-maps-react';
-import classes from './MapWindow.module.css';
+//import classes from './MapWindow.module.css';
 //import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 import ParkJson from '../../assets/parkkipaikkadatatest.json';
 //import axios from 'axios';
@@ -53,27 +53,6 @@ const handleApiLoaded = (map, maps) => {
         })
     })
   };
-
-class Search extends React.Component {
-    
-    constructor(props) {
-        super(props);
-
-        this.state={
-            position: {}
-        }
-    }
-    render() {
-        return(
-            <input type="text" name="search" placeholder="Search..">
-                
-            </input>
-        )
-        
-    }
-}
-
-
 
 class MapWindow extends Component {
 
@@ -171,23 +150,14 @@ class MapWindow extends Component {
             return parkinglots.slots.map((parkingSlots, i) => {
                 const rad = 2;
                 let circle = new this.props.google.maps.Circle({
-
                     center: parkingSlots.center,
                     radius: rad
                 })
-
                 return (
-                    
                         {circle}
-                    
-                   
-
                     )}
-
-                    
                 )
             })
-
     }
 
     /* displayParkingSlots = () => {
@@ -324,14 +294,6 @@ class MapWindow extends Component {
               mapTypeControl: true
             };
     }
-
-    createSearchBoxOptions = (maps) => {
-        return{
-            searchBoxOptions: {
-                position: maps.ControlPosition.LEFT_TOP
-            }
-        };
-    }
     
     render() {
         // Loading wheel showed while loading data
@@ -343,36 +305,16 @@ class MapWindow extends Component {
             
             displayPolygons = (
                 <div style={{ height: '90vh', width: '100%', zIndex: 1, position: "absolute", top: 0, bottom: 0 }}>
-                
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
-                    defaultCenter={{ lat: 65.0595, lng: 25.4662}}
-                    defaultZoom={16}
-                    /* mapTypeControlOptions={{position: this.props.google.maps.ControlPosition.LEFT_BOTTOM}} */
-                    onClick={this.onMapClicked}
-                    yesIWantToUseGoogleMapApiInternals
-                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-                    options={this.createMapOptions}
-                    >
-                    {this.displaySearchBox}
-                    {/* {this.displaySitePolygon()}
-                    {this.displayParkingSlots()}  */}
-                     
-                    {/* <InfoWindow
-                        position={this.state.position}
-                        visible={this.state.showingInfoWindow}
-                        name={this.state.selectedPlace.name} >
-                            <div>
-                                <h3>{this.state.selectedPlace.name}</h3>
-                                <ParkDetailOverlay />
-                            </div>         
-                    </InfoWindow> */}
-                </GoogleMapReact>
-                <div style={{ height: '90vh', width: '100%', zIndex: 2, position: "absolute", top: 0, bottom: 0 }}>
-                    <Search></Search>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+                        defaultCenter={{ lat: 65.0595, lng: 25.4662}}
+                        defaultZoom={16}
+                        onClick={this.onMapClicked}
+                        yesIWantToUseGoogleMapApiInternals
+                        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                        options={this.createMapOptions}>
+                    </GoogleMapReact>
                 </div>
-                </div>
-                
             );
         }
             
