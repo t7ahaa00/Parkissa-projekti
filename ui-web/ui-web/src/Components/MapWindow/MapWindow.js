@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { Map, GoogleApiWrapper, Marker, Polygon, Circle, InfoWindow} from 'google-maps-react';
-//import classes from './MapWindow.module.css';
+import classes from './MapWindow.module.css';
 //import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 import ParkJson from '../../assets/parkkipaikkadatatest.json';
 //import axios from 'axios';
@@ -53,6 +53,27 @@ const handleApiLoaded = (map, maps) => {
         })
     })
   };
+
+class Search extends React.Component {
+    
+    constructor(props) {
+        super(props);
+
+        this.state={
+            position: {}
+        }
+    }
+    render() {
+        return(
+            <input type="text" name="search" placeholder="Search..">
+                
+            </input>
+        )
+        
+    }
+}
+
+
 
 class MapWindow extends Component {
 
@@ -137,6 +158,13 @@ class MapWindow extends Component {
                 )
             })
     }
+
+    /*displaySearchBox = (map, maps) => {
+        return(
+            <SearchBox></SearchBox>
+            //<input type="text" name="search" placeholder="Search.."></input>;
+        )
+    }*/
 
     displayParkingSlots = () => {
         return ParkJson.parkingareas.map((parkinglots, i) => {
@@ -295,7 +323,15 @@ class MapWindow extends Component {
               },
               mapTypeControl: true
             };
-}
+    }
+
+    createSearchBoxOptions = (maps) => {
+        return{
+            searchBoxOptions: {
+                position: maps.ControlPosition.LEFT_TOP
+            }
+        };
+    }
     
     render() {
         // Loading wheel showed while loading data
@@ -306,7 +342,8 @@ class MapWindow extends Component {
         if (ParkJson !== null) {
             
             displayPolygons = (
-                <div style={{ height: '90vh', width: '100%' }}>
+                <div style={{ height: '90vh', width: '100%', zIndex: 1, position: "absolute", top: 0, bottom: 0 }}>
+                
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
                     defaultCenter={{ lat: 65.0595, lng: 25.4662}}
@@ -316,7 +353,8 @@ class MapWindow extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                     options={this.createMapOptions}
-                    >          
+                    >
+                    {this.displaySearchBox}
                     {/* {this.displaySitePolygon()}
                     {this.displayParkingSlots()}  */}
                      
@@ -330,7 +368,11 @@ class MapWindow extends Component {
                             </div>         
                     </InfoWindow> */}
                 </GoogleMapReact>
+                <div style={{ height: '90vh', width: '100%', zIndex: 2, position: "absolute", top: 0, bottom: 0 }}>
+                    <Search></Search>
                 </div>
+                </div>
+                
             );
         }
             
