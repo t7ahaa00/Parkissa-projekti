@@ -8,7 +8,19 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
 import GoogleMapReact from 'google-map-react';
 
-let ParkJson;
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////           BODYTYYPPINEN RATKAISU, SEARCHBAARIN DATANKÄSITTEÖLU, MAPWWINDOWIN GEOLOKAATIO JA SIIRTELY SEARCHBARIN MUKAAN            ///////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 const handleApiLoaded = (map, maps, serverTestParkData) => {
     // use map and maps objects
@@ -88,10 +100,8 @@ class MapWindow extends Component {
             responseType:"json"})
         .then(response => {
             console.log('[ComponenDidMount] ' + JSON.stringify(response.data));
-            //this.setState({serverTestParkData: response.data})
             this.setState({serverTestParkData: response.data})
             //this.setState({loadingReady: true})
-            console.log(ParkJson)
         }
         )
         .catch( error => {
@@ -100,7 +110,7 @@ class MapWindow extends Component {
 
         /*const createTestParkingArea = {
             "name": "testinimi3",
-            "areaID": 1,
+            "areaID": 20,
             "avaibleSlots": 20,
             "orientation": 90,
             "path": [
@@ -110,11 +120,8 @@ class MapWindow extends Component {
                 {"lat":65.0584839349725,"lng":25.47013335342961}
             ]
         }*/
-
         
-        /*
-        axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
-            data: (JSON.parse(createTestParkingArea)),
+        /*axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', createTestParkingArea, {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
             responseType:"json",
@@ -132,7 +139,7 @@ class MapWindow extends Component {
         /////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
 
-        /*axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/{4}/grid/create', slotsObject {
+        /*axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot/15/grid/create', slotsObject, {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
             responseType:"json"})
