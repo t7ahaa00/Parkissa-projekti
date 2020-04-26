@@ -183,6 +183,8 @@ class MapWindow extends Component {
                  </Marker>
         })
     } */
+
+    /*
     // Display all the polygons in JSON file
     displaySitePolygon = (map, maps) => {
         //return ParkJson.map((parkinglots, index) => {
@@ -210,6 +212,7 @@ class MapWindow extends Component {
         )
     }*/
 
+    /*
     displayParkingSlots = () => {
         return ParkJson.parkingareas.map((parkinglots, i) => {
             return parkinglots.slots.map((parkingSlots, i) => {
