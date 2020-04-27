@@ -1,5 +1,3 @@
-
-#NOT USED ANYMORE
 import pymysql
 import sys
 import config
@@ -21,7 +19,7 @@ def default(obj):
 def getParkinglot(event):
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
     with conn.cursor() as cursor:
-        sql_Query = """SELECT * FROM parkinglot WHERE name LIKE 'test%'"""
+        sql_Query = """SELECT * FROM parkinglot """
         cursor.execute(sql_Query)
         conn.commit()
         columns = [col[0] for col in cursor.description]
@@ -37,14 +35,8 @@ def getParkinglot(event):
             parkingareas = [dict(zip(columns, row)) for row in cursor.fetchall()]
             
             loopIndex2 = 0
-            loopIndex4 = 0
-            
+
             for item in parkingareas:
-                sql_Query = """SELECT DISTINCT(row) AS rowNumber FROM grid WHERE idparkingarea = %s """
-                insert_tuple3 = item['idparkingarea']
-                cursor.execute(sql_Query,insert_tuple3)
-                columns = [col[0] for col in cursor.description]
-                rowCount = [dict(zip(columns, row)) for row in cursor.fetchall()]
                 
                 sql_Query = """SELECT lat,lng FROM path WHERE idparkingarea = %s"""
                 insert_tuple3 = item['idparkingarea']
@@ -52,28 +44,36 @@ def getParkinglot(event):
                 columns = [col[0] for col in cursor.description]
                 path = [dict(zip(columns, row)) for row in cursor.fetchall()]
                 
-                loopIndex3 = 0
-            
-                for itemrow in rowCount:
-                    sql_Query = """SELECT slot,occupied FROM grid WHERE idparkingarea = %s AND row = %s """
-                    insert_tuple3 = item['idparkingarea'],itemrow['rowNumber']
-                    cursor.execute(sql_Query,insert_tuple3)
-                    columns = [col[0] for col in cursor.description]
-                    slots = [dict(zip(columns, row)) for row in cursor.fetchall()]
-                    
-                    rowCount[loopIndex3]["row"] = slots
-                    loopIndex3+=1
+                parkingareas[loopIndex2]["path"] = path
+
+                sql_Query = """SELECT slot, occupied FROM grid WHERE idparkingarea = %s"""
+                insert_tuple3 = item['idparkingarea']
+                cursor.execute(sql_Query,insert_tuple3)
+                columns = [col[0] for col in cursor.description]
+                slots = [dict(zip(columns, row)) for row in cursor.fetchall()]
+               
+                sql_Query = """SELECT lat, lng FROM grid WHERE idparkingarea = %s"""
+                insert_tuple3 = item['idparkingarea']
+                cursor.execute(sql_Query,insert_tuple3)
+                columns = [col[0] for col in cursor.description]
+                slotCenters = [dict(zip(columns, row)) for row in cursor.fetchall()]      
                 
-                parkingareas[loopIndex4]["path"] = path
-                loopIndex4+=1
-                parkingareas[loopIndex2]["slots"] = rowCount
+                loopIndex3 = 0
+                for slot in slots:
+                    slot['center'] = slotCenters[loopIndex3]
+                    loopIndex3+=1 
+                
+                
+                parkingareas[loopIndex2]["slots"] = slots
                 loopIndex2+=1
                 
             parkinglots[loopIndex]["parkingareas"] = parkingareas
             loopIndex+=1    
            
         cursor.close()
-        returnValue = json.dumps(parkinglots,separators=(',', ':'),default=default)
+        response = {}
+        response = parkinglots
+        returnValue = json.dumps(response,separators=(',', ':'),default=default)
         jsonOut = json.loads(returnValue)
         return(jsonOut)
 

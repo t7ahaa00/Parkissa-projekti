@@ -1,15 +1,17 @@
 CREATE DEFINER=`admin`@`%` PROCEDURE `generateDummyData`()
 BEGIN
 	DECLARE parkinglotName varchar(300) DEFAULT null;
+    DECLARE cityName varchar(300) DEFAULT null;
     DECLARE parkinglotID int(11) DEFAULT null;
     DECLARE parkingAreaID int(11) DEFAULT null;
 
     SET parkinglotName:='test oulunYliopisto';
+    SET cityName:='Oulu';
     SET parkinglotID:=1;
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
-    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
+    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName,cityName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20);
 	SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.060582, 25.462892),
 							(parkingAreaID,null,65.060573, 25.464510),
@@ -28,7 +30,7 @@ BEGIN
     CAll toggleStateWithoutReturn(parkingAreaID,35);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.059511, 25.462798),
 							(parkingAreaID,null,65.060321, 25.462787),
@@ -37,7 +39,7 @@ BEGIN
 	CALL createParkingGrid(parkingAreaID,34);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.057739, 25.462804),
 							(parkingAreaID,null,65.058847, 25.462809),
@@ -48,11 +50,12 @@ BEGIN
     
     
 	SET parkinglotName:='test teknologiakyla';
+    SET cityName:='Oulu';
     SET parkinglotID:=2;
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
-    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
+    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName,cityName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.059129, 25.453084),
 							(parkingAreaID,null,65.059630, 25.452490),
@@ -61,7 +64,7 @@ BEGIN
     CALL createParkingGrid(parkingAreaID,25);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.061452, 25.447493),
 							(parkingAreaID,null,65.062070, 25.446935),
@@ -70,7 +73,7 @@ BEGIN
 	CALL createParkingGrid(parkingAreaID,40);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20);
 	SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.057354, 25.455739),
 							(parkingAreaID,null,65.057359, 25.457524),

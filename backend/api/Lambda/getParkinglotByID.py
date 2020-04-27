@@ -37,8 +37,10 @@ def getParkinglot(event):
                         "httpStatus": 403,
                         "message": "Incorrect api key"
                     })
-        sql_Query = """SELECT * FROM parkinglot """
-        cursor.execute(sql_Query)
+          
+        sql_Query = """SELECT * FROM parkinglot WHERE idparkinglot = %s"""
+        insert_tuple = event["params"]["path"]["parkinglotID"]
+        cursor.execute(sql_Query,insert_tuple)
         conn.commit()
         columns = [col[0] for col in cursor.description]
         parkinglots = [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -76,7 +78,7 @@ def getParkinglot(event):
                 columns = [col[0] for col in cursor.description]
                 slotCenters = [dict(zip(columns, row)) for row in cursor.fetchall()]      
                 
-                loopIndex3 = 0;
+                loopIndex3 = 0
                 for slot in slots:
                     slot['center'] = slotCenters[loopIndex3]
                     loopIndex3+=1 
