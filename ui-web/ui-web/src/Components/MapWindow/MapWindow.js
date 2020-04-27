@@ -94,7 +94,7 @@ class MapWindow extends Component {
     componentDidMount() {
 
         //axios.get('https://react-jburger.firebaseio.com/parkdata.json')
-        axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
+          axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
             responseType:"json"})
@@ -106,32 +106,38 @@ class MapWindow extends Component {
         )
         .catch( error => {
             console.log( error );
-        });
+        });  
 
-        /*const createTestParkingArea = {
+        //////////////////////////////////////////////////////////////////////////////////////////////////// 
+        //////// createTestParkingArean tiedot kopioitu alhaalla olevaan slotsObject muuttujaan ////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /* const createTestParkingArea = {
             "name": "testinimi3",
-            "areaID": 20,
-            "avaibleSlots": 20,
-            "orientation": 90,
+            "city": "Oulu",
             "path": [
                 {"lat":65.0590539874513,"lng":25.470136035638625},
                 {"lat":65.0590573805843,"lng":25.471943844514662},
                 {"lat":65.0584873281781,"lng":25.471949208932692},
                 {"lat":65.0584839349725,"lng":25.47013335342961}
             ]
-        }*/
+        }  */
         
-        /*axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', createTestParkingArea, {
-            headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
+         /* axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', slotsObject, {
+            headers: {
+                "x-api-key": process.env.REACT_APP_DATABASE_API_KEY, 
+                "Content-Type": "application/json",
+                //"confirmation": 1 // Tarvitaan vain silloin kun päivitetään olemassaolevan parkkialueen slottidataa
+            },
             crossDomain: true,
-            responseType:"json",
+            
+            
             })
         .then(response => {
             console.log(response.data)
             this.setState({loadingReady: true})
         }).catch((error) => {
             console.log(error)
-        })*/
+        })  */
 
         /////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -397,6 +403,14 @@ class MapWindow extends Component {
 export default MapWindow;
 
 const slotsObject = {
+        "name": "testinimi3",
+        "city": "Oulu",
+        "path": [
+                {"lat":65.0590539874513,"lng":25.470136035638625},
+                {"lat":65.0590573805843,"lng":25.471943844514662},
+                {"lat":65.0584873281781,"lng":25.471949208932692},
+                {"lat":65.0584839349725,"lng":25.47013335342961}
+            ],
     "slots": [
         {"slot":1,"center":{"lat":65.0589675264858,"lng":25.470319656421523},"occupied":1},
         {"slot":2,"center":{"lat":65.0589697885818,"lng":25.470370618392806},"occupied":1},
