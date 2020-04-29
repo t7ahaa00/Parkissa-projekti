@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //import classes from './MapWindow.module.css';
 //import ParkDetailOverlay from './ParkDetailOverlay/ParkDetailOverlay';
 //import ParkJson from '../../assets/parkkipaikkadatatest.json';
-import axios from 'axios';
+//import axios from 'axios';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
 import GoogleMapReact from 'google-map-react';
@@ -79,7 +79,7 @@ const handleApiLoaded = (map, maps, serverTestParkData) => {
 
 class MapWindow extends Component {
 
-    constructor(props) {
+    /* constructor(props) {
         super(props);
 
         this.state= {
@@ -89,12 +89,12 @@ class MapWindow extends Component {
             loadingReady : true, 
             serverTestParkData: null
         }
-    }
+    } */
     
-    componentDidMount() {
+    //componentDidMount() {
 
         //axios.get('https://react-jburger.firebaseio.com/parkdata.json')
-          axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
+          /* axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
             responseType:"json"})
@@ -106,7 +106,7 @@ class MapWindow extends Component {
         )
         .catch( error => {
             console.log( error );
-        });  
+        });   */
 
         //////////////////////////////////////////////////////////////////////////////////////////////////// 
         //////// createTestParkingArean tiedot kopioitu alhaalla olevaan slotsObject muuttujaan ////////////
@@ -155,24 +155,24 @@ class MapWindow extends Component {
             console.log(error)
         });*/
 
-    } 
+    //} 
 
     // Show infowindow when clicking polygon
-    onPolyClick = (props, e) =>
+    /* onPolyClick = (props, e) =>
     this.setState({
       selectedPlace: props,
       position: props.position,
       showingInfoWindow: true
-    });
+    }); */
     // Hide infowindow when clicking on the map
-    onMapClicked = (props) => {
+    /* onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
         this.setState({
             showingInfoWindow: false,
             activeMarker: null
         })
         }
-    };
+    }; */
 
     // Parking place sites marker placement
     /* displaySiteMarkers = () => {
@@ -371,11 +371,11 @@ class MapWindow extends Component {
     
     render() {
         // Loading wheel showed while loading data
-        let displayPolygons = this.state.loadingReady ? <p>Loading...</p> : <Spinner />;
+        let displayPolygons = this.props.serverData !== null ? <p>Loading...</p> : <Spinner />;
         //console.log(process.env);
 
         // Map displays when data from server has been loaded
-        if (this.state.serverTestParkData !== null) {
+        if (this.props.serverData !== null) {
             
             displayPolygons = (
                 <div style={{ height: '90vh', width: '100%', zIndex: 1, position: "absolute", top: 0, bottom: 0 }}>
@@ -385,7 +385,7 @@ class MapWindow extends Component {
                         defaultZoom={16}
                         onClick={this.onMapClicked}
                         yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, this.state.serverTestParkData)}
+                        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, this.props.serverData)}
                         options={this.createMapOptions}>
                     </GoogleMapReact>
                 </div>
