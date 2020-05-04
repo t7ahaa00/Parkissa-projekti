@@ -11,8 +11,8 @@ class Body extends Component {
         super(props);
 
         this.state= {
-            serverParkData: null
-        }
+			serverParkData: null,
+		}
 	}
 	
 	componentDidMount() {
@@ -35,11 +35,10 @@ class Body extends Component {
 		return(
 		<Aux>
 			<div className={classes.Map}>
-				<MapWindow 	serverData={this.state.serverParkData}
-				/>
+				<MapWindow 	serverData={this.state.serverParkData}/>
 			</div>
 			<div className={classes.SearchBar}>
-				<SearchBar />
+				<SearchBar serverData={this.state.serverParkData}/>
 			</div>
 		</Aux>	
 		);
