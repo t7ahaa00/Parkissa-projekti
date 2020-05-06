@@ -38,7 +38,7 @@ class Body extends Component {
 				<MapWindow 	serverData={this.state.serverParkData}/>
 			</div>
 			<div className={classes.SearchBar}>
-				<SearchBar serverData={this.state.serverParkData}/>
+				<SearchBar serverData={this.state.serverParkData }/>
 			</div>
 		</Aux>	
 		);

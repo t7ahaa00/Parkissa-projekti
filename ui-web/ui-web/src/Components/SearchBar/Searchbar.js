@@ -45,13 +45,19 @@ const getParkingAreaNames = (serverTestParkData) => {
     )
 };
 
+
 class Search extends React.Component {
     
-    constructor(props){
-        super(props);
 
-        //this.getParkingAreaNames = this.getParkingAreaNames.bind(this);
-    }
+    onKeyPressed(props) {
+        
+        if (props.key === 'Enter') {
+            const id = props.target.value;
+              console.log('user search', id);
+            
+          }
+        }
+    
 
     render() {
         let displayNames = this.props.serverData !== null ? <p>Loading...</p> : <Spinner />;
@@ -63,7 +69,7 @@ class Search extends React.Component {
                 <div>
                     {getParkingAreaNames(this.props.serverData)}
                     {console.log(getParkingAreaNames(this.props.serverData))}
-                    <input  autoComplete="on" list="suggestions"/>
+                    <input type="search" placeholder="Search parkinglots" autoComplete="on" list="suggestions" onKeyPress={ this.onKeyPressed}/>
                 </div>
 
                     

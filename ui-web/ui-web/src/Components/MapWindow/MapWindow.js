@@ -382,7 +382,7 @@ class MapWindow extends Component {
                     <GoogleMapReact
                         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
                         defaultCenter={{ lat: 65.0595, lng: 25.4662}}
-                        defaultZoom={16}
+                        defaultZoom={14}
                         onClick={this.onMapClicked}
                         yesIWantToUseGoogleMapApiInternals
                         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, this.props.serverData)}
