@@ -28,6 +28,11 @@ const handleApiLoaded = (serverTestParkData) => {
     })
 };
 
+const removeQuotes = (str) => {
+    let newstr = str.replace(/\"/g, '');
+    return newstr;
+}
+
 const getParkingAreaNames = (serverTestParkData) => {
 
     return(
@@ -36,8 +41,9 @@ const getParkingAreaNames = (serverTestParkData) => {
 
         {serverTestParkData.map((serverData, index) => {
             console.log('[ParkArea names] ' + JSON.stringify(serverData.name))
+            let modifiedString = removeQuotes(serverData.name);
             return(
-                <option>{JSON.stringify(serverData.name)}</option>
+                <option>{modifiedString}</option>
             )
         })}
         
