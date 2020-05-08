@@ -1,23 +1,20 @@
 CREATE DEFINER=`admin`@`%` PROCEDURE `createLog`(
-IN 	parkinglotName VARCHAR(255),
-	parkingareaName VARCHAR(255)
+IN 	idParkingLot INT(11),
+	idParkingArea INT(11)
     )
 BEGIN
 
-	SET @idParkingLot := (SELECT idparkinglot FROM parkinglot WHERE name = parkinglotName);
-    SET @idParkingArea := (SELECT idparkingarea FROM parkingarea WHERE name = parkingareaName);
 	
     INSERT INTO log VALUES(
-	(@idParkingLot),
-    parkinglotName,
-    parkingareaName,
+	idParkingLot,
+	(SELECT name FROM parkinglot WHERE idparkinglot = idParkingLot),
 	null,
 	NOW(),
     (SELECT COUNT(*) FROM grid 
-		WHERE idparkingarea = (@idParkingArea) 
+		WHERE idparkingarea = idParkingArea
 		AND occupied = true),
     (SELECT COUNT(*) FROM grid 
-		WHERE idparkingarea = (@idParkingArea) 
+		WHERE idparkingarea = idParkingArea 
 		AND occupied = false),
-    (SELECT avaiblespace FROM parkingarea WHERE idparkingarea = @idParkingArea));
+    (SELECT avaiblespace FROM parkingarea WHERE idparkingarea = idParkingArea));
 END
