@@ -381,7 +381,7 @@ class MapWindow extends Component {
                 <div style={{ height: '90vh', width: '100%', zIndex: 1, position: "absolute", top: 0, bottom: 0 }}>
                     <GoogleMapReact
                         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
-                        defaultCenter={{ lat: 65.0595, lng: 25.4662}}
+                        defaultCenter={this.props.centerMap}
                         defaultZoom={14}
                         onClick={this.onMapClicked}
                         yesIWantToUseGoogleMapApiInternals

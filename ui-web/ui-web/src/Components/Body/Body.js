@@ -12,11 +12,13 @@ class Body extends Component {
 
         this.state= {
 			serverParkData: null,
+			center: {
+				lat: 65.0595, lng: 25.4662
+			}
 		}
 	}
 	
 	componentDidMount() {
-
           axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
@@ -30,15 +32,45 @@ class Body extends Component {
             console.log( error );
 		});  
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.center !== this.state.center) {
+			console.log('center state has changed.')
+		}
+	}
+
+	///////////////////// VOIKO KÄYTTÄÄ CHIIIILDIN RENDERÖINTIIIN=?====`???
+	componentWillReceiveProps({someProp}) {
+		this.setState({...this.state,someProp})
+	  }
+
+	handleToUpdate = (centerData) => {
+
+		//////////////////////////////////////////////////////////
+		//
+		//    centerDatasta lat ja lng tiedot pitää kaiivaa!!
+		//
+		//////////////////////////////////////////////////////////
+
+		alert('passed data from child to parent= ' + centerData);
+		console.log(this.state.center.lat)
+
+		this.setState(prevState => {
+			let center = Object.assign({}, prevState.center);  		// creating copy of state variable center
+			center.lat = 62.5050 //centerData.center.lat;        				// update the name property, assign a new value
+			center.lng = 30.0000;
+			return { center };                                 		// return new object center object
+		  })
+	}
 		
 	render() {
 		return(
 		<Aux>
 			<div className={classes.Map}>
-				<MapWindow 	serverData={this.state.serverParkData}/>
+				<MapWindow 	serverData={this.state.serverParkData} centerMap={this.state.center}/>
 			</div>
 			<div className={classes.SearchBar}>
-				<SearchBar serverData={this.state.serverParkData }/>
+				<SearchBar serverData={this.state.serverParkData} handleToUpdate={this.handleToUpdate}/>
 			</div>
 		</Aux>	
 		);
