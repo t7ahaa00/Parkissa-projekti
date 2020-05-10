@@ -2,7 +2,7 @@ import React from 'react';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Spinner from '../../Components/Spinner/Spinner';
 
-//import classes from './SearchBar.module.css';
+import classes from './SearchBar.module.css';
 
 var id
 var otherProps
@@ -55,32 +55,32 @@ const getParkingAreaNames = (serverTestParkData) => {
 };
 
 const getCenterData = (serverTestParkData, id) => {
-    
+    var centerCoords = null;
     console.log(id)
-    serverTestParkData.map((serverData, index) => {
-
-        if (serverData.name === id) {
-            console.log('ONE HIT!!! ' + JSON.stringify(serverData.parkingareas[0].path[0]))
-
-            var test = removeQuotes(JSON.stringify(serverData.parkingareas[0].path[0]))
-
-            console.log('ONE HIT!!! ' + test)
+    
+        serverTestParkData.map((serverData, index) => {
             
-            /*this.state= {
-                serverParkData: null,
-                center: {
-                    lat: 65.0595, lng: 25.4662
-                }
-            }*/
+            if (serverData.name === id) {
+                console.log('ONE HIT!!! ' + JSON.stringify(serverData.parkingareas[0].path[0]))
 
-            var test2 = {center: {test}}
+                //var test = removeQuotes(JSON.stringify(serverData.parkingareas[0].path[0]))
+                //var testJSON = JSON.parse(test);
+                centerCoords = serverData.parkingareas[0].path[0]
+                console.log(centerCoords)
+                
+                /*this.state= {
+                    serverParkData: null,
+                    center: {
+                        lat: 65.0595, lng: 25.4662
+                    }
+                }*/
 
-            return(
-                //JSON.stringify(serverData.parkingareas[0].path[0])
-                test2
-            )
-        }
-    })
+                //test2 = {center: {test}}
+                
+            }
+            
+        })
+    return (centerCoords);
 }
 
 const setId = (toId, props) => {
@@ -114,7 +114,7 @@ class Search extends React.Component {
                 <div>
                     {getParkingAreaNames(this.props.serverData)}
                     {console.log(getParkingAreaNames(this.props.serverData))}
-                    <input type="search" placeholder="Search parkinglots" autoComplete="on" list="suggestions" onKeyPress={this.onKeyPressed}/>
+                    <input className={classes.input} type="search" placeholder="Search parkinglots" autoComplete="on" list="suggestions" onKeyPress={this.onKeyPressed}/>
                 </div>
 
             );

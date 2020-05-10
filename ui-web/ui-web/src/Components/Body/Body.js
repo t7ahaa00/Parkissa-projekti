@@ -14,12 +14,13 @@ class Body extends Component {
 			serverParkData: null,
 			center: {
 				lat: 65.0595, lng: 25.4662
-			}
+			},
+			zoom: 14
 		}
 	}
 	
 	componentDidMount() {
-          axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
+           axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
             responseType:"json"})
@@ -30,7 +31,7 @@ class Body extends Component {
         )
         .catch( error => {
             console.log( error );
-		});  
+		});   
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -46,31 +47,33 @@ class Body extends Component {
 
 	handleToUpdate = (centerData) => {
 
-		//////////////////////////////////////////////////////////
-		//
-		//    centerDatasta lat ja lng tiedot pitää kaiivaa!!
-		//
-		//////////////////////////////////////////////////////////
+		//alert('passed data from child to parent= ' + centerData);
+		console.log(this.state.center)
+		console.log(centerData);
 
-		alert('passed data from child to parent= ' + centerData);
-		console.log(this.state.center.lat)
+		//let updatedCenter = JSON.parse(centerData);
+		//console.log(updatedCenter);
+		this.setState({center: centerData, zoom: 16});
 
-		this.setState(prevState => {
+		 /* this.setState(prevState => {
 			let center = Object.assign({}, prevState.center);  		// creating copy of state variable center
-			center.lat = 62.5050 //centerData.center.lat;        				// update the name property, assign a new value
-			center.lng = 30.0000;
+			//console.log(" centerData lng:" + centerData.center.lng);
+			center = {center: updatedCenter} //62.5050 //centerData.center.lat;        				// update the name property, assign a new value
+			//center.lng = centerData.lng //30.0000;
 			return { center };                                 		// return new object center object
 		  })
+		  console.log(this.state.center.lat);  */
 	}
 		
 	render() {
 		return(
 		<Aux>
 			<div className={classes.Map}>
-				<MapWindow 	serverData={this.state.serverParkData} centerMap={this.state.center}/>
+				<MapWindow 	serverData={this.state.serverParkData} centerMap={this.state.center} mapZoom={this.state.zoom}/>
 			</div>
 			<div className={classes.SearchBar}>
 				<SearchBar serverData={this.state.serverParkData} handleToUpdate={this.handleToUpdate}/>
+				{console.log("rendering " + this.state.center.lat)}
 			</div>
 		</Aux>	
 		);
