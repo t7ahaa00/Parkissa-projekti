@@ -42,7 +42,6 @@ class Body extends Component {
 		}
 	}
 
-	///////////////////// VOIKO KÄYTTÄÄ CHIIIILDIN RENDERÖINTIIIN=?====`???
 	componentWillReceiveProps({someProp}) {
 		this.setState({...this.state,someProp})
 	  }
