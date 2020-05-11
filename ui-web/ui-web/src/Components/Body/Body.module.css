@@ -24,3 +24,15 @@
 .SearchBar input:focus {
     width: 250px;
 }
+
+/*.AddParkingLot {
+    width: 100vw;
+    height: 90vh;
+    position: relative;
+    float: "left";
+    z-index: 1;
+    top: 40px;
+    left: 10px;
+    margin: 0px;
+}*/
+
