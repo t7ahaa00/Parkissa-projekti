@@ -1,0 +1,19 @@
+input{
+    z-index: 2;
+    width: 140px;
+    height: 25px;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    margin: 0px;
+    -webkit-transition: width 0.4s ;
+    transition: width 0.4s ;
+}
+
+input:hover {
+    width: 250px;
+}
+
+input:focus {
+    width: 250px;
+}

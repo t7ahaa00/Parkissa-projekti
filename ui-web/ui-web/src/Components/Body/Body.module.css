@@ -1,5 +1,14 @@
-.Body {
+.Map {
     width: 100vw;
     height: 90vh;
     position: relative;
+    z-index: 1;
+}
+
+.Button {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    height: 28px;
+    z-index: 2;
 }

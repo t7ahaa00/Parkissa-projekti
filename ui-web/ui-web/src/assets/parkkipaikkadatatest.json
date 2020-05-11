@@ -6,7 +6,6 @@
           "idparkingarea": 29,
           "id": 1,
           "avaiblespace": 40,
-          "rows": 4,
           "orientation": "90.000000",
           "path": [
             {
@@ -28,184 +27,264 @@
           ],
           "slots": [
             {
-              "rowNumber": 1,
-              "row": [
-                {
-                  "slot": 1,
-                  "occupied": 1
-                },
-                {
-                  "slot": 2,
-                  "occupied": 0
-                },
-                {
-                  "slot": 3,
-                  "occupied": 1
-                },
-                {
-                  "slot": 4,
-                  "occupied": 0
-                },
-                {
-                  "slot": 5,
-                  "occupied": 0
-                },
-                {
-                  "slot": 6,
-                  "occupied": 1
-                },
-                {
-                  "slot": 7,
-                  "occupied": 1
-                },
-                {
-                  "slot": 8,
-                  "occupied": 0
-                },
-                {
-                  "slot": 9,
-                  "occupied": 0
-                },
-                {
-                  "slot": 10,
-                  "occupied": 1
-                }
-              ]
+              "slot": 1,
+              "center": {"lat": 65.059879, "lng": 25.470382},
+              "occupied": 0
             },
             {
-              "rowNumber": 2,
-              "row": [
-                {
-                  "slot": 1,
-                  "occupied": 1
-                },
-                {
-                  "slot": 2,
-                  "occupied": 0
-                },
-                {
-                  "slot": 3,
-                  "occupied": 1
-                },
-                {
-                  "slot": 4,
-                  "occupied": 1
-                },
-                {
-                  "slot": 5,
-                  "occupied": 1
-                },
-                {
-                  "slot": 6,
-                  "occupied": 1
-                },
-                {
-                  "slot": 7,
-                  "occupied": 0
-                },
-                {
-                  "slot": 8,
-                  "occupied": 0
-                },
-                {
-                  "slot": 9,
-                  "occupied": 0
-                },
-                {
-                  "slot": 10,
-                  "occupied": 0
-                }
-              ]
+              "slot": 2,
+              "center": {"lat": 65.059879, "lng": 25.470438},
+              "occupied": 1
             },
             {
-              "rowNumber": 3,
-              "row": [
-                {
-                  "slot": 1,
-                  "occupied": 1
-                },
-                {
-                  "slot": 2,
-                  "occupied": 1
-                },
-                {
-                  "slot": 3,
-                  "occupied": 1
-                },
-                {
-                  "slot": 4,
-                  "occupied": 1
-                },
-                {
-                  "slot": 5,
-                  "occupied": 1
-                },
-                {
-                  "slot": 6,
-                  "occupied": 1
-                },
-                {
-                  "slot": 7,
-                  "occupied": 1
-                },
-                {
-                  "slot": 8,
-                  "occupied": 1
-                },
-                {
-                  "slot": 9,
-                  "occupied": 1
-                },
-                {
-                  "slot": 10,
-                  "occupied": 1
-                }
-              ]
+              "slot": 3,
+              "center": {"lat": 65.059879, "lng": 25.470492},
+              "occupied": 1
             },
             {
-              "rowNumber": 4,
-              "row": [
-                {
-                  "slot": 1,
-                  "occupied": 1
-                },
-                {
-                  "slot": 2,
-                  "occupied": 1
-                },
-                {
-                  "slot": 3,
-                  "occupied": 1
-                },
-                {
-                  "slot": 4,
-                  "occupied": 1
-                },
-                {
-                  "slot": 5,
-                  "occupied": 1
-                },
-                {
-                  "slot": 6,
-                  "occupied": 1
-                },
-                {
-                  "slot": 7,
-                  "occupied": 1
-                },
-                {
-                  "slot": 8,
-                  "occupied": 1
-                },
-                {
-                  "slot": 9,
-                  "occupied": 1
-                },
-                {
-                  "slot": 10,
-                  "occupied": 1
-                }
-              ]
+              "slot": 4,
+              "center": {"lat": 65.059879, "lng": 25.470544},
+              "occupied": 1
+            },
+            {
+              "slot": 5,
+              "center": {"lat": 65.059879, "lng": 25.470594},
+              "occupied": 0
+            },
+            {
+              "slot": 6,
+              "center": {"lat": 65.059879, "lng": 25.470647},
+              "occupied": 1
+            },
+            {
+              "slot": 7,
+              "center": {"lat": 65.059879, "lng": 25.470699},
+              "occupied": 1
+            },
+            {
+              "slot": 8,
+              "center": {"lat": 65.059879, "lng": 25.470756},
+              "occupied": 1
+            },
+            {
+              "slot": 9,
+              "center": {"lat": 65.059879, "lng": 25.470808},
+              "occupied": 1
+            },
+            {
+              "slot": 10,
+              "center": {"lat": 65.059879, "lng": 25.470860},
+              "occupied": 1
+            },
+            {
+              "slot": 11,
+              "center": {"lat": 65.059879, "lng": 25.470914},
+              "occupied": 0
+            },
+            {
+              "slot": 12,
+              "center": {"lat": 65.059879, "lng": 25.470968},
+              "occupied": 1
+            },
+            {
+              "slot": 13,
+              "center": {"lat": 65.059879, "lng": 25.471020},
+              "occupied": 1
+            },
+            {
+              "slot": 14,
+              "center": {"lat": 65.059879, "lng": 25.471074},
+              "occupied": 0
+            },
+            {
+              "slot": 15,
+              "center": {"lat": 65.059879, "lng": 25.471128},
+              "occupied": 1
+            },
+            {
+              "slot": 16,
+              "center": {"lat": 65.059879, "lng": 25.471182},
+              "occupied": 0
+            },
+            {
+              "slot": 17,
+              "center": {"lat": 65.059879, "lng": 25.471235},
+              "occupied": 1
+            },
+            {
+              "slot": 18,
+              "center": {"lat": 65.059879, "lng": 25.471288},
+              "occupied": 0
+            },
+            {
+              "slot": 19,
+              "center": {"lat": 65.059879, "lng": 25.471341},
+              "occupied": 1
+            },
+            {
+              "slot": 20,
+              "center": {"lat": 65.059879, "lng": 25.471390},
+              "occupied": 0
+            },
+            {
+              "slot": 21,
+              "center": {"lat": 65.059879, "lng": 25.471442},
+              "occupied": 0
+            },
+            {
+              "slot": 22,
+              "center": {"lat": 65.059879, "lng": 25.471496},
+              "occupied": 1
+            },
+            {
+              "slot": 23,
+              "center": {"lat": 65.059879, "lng": 25.471550},
+              "occupied": 1
+            },
+            {
+              "slot": 24,
+              "center": {"lat": 65.059879, "lng": 25.471604},
+              "occupied": 0
+            },
+            {
+              "slot": 25,
+              "center": {"lat": 65.059879, "lng": 25.471658},
+              "occupied": 0
+            },
+            {
+              "slot": 26,
+              "center": {"lat": 65.059879, "lng": 25.471712},
+              "occupied": 1
+            },
+            {
+              "slot": 27,
+              "center": {"lat": 65.059837, "lng": 25.470382},
+              "occupied": 1
+            },
+            {
+              "slot": 28,
+              "center": {"lat": 65.059837, "lng": 25.470438},
+              "occupied": 1
+            },
+            {
+              "slot": 29,
+              "center": {"lat": 65.059837, "lng": 25.470492},
+              "occupied": 0
+            },
+            {
+              "slot": 30,
+              "center": {"lat": 65.059837, "lng": 25.470544},
+              "occupied": 1
+            },
+            {
+              "slot": 31,
+              "center": {"lat": 65.059837, "lng": 25.470594},
+              "occupied": 0
+            },
+            {
+              "slot": 32,
+              "center": {"lat": 65.059837, "lng": 25.470647},
+              "occupied": 1
+            },
+            {
+              "slot": 33,
+              "center": {"lat": 65.059837, "lng": 25.470699},
+              "occupied": 1
+            },
+            {
+              "slot": 34,
+              "center": {"lat": 65.059837, "lng": 25.470756},
+              "occupied": 1
+            },
+            {
+              "slot": 35,
+              "center": {"lat": 65.059837, "lng": 25.470808},
+              "occupied": 1
+            },
+            {
+              "slot": 36,
+              "center": {"lat": 65.059837, "lng": 25.470860},
+              "occupied": 1
+            },
+            {
+              "slot": 37,
+              "center": {"lat": 65.059837, "lng": 25.470914},
+              "occupied": 1
+            },
+            {
+              "slot": 38,
+              "center": {"lat": 65.059837, "lng": 25.470968},
+              "occupied": 1
+            },
+            {
+              "slot": 39,
+              "center": {"lat": 65.059837, "lng": 25.471020},
+              "occupied": 1
+            },
+            {
+              "slot": 40,
+              "center": {"lat": 65.059837, "lng": 25.471074},
+              "occupied": 1
+            },
+            {
+              "slot": 41,
+              "center": {"lat": 65.059837, "lng": 25.471128},
+              "occupied": 1
+            },
+            {
+              "slot": 42,
+              "center": {"lat": 65.059837, "lng": 25.471182},
+              "occupied": 0
+            },
+            {
+              "slot": 43,
+              "center": {"lat": 65.059837, "lng": 25.471235},
+              "occupied": 0
+            },
+            {
+              "slot": 44,
+              "center": {"lat": 65.059837, "lng": 25.471288},
+              "occupied": 0
+            },
+            {
+              "slot": 45,
+              "center": {"lat": 65.059837, "lng": 25.471341},
+              "occupied": 0
+            },
+            {
+              "slot": 46,
+              "center": {"lat": 65.059837, "lng": 25.471390},
+              "occupied": 0
+            },
+            {
+              "slot": 47,
+              "center": {"lat": 65.059837, "lng": 25.471442},
+              "occupied": 1
+            },
+            {
+              "slot": 48,
+              "center": {"lat": 65.059837, "lng": 25.471496},
+              "occupied": 0
+            },
+            {
+              "slot": 49,
+              "center": {"lat": 65.059837, "lng": 25.471550},
+              "occupied": 0
+            },
+            {
+              "slot": 50,
+              "center": {"lat": 65.059837, "lng": 25.471604},
+              "occupied": 0
+            },
+            {
+              "slot": 51,
+              "center": {"lat": 65.059837, "lng": 25.471658},
+              "occupied": 0
+            },
+            {
+              "slot": 52,
+              "center": {"lat": 65.059837, "lng": 25.471712},
+              "occupied": 1
             }
           ]
         }
