@@ -8,7 +8,31 @@
 
 }
 
-.Inputit {
+.Button {
+    position: relative;
     padding: 3px;
     margin-top: 10px;
+}
+
+.InputName {
+    width: 200px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+}
+
+.InputPath {
+    width: 400px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+
+}
+
+.InputSlots {
+    width: 400px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+
 }
