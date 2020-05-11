@@ -47,23 +47,9 @@ class Body extends Component {
 	  }
 
 	handleToUpdate = (centerData) => {
-
-		//alert('passed data from child to parent= ' + centerData);
 		console.log(this.state.center)
 		console.log(centerData);
-
-		//let updatedCenter = JSON.parse(centerData);
-		//console.log(updatedCenter);
 		this.setState({center: centerData, zoom: 16});
-
-		 /* this.setState(prevState => {
-			let center = Object.assign({}, prevState.center);  		// creating copy of state variable center
-			//console.log(" centerData lng:" + centerData.center.lng);
-			center = {center: updatedCenter} //62.5050 //centerData.center.lat;        				// update the name property, assign a new value
-			//center.lng = centerData.lng //30.0000;
-			return { center };                                 		// return new object center object
-		  })
-		  console.log(this.state.center.lat);  */
 	}
 
 	showDataAdderHandler = () => {

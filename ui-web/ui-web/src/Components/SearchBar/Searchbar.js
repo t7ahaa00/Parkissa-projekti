@@ -15,15 +15,6 @@ const handleApiLoaded = (serverTestParkData) => {
                 console.log('[ParkAreas] ' + JSON.stringify(parkAreas.name))
                 
                 return(
-                    /*new maps.Polygon({
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        fillColor: '#888888',
-                        fillOpacity: 0.1,
-                        map,
-                        path: parkAreas.path,
-                    })*/
                     <option>{JSON.stringify(parkAreas.name)}</option>
                 )
             })
@@ -63,20 +54,8 @@ const getCenterData = (serverTestParkData, id) => {
             if (serverData.name === id) {
                 console.log('ONE HIT!!! ' + JSON.stringify(serverData.parkingareas[0].path[0]))
 
-                //var test = removeQuotes(JSON.stringify(serverData.parkingareas[0].path[0]))
-                //var testJSON = JSON.parse(test);
                 centerCoords = serverData.parkingareas[0].path[0]
                 console.log(centerCoords)
-                
-                /*this.state= {
-                    serverParkData: null,
-                    center: {
-                        lat: 65.0595, lng: 25.4662
-                    }
-                }*/
-
-                //test2 = {center: {test}}
-                
             }
             
         })
