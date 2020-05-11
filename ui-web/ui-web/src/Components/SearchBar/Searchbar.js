@@ -7,6 +7,8 @@ import classes from './SearchBar.module.css';
 var id
 var otherProps
 
+var idKeyPressed
+
 const handleApiLoaded = (serverTestParkData) => {
     // use map and maps objects
     serverTestParkData.map((serverData, index) => {
@@ -75,9 +77,14 @@ class Search extends React.Component {
     onKeyPressed(props) {
         
         if (props.key === 'Enter') {
+            
             const id = props.target.value;
-            console.log('user search', id);
-            setId(id, otherProps);
+
+            if(id && idKeyPressed !== id) {
+                console.log('user search', id);
+                setId(id, otherProps);
+                idKeyPressed = id;
+            }
         }
     }
 
