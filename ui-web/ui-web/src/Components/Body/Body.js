@@ -4,6 +4,7 @@ import classes from './Body.module.css';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import SearchBar from '../SearchBar/Searchbar';
 import axios from 'axios';
+import AddParkingLot from '../AddParkingLot/AddParkingLot';
 
 class Body extends Component {
 
@@ -15,7 +16,8 @@ class Body extends Component {
 			center: {
 				lat: 65.0595, lng: 25.4662
 			},
-			zoom: 14
+			zoom: 14,
+			showDataAdder: false
 		}
 	}
 	
@@ -64,19 +66,39 @@ class Body extends Component {
 		  })
 		  console.log(this.state.center.lat);  */
 	}
+
+	showDataAdderHandler = () => {
+
+		this.setState( (prevState) => {
+			return {showDataAdder: !prevState.showDataAdder};
+		}); 
+	}
 		
 	render() {
+
+		if (this.state.showDataAdder === false) { 
 		return(
 		<Aux>
 			<div className={classes.Map}>
 				<MapWindow 	serverData={this.state.serverParkData} centerMap={this.state.center} mapZoom={this.state.zoom}/>
 			</div>
+			<button className={classes.Button} onClick={this.showDataAdderHandler}>Datan syöttö</button>
 			<div className={classes.SearchBar}>
 				<SearchBar serverData={this.state.serverParkData} handleToUpdate={this.handleToUpdate}/>
 				{console.log("rendering " + this.state.center.lat)}
 			</div>
 		</Aux>	
 		);
+	}
+	else {
+		return (
+			<div>
+				<button className={classes.Button} onClick={this.showDataAdderHandler}>Datan syöttö</button>
+				<AddParkingLot />
+
+			</div>
+		)
+	}
 	}
 };
 
