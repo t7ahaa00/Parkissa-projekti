@@ -79,7 +79,7 @@ class AddParkingLot extends React.Component {
                 <input
                     //className="w3-button w3-white w3-border w3-border-gray w3-round-large"
                     className={styles.Button}
-                    type="button"
+                    type="submit"
                     value="Submit"
                     onClick={storeJsonData}></input>
 
