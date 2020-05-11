@@ -85,7 +85,7 @@ def main():
         details = Parkingslot(s[0],s[1],s[2])    
         data.append(json.loads(details.toJson()))
          
-    s3.Object('parkissaimages', f'json/{parkingLot}/{areaID}/camera{cameraID}.json'.put(Body=(bytes(json.dumps(data).encode('UTF-8')))))
+    s3.Object('parkissaimages', f'json/{parkingLot}/{areaID}/camera{cameraID}.json').put(Body=(bytes(json.dumps(data).encode('UTF-8'))))
     cv2.destroyAllWindows()
  
 if __name__== "__main__":
