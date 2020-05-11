@@ -36,3 +36,22 @@
     margin-top: 10px;
 
 }
+
+.InputPath:hover {
+    width: 650px;
+}
+
+.InputSlots:hover {
+    width: 650px;
+}
+
+.Button {
+    width: 200px;
+    height: 25px;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+.Button:hover {
+    width: 200px;
+}
