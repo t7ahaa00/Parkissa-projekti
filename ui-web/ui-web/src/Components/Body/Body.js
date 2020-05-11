@@ -19,7 +19,7 @@ class Body extends Component {
 		}
 	}
 	
-	componentDidMount() {
+	 componentDidMount() {
            axios.get('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', {
             headers: {"x-api-key": process.env.REACT_APP_DATABASE_API_KEY},
             crossDomain: true,
@@ -32,7 +32,7 @@ class Body extends Component {
         .catch( error => {
             console.log( error );
 		});   
-	}
+	} 
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.center !== this.state.center) {

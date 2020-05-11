@@ -122,22 +122,20 @@ class MapWindow extends Component {
             ]
         }  */
         
-           /* axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', slotsObject, {
+             /* axios.post('https://kfcuuczfr2.execute-api.eu-west-1.amazonaws.com/front_tests/parkinglot', slotsObject, {
             headers: {
                 "x-api-key": process.env.REACT_APP_DATABASE_API_KEY, 
                 "Content-Type": "application/json",
                 "confirmation": 1 // Tarvitaan vain silloin kun päivitetään olemassaolevan parkkialueen slottidataa
             },
             crossDomain: true,
-            
-            
             })
         .then(response => {
             console.log(response.data)
             //this.setState({loadingReady: true})
         }).catch((error) => {
             console.log(error)
-        })   */
+        })     */
  
         /////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -403,7 +401,7 @@ class MapWindow extends Component {
 export default MapWindow;
 
 const slotsObject = {
-        "name": "testinimi3",
+        "name": "Oulun yliopisto A",
         "city": "Oulu",
         "path": [
                 {"lat":65.0590539874513,"lng":25.470136035638625},
@@ -432,7 +430,7 @@ const slotsObject = {
         {"slot":18,"occupied":1,"center":{"lat":65.0589709196298,"lng":25.471231607486587}},
         {"slot":19,"occupied":0,"center":{"lat":65.0589709196298,"lng":25.47128256945787}},
         {"slot":20,"occupied":1,"center":{"lat":65.0589686575338,"lng":25.471336213638168}},
-        /* {"slot":21,"center":{"lat":65.0589720506777,"lng":25.47138181119142},"occupied":0},
+        {"slot":21,"center":{"lat":65.0589720506777,"lng":25.47138181119142},"occupied":0},
         {"slot":22,"center":{"lat":65.0589697885818,"lng":25.47144081978975},"occupied":0},
         {"slot":23,"center":{"lat":65.0589697885818,"lng":25.471483735133987},"occupied":0},
         {"slot":24,"center":{"lat":65.0589709196298,"lng":25.471542743732314},"occupied":1},
@@ -554,7 +552,7 @@ const slotsObject = {
         {"slot":140,"center":{"lat":65.0586202924637,"lng":25.47139254002748},"occupied":1},
         {"slot":141,"center":{"lat":65.0586202924637,"lng":25.471338895847182},"occupied":1},
         {"slot":142,"center":{"lat":65.0586202924637,"lng":25.47129329829393},"occupied":1},
-        {"slot":143,"center":{"lat":65.0586191614009,"lng":25.47
+        /*{"slot":143,"center":{"lat":65.0586191614009,"lng":25.47
         {"slot":21,"center":{"lat":65.0589720506777,"lng":25.47138181119142},"occupied":0},
         {"slot":22,"center":{"lat":65.0589697885818,"lng":25.47144081978975},"occupied":0},
         {"slot":23,"center":{"lat":65.0589697885818,"lng":25.471483735133987},"occupied":0},

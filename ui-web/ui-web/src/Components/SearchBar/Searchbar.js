@@ -46,7 +46,7 @@ const getParkingAreaNames = (serverTestParkData) => {
             console.log('[ParkArea names] ' + JSON.stringify(serverData.name))
             let modifiedString = removeQuotes(serverData.name);
             return(
-                <option>{modifiedString}</option>
+                <option key={index}>{modifiedString}</option>
             )
         })}
         
