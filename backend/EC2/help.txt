@@ -1,0 +1,18 @@
+Mount file to s3
+s3fs parkissaimages /home/ftpuser/ftp/files -o rw,nosuid,nodev,allow_other,nonempty,passwd_file=${HOME}/.passwd-s3fs
+
+Unmount file 
+fusermount -u /home/ftpuser/ftp/files
+
+Oikeudet FTP kansiolle
+sudo chmod 707 /home/ftpuser/ftp/files
+
+sudo chown nfsnobody:nfsnobody /home/ftpuser/ftp
+sudo chmod a-w /home/ftpuser/ftp
+sudo chown ftpuser:ftpuser /home/ftpuser/ftp/files
+
+echo <ACCESS_KEY>:<SECRET_KEY> >  ${HOME}/.passwd-s3fs
+chmod 600  ~/.passwd-s3fs
+
+ohje https://cloudacademy.com/blog/s3-ftp-server/
+s3fs-fuse https://github.com/s3fs-fuse/s3fs-fuse

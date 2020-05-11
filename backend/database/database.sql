@@ -5,6 +5,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema parkissa
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `parkissa` ;
@@ -23,10 +26,11 @@ DROP TABLE IF EXISTS `parkissa`.`parkinglot` ;
 CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   `idparkinglot` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
+  `city` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`idparkinglot`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -40,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
   `idparkingarea` INT(11) NOT NULL AUTO_INCREMENT,
   `id` INT(11) NOT NULL,
   `avaiblespace` INT(11) NOT NULL,
-  `orientation` DECIMAL(15,6) NOT NULL,
   PRIMARY KEY (`idparkingarea`),
   INDEX `fk_parkingarea_parkinglot1_idx` (`idparkinglot` ASC),
   CONSTRAINT `fk_parkingarea_parkinglot1`
@@ -49,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 54
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -62,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`camera` (
   `idparkingarea` INT(11) NOT NULL,
   `idcamera` INT(11) NOT NULL AUTO_INCREMENT,
   `ip` VARCHAR(45) NULL DEFAULT NULL,
-  `cameraNumber` INT(11) NULL,
+  `cameraNumber` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`idcamera`),
   INDEX `fk_camera_parkingarea1_idx` (`idparkingarea` ASC),
   CONSTRAINT `fk_camera_parkingarea1`
@@ -129,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2771
+AUTO_INCREMENT = 567
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -217,8 +220,25 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`path` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 209
+AUTO_INCREMENT = 61
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `parkissa`.`api_keys`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `parkissa`.`api_keys` ;
+
+CREATE TABLE IF NOT EXISTS `parkissa`.`api_keys` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `api_key` VARCHAR(24) NOT NULL,
+  `ip` VARCHAR(45) NOT NULL,
+  `user_agent` VARCHAR(400) NOT NULL,
+  `request_id` VARCHAR(200) NOT NULL,
+  `uses` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `api_key_UNIQUE` (`api_key` ASC))
+ENGINE = InnoDB;
 
 USE `parkissa` ;
 
@@ -326,15 +346,17 @@ USE `parkissa`$$
 CREATE DEFINER=`admin`@`%` PROCEDURE `generateDummyData`()
 BEGIN
 	DECLARE parkinglotName varchar(300) DEFAULT null;
+    DECLARE cityName varchar(300) DEFAULT null;
     DECLARE parkinglotID int(11) DEFAULT null;
     DECLARE parkingAreaID int(11) DEFAULT null;
 
     SET parkinglotName:='test oulunYliopisto';
+    SET cityName:='Oulu';
     SET parkinglotID:=1;
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
-    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
+    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName,cityName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20);
 	SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.060582, 25.462892),
 							(parkingAreaID,null,65.060573, 25.464510),
@@ -353,7 +375,7 @@ BEGIN
     CAll toggleStateWithoutReturn(parkingAreaID,35);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.059511, 25.462798),
 							(parkingAreaID,null,65.060321, 25.462787),
@@ -362,7 +384,7 @@ BEGIN
 	CALL createParkingGrid(parkingAreaID,34);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.057739, 25.462804),
 							(parkingAreaID,null,65.058847, 25.462809),
@@ -373,11 +395,12 @@ BEGIN
     
     
 	SET parkinglotName:='test teknologiakyla';
+    SET cityName:='Oulu';
     SET parkinglotID:=2;
     DELETE FROM parkinglot WHERE idparkinglot = parkinglotID;
-    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName);
+    INSERT INTO parkinglot VALUES(parkinglotID,parkinglotName,cityName);
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,1,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.059129, 25.453084),
 							(parkingAreaID,null,65.059630, 25.452490),
@@ -386,7 +409,7 @@ BEGIN
     CALL createParkingGrid(parkingAreaID,25);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20,90.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,2,20);
     SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.061452, 25.447493),
 							(parkingAreaID,null,65.062070, 25.446935),
@@ -395,7 +418,7 @@ BEGIN
 	CALL createParkingGrid(parkingAreaID,40);
     SET parkingAreaID = null;
     
-    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20,0.0);
+    INSERT INTO parkingarea VALUES(parkinglotID,null,3,20);
 	SET parkingAreaID = LAST_INSERT_ID();
     INSERT INTO path VALUES(parkingAreaID,null,65.057354, 25.455739),
 							(parkingAreaID,null,65.057359, 25.457524),

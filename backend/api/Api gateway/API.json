@@ -24,170 +24,6 @@
     }
   ],
   "paths": {
-    "/parkinglot/{parkingareaID}/grid/free": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "parkingareaID",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Free grids",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "info": {
-                      "type": "object",
-                      "properties": {
-                        "idparkinglot": {
-                          "type": "integer"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "freeSlots": {
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "freeGrids": {
-                      "type": "object",
-                      "properties": {
-                        "idparkinglot": {
-                          "type": "integer"
-                        },
-                        "idgrid": {
-                          "type": "integer"
-                        },
-                        "slotname": {
-                          "type": "string"
-                        },
-                        "occupied": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "success": {
-                    "value": {
-                      "info": [
-                        {
-                          "idparkingarea": 1,
-                          "freeSlots": 10
-                        }
-                      ],
-                      "freeGrids": [
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 2,
-                          "row": 1,
-                          "slot": 2,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 4,
-                          "row": 1,
-                          "slot": 4,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 5,
-                          "row": 1,
-                          "slot": 5,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 8,
-                          "row": 1,
-                          "slot": 8,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 9,
-                          "row": 1,
-                          "slot": 9,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 12,
-                          "row": 2,
-                          "slot": 2,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 17,
-                          "row": 2,
-                          "slot": 7,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 18,
-                          "row": 2,
-                          "slot": 8,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 19,
-                          "row": 2,
-                          "slot": 9,
-                          "occupied": 0
-                        },
-                        {
-                          "idparkingarea": 1,
-                          "idgrid": 20,
-                          "row": 2,
-                          "slot": 10,
-                          "occupied": 0
-                        }
-                      ]
-                    }
-                  },
-                  "error": {
-                    "value": {
-                      "info": [
-                        {
-                          "error": "error",
-                          "message": "could not find parkinglot with that id"
-                        }
-                      ],
-                      "freeGrids": []
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-parkinglot-parkinglotID-grids-free",
-        "description": "gets all free slots of parking lot",
-        "parameters": [],
-        "security": [
-          {
-            "API Key": []
-          }
-        ]
-      }
-    },
     "/parkinglot/{parkingareaID}/grid/{slot}/toggleState": {
       "parameters": [
         {
@@ -251,9 +87,14 @@
             }
           }
         },
-        "security": [
+        "parameters": [
           {
-            "API Key": []
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
           }
         ]
       },
@@ -306,9 +147,14 @@
           }
         },
         "description": "Gets the state of specific slot",
-        "security": [
+        "parameters": [
           {
-            "API Key": []
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
           }
         ]
       }
@@ -336,25 +182,22 @@
                 "examples": {
                   "success": {
                     "value": {
-                      "idparkinglot": 3,
-                      "idparkingarea": 7
+                      "success": "success",
+                      "created new parkinglot": false,
+                      "parkinglotID": 9,
+                      "parkingareaID": 23,
+                      "parkingareaNumber": 12,
+                      "added slots": 2
                     }
                   },
                   "error": {
                     "value": {
-                      "error": "duplicate id"
+                      "error": "parkinglot with that name existed, add header confirmation = 1 to confirm adding new area"
                     }
                   },
                   "error 2": {
                     "value": {
-                      "error": "couldn't create path",
-                      "errormsg": "errormsg"
-                    }
-                  },
-                  "error 3": {
-                    "value": {
-                      "error": "couldn't create parkingarea",
-                      "errormsg": "errormsg"
+                      "error": "there must be at least 2 parking grids"
                     }
                   }
                 }
@@ -370,10 +213,21 @@
           }
         },
         "description": "Creates new parkinglot and parkingarea",
-        "parameters": [],
-        "security": [
+        "parameters": [
           {
-            "API Key": []
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "header",
+            "name": "confirmation"
           }
         ],
         "requestBody": {
@@ -385,37 +239,21 @@
                   "name": {
                     "type": "string"
                   },
-                  "areaID": {
-                    "type": "number"
-                  },
-                  "avaibleSlots": {
-                    "type": "number"
-                  },
-                  "orientation": {
-                    "type": "number"
+                  "city": {
+                    "type": "string"
                   },
                   "path": {
-                    "type": "object",
-                    "required": [
-                      "lng",
-                      "lat"
-                    ],
-                    "properties": {
-                      "lng": {
-                        "type": "number"
-                      },
-                      "lat": {
-                        "type": "number"
-                      }
-                    }
+                    "$ref": "#/components/schemas/path"
+                  },
+                  "slots": {
+                    "$ref": "#/components/schemas/slots"
                   }
                 },
                 "required": [
                   "name",
-                  "areaID",
-                  "avaibleSlots",
-                  "orientation",
-                  "path"
+                  "city",
+                  "path",
+                  "slots"
                 ]
               },
               "examples": {
@@ -481,6 +319,1485 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "Get all parkinglots",
+        "operationId": "get-parkinglot",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "success": {
+                    "value": [
+                      {
+                        "idparkinglot": 1,
+                        "name": "test oulunYliopisto",
+                        "city": "Oulu",
+                        "parkingareas": [
+                          {
+                            "idparkingarea": 8,
+                            "id": 1,
+                            "avaiblespace": 45,
+                            "orientation": 90,
+                            "path": [
+                              {
+                                "lat": 65.060582,
+                                "lng": 25.462892
+                              },
+                              {
+                                "lat": 65.060573,
+                                "lng": 25.46451
+                              },
+                              {
+                                "lat": 65.061669,
+                                "lng": 25.464576
+                              },
+                              {
+                                "lat": 65.061665,
+                                "lng": 25.462881
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 11,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 12,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 13,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 14,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 15,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 16,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 17,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 18,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 19,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 20,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 21,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 22,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 23,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 24,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 25,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 26,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 27,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 28,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 29,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 30,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 31,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 32,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 33,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 34,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 35,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 36,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 37,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 38,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 39,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 40,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 41,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 42,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 43,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 44,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 45,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          },
+                          {
+                            "idparkingarea": 9,
+                            "id": 2,
+                            "avaiblespace": 34,
+                            "orientation": 90,
+                            "path": [
+                              {
+                                "lat": 65.059511,
+                                "lng": 25.462798
+                              },
+                              {
+                                "lat": 65.060321,
+                                "lng": 25.462787
+                              },
+                              {
+                                "lat": 65.060333,
+                                "lng": 25.461981
+                              },
+                              {
+                                "lat": 65.059516,
+                                "lng": 25.461992
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 11,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 12,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 13,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 14,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 15,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 16,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 17,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 18,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 19,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 20,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 21,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 22,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 23,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 24,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 25,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 26,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 27,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 28,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 29,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 30,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 31,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 32,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 33,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 34,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          },
+                          {
+                            "idparkingarea": 10,
+                            "id": 3,
+                            "avaiblespace": 44,
+                            "orientation": 0,
+                            "path": [
+                              {
+                                "lat": 65.057739,
+                                "lng": 25.462804
+                              },
+                              {
+                                "lat": 65.058847,
+                                "lng": 25.462809
+                              },
+                              {
+                                "lat": 65.058841,
+                                "lng": 25.461611
+                              },
+                              {
+                                "lat": 65.057741,
+                                "lng": 25.461567
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 11,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 12,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 13,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 14,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 15,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 16,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 17,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 18,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 19,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 20,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 21,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 22,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 23,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 24,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 25,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 26,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 27,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 28,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 29,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 30,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 31,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 32,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 33,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 34,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 35,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 36,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 37,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 38,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 39,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 40,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 41,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 42,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 43,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 44,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "idparkinglot": 2,
+                        "name": "test teknologiakyla",
+                        "parkingareas": [
+                          {
+                            "idparkingarea": 11,
+                            "id": 1,
+                            "avaiblespace": 25,
+                            "orientation": 0,
+                            "path": [
+                              {
+                                "lat": 65.059129,
+                                "lng": 25.453084
+                              },
+                              {
+                                "lat": 65.05963,
+                                "lng": 25.45249
+                              },
+                              {
+                                "lat": 65.059567,
+                                "lng": 25.452178
+                              },
+                              {
+                                "lat": 65.05907,
+                                "lng": 25.452777
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 11,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 12,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 13,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 14,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 15,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 16,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 17,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 18,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 19,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 20,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 21,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 22,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 23,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 24,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 25,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          },
+                          {
+                            "idparkingarea": 12,
+                            "id": 2,
+                            "avaiblespace": 40,
+                            "orientation": 90,
+                            "path": [
+                              {
+                                "lat": 65.061452,
+                                "lng": 25.447493
+                              },
+                              {
+                                "lat": 65.06207,
+                                "lng": 25.446935
+                              },
+                              {
+                                "lat": 65.061695,
+                                "lng": 25.444566
+                              },
+                              {
+                                "lat": 65.061069,
+                                "lng": 25.445036
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 11,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 12,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 13,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 14,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 15,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 16,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 17,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 18,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 19,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 20,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 21,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 22,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 23,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 24,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 25,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 26,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 27,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 28,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 29,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 30,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 31,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 32,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 33,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 34,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 35,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 36,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 37,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 38,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 39,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 40,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          },
+                          {
+                            "idparkingarea": 13,
+                            "id": 3,
+                            "avaiblespace": 10,
+                            "orientation": 0,
+                            "path": [
+                              {
+                                "lat": 65.057354,
+                                "lng": 25.455739
+                              },
+                              {
+                                "lat": 65.057359,
+                                "lng": 25.457524
+                              },
+                              {
+                                "lat": 65.057961,
+                                "lng": 25.457521
+                              },
+                              {
+                                "lat": 65.057975,
+                                "lng": 25.455755
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 4,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 5,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 6,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 7,
+                                "occupied": 1,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 8,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 9,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              },
+                              {
+                                "slot": 10,
+                                "occupied": 0,
+                                "lat": 0.123457,
+                                "lng": 0.123457
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "idparkinglot": 3,
+                        "name": "testinimi",
+                        "parkingareas": [
+                          {
+                            "idparkingarea": 7,
+                            "id": 1,
+                            "avaiblespace": 3,
+                            "orientation": 90,
+                            "path": [
+                              {
+                                "lat": 1,
+                                "lng": 0
+                              },
+                              {
+                                "lat": 3,
+                                "lng": 2
+                              },
+                              {
+                                "lat": 5,
+                                "lng": 4
+                              },
+                              {
+                                "lat": 7,
+                                "lng": 6
+                              }
+                            ],
+                            "slots": [
+                              {
+                                "slot": 1,
+                                "occupied": 1,
+                                "lat": 24.2,
+                                "lng": 24.2
+                              },
+                              {
+                                "slot": 2,
+                                "occupied": 1,
+                                "lat": 24.525,
+                                "lng": 24.2342
+                              },
+                              {
+                                "slot": 3,
+                                "occupied": 1,
+                                "lat": 24.251,
+                                "lng": 0
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "idparkinglot": 4,
+                        "name": "testinimi2",
+                        "parkingareas": [
+                          {
+                            "idparkingarea": 14,
+                            "id": 1,
+                            "avaiblespace": 20,
+                            "orientation": 90,
+                            "path": [
+                              {
+                                "lat": 1,
+                                "lng": 0
+                              },
+                              {
+                                "lat": 3,
+                                "lng": 2
+                              },
+                              {
+                                "lat": 5,
+                                "lng": 4
+                              },
+                              {
+                                "lat": 7,
+                                "lng": 6
+                              }
+                            ],
+                            "slots": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "return all parkinglots",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
+          }
+        ]
       }
     },
     "/{parkinglotID}": {
@@ -530,22 +1847,18 @@
         "operationId": "get-parkinglot-parkinglotID",
         "description": "deletes parkinglot with id",
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          }
+          "description": ""
         },
-        "security": [
+        "parameters": [
           {
-            "API Key": []
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
           }
-        ],
-        "parameters": []
+        ]
       },
       "get": {
         "summary": "Gets all data in parkinglot",
@@ -574,9 +1887,6 @@
                           "type": "number"
                         },
                         "avaiblespace": {
-                          "type": "number"
-                        },
-                        "orientation": {
                           "type": "number"
                         },
                         "path": {
@@ -610,6 +1920,9 @@
                           }
                         }
                       }
+                    },
+                    "city": {
+                      "type": "string"
                     }
                   }
                 },
@@ -618,6 +1931,7 @@
                     "value": {
                       "idparkinglot": 1,
                       "name": "test oulunYliopisto",
+                      "city": "Oulu",
                       "parkingareas": [
                         {
                           "idparkinglot": 1,
@@ -1433,91 +2747,31 @@
                     }
                   }
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "example-1": {}
+                }
               }
             }
           }
         },
         "description": "gets all data in parkinglot with specific id",
-        "security": [
+        "parameters": [
           {
-            "API Key": []
-          }
-        ]
-      }
-    },
-    "/testdata/generate": {
-      "post": {
-        "summary": "Generate test data",
-        "operationId": "post-testdata-generate",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "success": {
-                    "value": {
-                      "success": "success"
-                    }
-                  }
-                }
-              }
+            "schema": {
+              "type": "string"
             },
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "generates/resets test dataset (poistetaan lopullisesta API:sta)",
-        "security": [
-          {
-            "API Key": []
+            "in": "header",
+            "name": "x-api-key",
+            "description": "",
+            "required": true
           }
         ]
-      },
-      "options": {
-        "summary": "",
-        "operationId": "options-testdata-generate",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "X-Requested-With": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {}
       }
     },
     "/getapikey": {
@@ -1556,7 +2810,17 @@
           }
         },
         "operationId": "get-testdata-getapikey",
-        "description": "returns testing apikey (poistetaan lopullisesta API:sta)"
+        "description": "returns testing apikey (poistetaan lopullisesta API:sta)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
+          }
+        ]
       },
       "options": {
         "summary": "",
@@ -1590,152 +2854,6 @@
         }
       },
       "parameters": []
-    },
-    "/parkinglot/{parkingareaID}/grid/create": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "parkingareaID",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Add parking places to grid",
-        "operationId": "post-parkinglotID-parkingareaID-grid-create",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                },
-                "examples": {
-                  "success": {
-                    "value": {
-                      "success": "success",
-                      "added slots": 22
-                    }
-                  },
-                  "error 1": {
-                    "value": {
-                      "error": "grid already exists"
-                    }
-                  },
-                  "error 2": {
-                    "value": {
-                      "error": "parkingarea doesnt exist"
-                    }
-                  }
-                }
-              }
-            },
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "slots": {
-                    "type": "object",
-                    "properties": {
-                      "slot": {
-                        "type": "number"
-                      },
-                      "lat": {
-                        "type": "number"
-                      },
-                      "lng": {
-                        "type": "number"
-                      }
-                    },
-                    "required": [
-                      "slot",
-                      "lat",
-                      "lng"
-                    ]
-                  }
-                }
-              },
-              "examples": {
-                "example": {
-                  "value": {
-                    "slots": [
-                      {
-                        "slots": 12
-                      },
-                      {
-                        "slots": 12
-                      },
-                      {
-                        "row": 3,
-                        "slots": 13
-                      },
-                      {
-                        "row": 4,
-                        "slots": 13
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "description": ""
-        },
-        "security": [
-          {
-            "API Key": []
-          }
-        ],
-        "description": "creates grid for parkingarea"
-      },
-      "options": {
-        "summary": "",
-        "operationId": "options-parkinglot-parkingareaID-grid-create",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "X-Requested-With": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "description": "CORS options",
-        "requestBody": {}
-      }
     },
     "/parkinglot/{parkingareaID}/grid/setAvaibleGrids": {
       "patch": {
@@ -1771,11 +2889,6 @@
           }
         },
         "description": "Updates multiple grid states",
-        "security": [
-          {
-            "API Key": []
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1821,7 +2934,17 @@
             }
           },
           "description": ""
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
+          }
+        ]
       },
       "parameters": [
         {
@@ -1862,7 +2985,16 @@
           }
         },
         "description": "upload image to S3 bucket",
-        "parameters": [],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-key",
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1897,6 +3029,38 @@
         "in": "header"
       }
     },
-    "schemas": {}
+    "schemas": {
+      "slots": {
+        "title": "slots",
+        "type": "object",
+        "properties": {
+          "slot": {
+            "type": "number"
+          },
+          "occupied": {
+            "type": "number"
+          },
+          "center": {
+            "$ref": "#/components/schemas/path"
+          }
+        }
+      },
+      "path": {
+        "title": "pqth",
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "lat",
+          "lng"
+        ]
+      }
+    }
   }
 }

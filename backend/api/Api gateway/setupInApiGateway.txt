@@ -1,0 +1,26 @@
+CORS headers (options endpoints) + header mapping Access-Control-Allow-Origin	'*'  in method
+
+Options
+
+1.Integration request - > mock
+2.In Integration Response
+
+Response header	Mapping value 	
+    X-Requested-With	'*'	
+    Access-Control-Allow-Headers	'Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with'	
+    Access-Control-Allow-Origin	'*'	
+    Access-Control-Allow-Methods	'POST,GET,OPTIONS'
+
+All endpoints
+1.Integration request - > Lambda
+2.Integration Request - > Mapping Templates  - > application/json -> default method request passthrough
+3.Method Response - > add 403 
+4.Integration Response - > Add integration response -> Lambda Error Regex = .*'errorType': 'Exception'.* 
+5.Integration Response - > Mapping Templates - > application/json - > 
+
+{
+    "ErrorCode":403,
+    "ErrorMessage":"Forbidden",
+    "Reason":"Missing/Wrong API key"
+}
+ 

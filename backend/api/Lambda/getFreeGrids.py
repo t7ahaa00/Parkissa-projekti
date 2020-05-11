@@ -37,6 +37,7 @@ def getFreeGrids(event):
         data = { 'info':info, 'freeGrids':freeGrids }
         returnValue = json.dumps(data,separators=(',', ':'),default=default)
         jsonOut = json.loads(returnValue)
+
         return(jsonOut)
 
 def main(event, context):
