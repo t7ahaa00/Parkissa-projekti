@@ -1,0 +1,57 @@
+
+.AddParkingLot {
+    width: 100vw;
+    height: 90vh;
+    /*position: relative;*/
+    text-align: "left";
+    z-index: 1;
+
+}
+
+.Button {
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+}
+
+.InputName {
+    width: 200px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+}
+
+.InputPath {
+    width: 400px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+
+}
+
+.InputSlots {
+    width: 400px;
+    position: relative;
+    padding: 3px;
+    margin-top: 10px;
+
+}
+
+.InputPath:hover {
+    width: 650px;
+}
+
+.InputSlots:hover {
+    width: 650px;
+}
+
+.Button {
+    width: 200px;
+    height: 25px;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+.Button:hover {
+    width: 200px;
+}
