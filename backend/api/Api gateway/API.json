@@ -156,7 +156,8 @@
             "name": "x-api-key",
             "required": true
           }
-        ]
+        ],
+        "requestBody": {}
       }
     },
     "/parkinglot": {
@@ -1788,16 +1789,7 @@
           }
         },
         "description": "return all parkinglots",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-api-key",
-            "required": true
-          }
-        ]
+        "parameters": []
       }
     },
     "/{parkinglotID}": {
@@ -2761,17 +2753,7 @@
           }
         },
         "description": "gets all data in parkinglot with specific id",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "x-api-key",
-            "description": "",
-            "required": true
-          }
-        ]
+        "parameters": []
       }
     },
     "/getapikey": {

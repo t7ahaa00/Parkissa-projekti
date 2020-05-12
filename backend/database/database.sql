@@ -10,7 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema parkissa
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `parkissa` ;
 
 -- -----------------------------------------------------
 -- Schema parkissa
@@ -19,10 +18,25 @@ CREATE SCHEMA IF NOT EXISTS `parkissa` DEFAULT CHARACTER SET utf8 ;
 USE `parkissa` ;
 
 -- -----------------------------------------------------
+-- Table `parkissa`.`api_keys`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `parkissa`.`api_keys` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `api_key` VARCHAR(24) NOT NULL,
+  `ip` VARCHAR(45) NOT NULL,
+  `user_agent` VARCHAR(400) NOT NULL,
+  `request_id` VARCHAR(200) NOT NULL,
+  `uses` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `api_key_UNIQUE` (`api_key` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `parkissa`.`parkinglot`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`parkinglot` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   `idparkinglot` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(60) NOT NULL,
@@ -30,15 +44,13 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot` (
   PRIMARY KEY (`idparkinglot`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `parkissa`.`parkingarea`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`parkingarea` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
   `idparkinglot` INT(11) NOT NULL,
   `idparkingarea` INT(11) NOT NULL AUTO_INCREMENT,
@@ -52,15 +64,13 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`parkingarea` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 16
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `parkissa`.`camera`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`camera` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`camera` (
   `idparkingarea` INT(11) NOT NULL,
   `idcamera` INT(11) NOT NULL AUTO_INCREMENT,
@@ -80,8 +90,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`visitor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`visitor` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`visitor` (
   `idvisitor` INT(11) NOT NULL AUTO_INCREMENT,
   `phonenumber` VARCHAR(45) NOT NULL,
@@ -95,8 +103,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`car`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`car` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`car` (
   `idvisitor` INT(11) NOT NULL,
   `idcar` INT(11) NOT NULL AUTO_INCREMENT,
@@ -115,8 +121,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`grid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`grid` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
   `idparkingarea` INT(11) NOT NULL,
   `idgrid` INT(11) NOT NULL AUTO_INCREMENT,
@@ -132,15 +136,13 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`grid` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 567
+AUTO_INCREMENT = 931
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `parkissa`.`log`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`log` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`log` (
   `idparkinglot` INT(11) NOT NULL,
   `parkinglotname` VARCHAR(300) NOT NULL,
@@ -164,8 +166,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`user` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`user` (
   `iduser` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
@@ -180,8 +180,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`parkinglot_has_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`parkinglot_has_user` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`parkinglot_has_user` (
   `idparkinglot` INT(11) NOT NULL,
   `iduser` INT(11) NOT NULL,
@@ -205,8 +203,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `parkissa`.`path`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`path` ;
-
 CREATE TABLE IF NOT EXISTS `parkissa`.`path` (
   `idparkingarea` INT(11) NOT NULL,
   `idpath` INT(11) NOT NULL AUTO_INCREMENT,
@@ -220,34 +216,14 @@ CREATE TABLE IF NOT EXISTS `parkissa`.`path` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 61
+AUTO_INCREMENT = 85
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `parkissa`.`api_keys`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `parkissa`.`api_keys` ;
-
-CREATE TABLE IF NOT EXISTS `parkissa`.`api_keys` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `api_key` VARCHAR(24) NOT NULL,
-  `ip` VARCHAR(45) NOT NULL,
-  `user_agent` VARCHAR(400) NOT NULL,
-  `request_id` VARCHAR(200) NOT NULL,
-  `uses` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `api_key_UNIQUE` (`api_key` ASC))
-ENGINE = InnoDB;
 
 USE `parkissa` ;
 
 -- -----------------------------------------------------
 -- procedure createLog
 -- -----------------------------------------------------
-
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`createLog`;
 
 DELIMITER $$
 USE `parkissa`$$
@@ -278,9 +254,6 @@ DELIMITER ;
 -- procedure createParkingGrid
 -- -----------------------------------------------------
 
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`createParkingGrid`;
-
 DELIMITER $$
 USE `parkissa`$$
 CREATE DEFINER=`admin`@`%` PROCEDURE `createParkingGrid`(
@@ -305,9 +278,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedure deleteParkinglot
 -- -----------------------------------------------------
-
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`deleteParkinglot`;
 
 DELIMITER $$
 USE `parkissa`$$
@@ -337,9 +307,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedure generateDummyData
 -- -----------------------------------------------------
-
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`generateDummyData`;
 
 DELIMITER $$
 USE `parkissa`$$
@@ -447,9 +414,6 @@ DELIMITER ;
 -- procedure getFreeSlots
 -- -----------------------------------------------------
 
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`getFreeSlots`;
-
 DELIMITER $$
 USE `parkissa`$$
 CREATE DEFINER=`admin`@`%` PROCEDURE `getFreeSlots`(
@@ -483,9 +447,6 @@ DELIMITER ;
 -- procedure toggleState
 -- -----------------------------------------------------
 
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`toggleState`;
-
 DELIMITER $$
 USE `parkissa`$$
 CREATE DEFINER=`admin`@`%` PROCEDURE `toggleState`(
@@ -515,9 +476,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedure toggleStateWithoutReturn
 -- -----------------------------------------------------
-
-USE `parkissa`;
-DROP procedure IF EXISTS `parkissa`.`toggleStateWithoutReturn`;
 
 DELIMITER $$
 USE `parkissa`$$

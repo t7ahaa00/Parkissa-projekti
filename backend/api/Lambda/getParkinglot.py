@@ -21,22 +21,22 @@ def getParkinglot(event):
     with conn.cursor() as cursor:
         
         #Checking api key
-        sql_Query = """SELECT * FROM api_keys WHERE ip = %s AND api_key = %s;"""
-        insert_tuple = event["params"]["header"]["X-Forwarded-For"],event["params"]["header"]['x-api-key']
-        try:
-            cursor.execute(sql_Query,insert_tuple)
-            conn.commit()
-            columns = [col[0] for col in cursor.description]
-            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        except pymysql.Error:
-                print('MySQL Error')
+        #sql_Query = """SELECT * FROM api_keys WHERE ip = %s AND api_key = %s;"""
+        #insert_tuple = event["params"]["header"]["X-Forwarded-For"],event["params"]["header"]['x-api-key']
+        #try:
+        #    cursor.execute(sql_Query,insert_tuple)
+        #    conn.commit()
+        #    columns = [col[0] for col in cursor.description]
+        #    data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        #except pymysql.Error:
+        #        print('MySQL Error')
         
-        if not data: 
-                raise Exception({
-                        "errorType" : "Exception",
-                        "httpStatus": 403,
-                        "message": "Incorrect api key"
-                    })
+        #if not data: 
+        #        raise Exception({
+        #                "errorType" : "Exception",
+        #                "httpStatus": 403,
+        #                "message": "Incorrect api key"
+        #           })
         sql_Query = """SELECT * FROM parkinglot """
         cursor.execute(sql_Query)
         conn.commit()

@@ -17,12 +17,12 @@ def main(event, context):
     bucket = s3.Bucket(BUCKET_NAME)
     path = '%s/%s/%s/%s.json'%(folder,parkinglotID,areaID,cameraNumber)
     data = str({"Bucket":bucketName,"Folder":folder,"parkinglotID":parkinglotID,"areaID":areaID,"cameraNumber":cameraNumber,"imageType":imageType})
-    #bucket.put_object(
-    #    ACL='public-read',
-    #    ContentType='application/json',
-    #    Key=path,
-    #    Body=data,
-    #    )
+    bucket.put_object(
+        ACL='public-read',
+        ContentType='application/json',
+        Key=path,
+        Body=JSONdata,
+        )
     
     
     #Hakee kuvan

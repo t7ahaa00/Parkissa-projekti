@@ -1,59 +1,31 @@
-USE parkissa;
+use parkissa;
+/*SET SQL_SAFE_UPDATES = 0;
+
 SET SQL_SAFE_UPDATES = 0;
-#***********************PARKKIPAIKKOJEN HALLINTA**************************
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE TABLE camera;
+TRUNCATE TABLE car;
+TRUNCATE TABLE path;
+TRUNCATE TABLE grid;
+TRUNCATE TABLE log;
+TRUNCATE TABLE parkingarea;
+TRUNCATE TABLE parkinglot;
+TRUNCATE TABLE parkinglot_has_user;
+TRUNCATE TABLE user;
+TRUNCATE TABLE visitor;
+SET FOREIGN_KEY_CHECKS=1;
 
-#-----------------------PARKKIPAIKAN LISÄÄMINEN--------------------------
 
-INSERT INTO parkinglot VALUES(null,65.060778,25.461132,'OAMK parkkipaikka',40);
+*/
+SELECT * FROM path;
 
-#-----------------------PARKKIPAIKAN PAIKKOJEN LUOMINEN------------------
+#CALL generateDummyData();
+#SELECT DISTINCT(row) AS rowCount FROM grid WHERE idparkingarea = 25;
+#Call generateDummyData();
+#delete from parkinglot where idparkinglot = 3;
+#select * from grid where idparkingarea =5;
+#select *  from grid where idparkingarea = 7;
+#delete from grid where idparkingarea = 7;
 
-#createParkingGrid(parkipaikan_nimi,rivien_lukumäärä,paikkojen_määrä_rivissä);
-#HUOM! päivittää myös parkkipaikkojen lukumäärän vastaamaan annettua rivit*paikat rivissä määrää
 
-CALL createParkingGrid('OAMK parkkipaikka',9,10);
-
-#-----------------------PARKKIPAIKAN LOGIN PÄIVITTÄMINEN------------------
-
-#CALL createLog(Parkkipaikan nimi);
-CALL createLog('OAMK parkkipaikka');
-
-#-----------------------VAPAIDEN PARKKIPAIKKOJEN LASKEMINEN--------------
-
-SELECT COUNT(*) FROM grid 
-	WHERE idparkinglot = (SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka') 
-    AND occupied = false;
- 
-#-----------------------PARKKIPAIKAN TILAN MUUTTAMINEN-------------------
-
-CALL toggleState(parkinglotName,slotName);
-
-#***********************KÄYTTÄJÄHALLINTA*********************************
-
-#-----------------------ADMIN LISÄÄMINEN---------------------------------
-INSERT INTO user VALUES(null,'admin.admin@parkissa.fi');
-INSERT INTO admin VALUES (LAST_INSERT_ID(), null, 'admin', 'salainenSalasana');
-
-#-----------------------ADMIN LISÄÄMINEN PARKKIPAIKALLE------------------
-INSERT INTO parkinglot_has_user VALUES(
-	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-	(SELECT iduser FROM user WHERE email = 'admin.admin@parkissa.fi'));
-
-#-----------------------HALTIJAN LISÄÄMINEN------------------------------
-INSERT INTO user VALUES(null,'ylläpitäjä.ylläpitäjä@firma.net');
-INSERT INTO staff VALUES (LAST_INSERT_ID(), null, 'ylläpitäjä', 'password');
-
-#-----------------------HALTIJAN LISÄÄMINEN PARKKIPAIKALLE---------------
-INSERT INTO parkinglot_has_user VALUES(
-	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-	(SELECT iduser FROM user WHERE email = 'ylläpitäjä.ylläpitäjä@firma.net'));
-
-#-----------------------KÄYTTÄJÄN LISÄÄMINEN-----------------------------
-INSERT INTO user VALUES(null,'matti.meikäläinen@gmail.com');
-INSERT INTO visitor VALUES (LAST_INSERT_ID(), null, '044-123456', 'matti','meikäläinen');
-
-#-----------------------KÄYTTÄJÄN LISÄÄMINEN PARKKIPAIKALLE--------------
-INSERT INTO parkinglot_has_user VALUES(
-	(SELECT idparkinglot FROM parkinglot WHERE name = 'OAMK parkkipaikka'),
-	(SELECT iduser FROM user WHERE email = 'matti.meikäläinen@gmail.com'));
-
+#select * from grid where idparkingarea = 10 and occupied = 0;
